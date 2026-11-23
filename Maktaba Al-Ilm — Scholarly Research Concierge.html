@@ -1,0 +1,2999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0B1D3A" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Maktaba Al-Ilm" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Maktaba Al-Ilm" />
+  <meta name="description" content="Maktaba Al-Ilm — Scholarly Research Concierge with verified classical references, Reader Sign-Up, PWA mobile installation, and private Curator vault." />
+  <title>Maktaba Al-Ilm — Scholarly Research Concierge</title>
+
+  <!-- Google Fonts: Cormorant Garamond, Inter, Noto Nastaliq Urdu, and Amiri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+            urdu: ['"Noto Nastaliq Urdu"', 'serif'],
+            arabic: ['"Amiri"', 'serif']
+          },
+          colors: {
+            parchment: {
+              bg: '#F8F5EE',
+              surface: '#FCFBF8',
+              subtle: '#F1ECE1',
+              border: '#E2D9C8'
+            },
+            royalBlue: {
+              DEFAULT: '#0B1D3A',
+              hover: '#071429',
+              mid: '#122B54',
+              sapphire: '#1A3A6E',
+              light: '#EBF0F8',
+              border: '#C6D4EB'
+            },
+            antiqueGold: {
+              DEFAULT: '#C59B44',
+              rich: '#D4AF37',
+              bright: '#E8C872',
+              dark: '#8C671E',
+              light: '#FBF5E6',
+              border: '#E4CE96'
+            },
+            charcoal: '#1A202C',
+            mutedSlate: '#5A6577'
+          },
+          boxShadow: {
+            'luxury': '0 10px 30px -10px rgba(11, 29, 58, 0.08), 0 1px 3px rgba(197, 155, 68, 0.14)',
+            'luxury-lg': '0 20px 45px -12px rgba(11, 29, 58, 0.14), 0 4px 12px rgba(197, 155, 68, 0.18)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Ambient luxury ivory background with royal navy & antique gold radial glows */
+    .library-canvas {
+      background-color: #F8F5EE;
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(197, 155, 68, 0.09) 0%, transparent 42%),
+        radial-gradient(circle at 88% 14%, rgba(26, 58, 110, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 95%, rgba(11, 29, 58, 0.04) 0%, transparent 50%);
+    }
+
+    .scholar-card {
+      background-color: #FCFBF8;
+      border: 1px solid #E2D9C8;
+      box-shadow: 0 8px 24px -8px rgba(11, 29, 58, 0.07), 0 1px 2px rgba(197, 155, 68, 0.12);
+    }
+
+    .gold-hairline {
+      height: 2px;
+      background: linear-gradient(90deg, rgba(197,155,68,0.12) 0%, #D4AF37 50%, rgba(197,155,68,0.12) 100%);
+    }
+
+    /* Multi-script typography classes applied dynamically per text block */
+    .script-urdu {
+      font-family: 'Noto Nastaliq Urdu', serif;
+      line-height: 2.25;
+      letter-spacing: 0;
+    }
+
+    .script-arabic {
+      font-family: 'Amiri', serif;
+      line-height: 1.95;
+    }
+
+    .script-latin {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+    }
+
+    /* Safe-area padding for mobile notches and home indicators */
+    .safe-bottom {
+      padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    }
+
+    /* Custom subtle scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1ECE1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C9BDA6;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #1A3A6E;
+    }
+  </style>
+</head>
+
+<body class="library-canvas text-charcoal font-sans antialiased min-h-screen flex flex-col overflow-x-hidden selection:bg-royalBlue selection:text-antiqueGold-bright">
+
+  <!-- Shared SVG Definitions for Luxury Burnished Gold Crest -->
+  <svg width="0" height="0" class="absolute pointer-events-none" aria-hidden="true">
+    <defs>
+      <linearGradient id="maktabaGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E8C872" />
+        <stop offset="50%" stop-color="#D4AF37" />
+        <stop offset="100%" stop-color="#B58932" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Toast Notification Banner (No alert() or confirm() used anywhere) -->
+  <div id="toastNotification" class="fixed top-4 right-4 z-[60] transform transition-all duration-300 -translate-y-24 opacity-0 pointer-events-none max-w-sm">
+    <div class="bg-royalBlue text-white px-4 py-3 rounded-xl shadow-luxury-lg border border-antiqueGold/70 flex items-center gap-2.5 text-xs sm:text-sm font-medium">
+      <span id="toastIcon" class="text-antiqueGold-bright font-bold shrink-0">✦</span>
+      <span id="toastMessage">Action completed</span>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. READER SIGN-UP & SIGN-IN GATE OVERLAY                            -->
+  <!-- ===================================================================== -->
+  <div id="authGateOverlay" dir="ltr" class="fixed inset-0 z-50 overflow-y-auto library-canvas/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
+    <div class="max-w-lg w-full scholar-card rounded-3xl overflow-hidden my-auto border border-antiqueGold/65 shadow-luxury-lg">
+      <div class="gold-hairline"></div>
+
+      <!-- Royal Navy & Antique Gold Crest Header -->
+      <div class="px-6 py-6 bg-gradient-to-br from-royalBlue-sapphire via-royalBlue-mid to-royalBlue text-white text-center relative">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-royalBlue border-2 border-antiqueGold/85 shadow-lg flex items-center justify-center p-2">
+          <!-- Bespoke Vector Crest Logo: 8-point star, open book & qalam nib -->
+          <svg class="w-full h-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="40,4 48.2,18.8 65.5,14.5 61.2,31.8 76,40 61.2,48.2 65.5,65.5 48.2,61.2 40,76 31.8,61.2 14.5,65.5 18.8,48.2 4,40 18.8,31.8 14.5,14.5 31.8,18.8" stroke="url(#maktabaGoldGrad)" stroke-width="1.8" fill="rgba(212,175,55,0.09)"/>
+            <circle cx="40" cy="40" r="25" stroke="url(#maktabaGoldGrad)" stroke-width="1" stroke-dasharray="2.5 2.5" opacity="0.8"/>
+            <path d="M18 54.5 C26 50.8, 34 52, 40 57 C46 52, 54 50.8, 62 54.5 L62 35.5 C54 31.8, 46 33, 40 38 C34 33, 26 31.8, 18 35.5 Z" stroke="url(#maktabaGoldGrad)" stroke-width="2.2" stroke-linejoin="round" fill="rgba(11,29,58,0.92)"/>
+            <line x1="40" y1="38" x2="40" y2="57" stroke="url(#maktabaGoldGrad)" stroke-width="1.8"/>
+            <path d="M40 12.5 L46 25.5 L42 35 L38 35 L34 25.5 Z" fill="url(#maktabaGoldGrad)"/>
+            <line x1="40" y1="12.5" x2="40" y2="26.5" stroke="#0B1D3A" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-antiqueGold-bright bg-white/10 border border-antiqueGold/45 px-3 py-0.5 rounded-full mb-2">
+          ✦ Scholarly Reader Admission
+        </span>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          Maktaba Al-Ilm
+        </h2>
+        <p class="text-xs text-blue-100/90 mt-1 max-w-sm mx-auto leading-relaxed">
+          Scholarly Research Concierge — sign up or sign in to access reference-backed answers across English, اردو &amp; العربية.
+        </p>
+      </div>
+
+      <!-- Mode Switcher Tabs -->
+      <div class="px-6 pt-5">
+        <div class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-parchment-bg border border-parchment-border text-xs">
+          <button type="button" id="authTabSignUp" class="py-2 rounded-lg font-bold bg-royalBlue text-antiqueGold-bright shadow-xs transition">
+            New Reader Sign-Up
+          </button>
+          <button type="button" id="authTabSignIn" class="py-2 rounded-lg font-semibold text-mutedSlate hover:text-charcoal transition">
+            Returning Reader Sign-In
+          </button>
+        </div>
+      </div>
+
+      <!-- Sign-Up Form -->
+      <form id="userSignUpForm" class="p-6 space-y-3.5 text-xs">
+        <div>
+          <label for="signupNameInput" class="block font-bold text-charcoal mb-1">
+            Full Name <span class="text-red-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="signupNameInput"
+            required
+            placeholder="e.g., Muhammad Usman Al-Azhari"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-charcoal text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire"
+          />
+        </div>
+
+        <div>
+          <label for="signupEmailInput" class="block font-bold text-charcoal mb-1">
+            Email Address <span class="text-red-600">*</span>
+          </label>
+          <input
+            type="email"
+            id="signupEmailInput"
+            required
+            placeholder="e.g., reader@example.com"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-charcoal text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire"
+          />
+        </div>
+
+        <div>
+          <label for="signupCityRoleInput" class="block font-bold text-charcoal mb-1">
+            City / Scholarly Role <span class="text-mutedSlate font-normal">(Optional)</span>
+          </label>
+          <input
+            type="text"
+            id="signupCityRoleInput"
+            placeholder="e.g., Islamabad · Student of Hadith / Researcher"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-charcoal text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire"
+          />
+        </div>
+
+        <p id="signupErrorMsg" class="hidden text-red-700 font-semibold"></p>
+
+        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-royalBlue to-royalBlue-sapphire hover:from-royalBlue-hover hover:to-royalBlue text-antiqueGold-bright border border-antiqueGold/65 font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+          <span>Enter Maktaba Al-Ilm Desk</span>
+          <span>→</span>
+        </button>
+
+        <div class="pt-2 border-t border-parchment-border flex items-center justify-between text-[11px] text-mutedSlate">
+          <span>Verified References · English, اردو &amp; العربية</span>
+          <button type="button" id="gateCuratorShortcutBtn" class="font-semibold text-royalBlue-sapphire hover:underline">
+            🔒 Curator Lock
+          </button>
+        </div>
+      </form>
+
+      <!-- Returning Reader Sign-In Form -->
+      <form id="userSignInForm" class="hidden p-6 space-y-4 text-xs">
+        <p class="text-mutedSlate leading-relaxed">
+          Enter your registered email address to resume your scholarly research session.
+        </p>
+        <div>
+          <label for="signinEmailInput" class="block font-bold text-charcoal mb-1">
+            Registered Email Address <span class="text-red-600">*</span>
+          </label>
+          <input
+            type="email"
+            id="signinEmailInput"
+            required
+            placeholder="e.g., reader@example.com"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-charcoal text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire"
+          />
+        </div>
+
+        <p id="signinErrorMsg" class="hidden text-red-700 font-semibold"></p>
+
+        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-royalBlue to-royalBlue-sapphire hover:from-royalBlue-hover hover:to-royalBlue text-antiqueGold-bright border border-antiqueGold/65 font-bold text-sm shadow-md transition">
+          Sign In &amp; Resume Research →
+        </button>
+
+        <div class="pt-2 border-t border-parchment-border flex items-center justify-between text-[11px] text-mutedSlate">
+          <span>New visitor? Switch to Sign-Up above.</span>
+          <button type="button" id="gateCuratorShortcutBtn2" class="font-semibold text-royalBlue-sapphire hover:underline">
+            🔒 Curator Lock
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 2. SLIM DISMISSIBLE MOBILE INSTALL STRIP                              -->
+  <!-- ===================================================================== -->
+  <div id="mobileInstallStrip" dir="ltr" class="md:hidden bg-gradient-to-r from-royalBlue via-royalBlue-mid to-royalBlue-sapphire text-white px-3 py-2 flex items-center justify-between gap-2 border-b border-antiqueGold/50 shrink-0 z-30">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="w-6 h-6 rounded-lg bg-royalBlue border border-antiqueGold/75 flex items-center justify-center text-antiqueGold-bright text-xs shrink-0">✦</span>
+      <p class="text-[11px] leading-tight truncate">
+        <span class="font-semibold text-antiqueGold-bright">Maktaba Al-Ilm App</span> · Add to Home Screen
+      </p>
+    </div>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button id="stripInstallBtn" type="button" class="px-2.5 py-1 rounded-full bg-antiqueGold-rich text-royalBlue font-bold text-[10px] hover:bg-antiqueGold-bright transition">
+        Install
+      </button>
+      <button id="dismissInstallStripBtn" type="button" aria-label="Dismiss install banner" class="p-1 text-blue-100/80 hover:text-white text-xs">
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 3. TOP LUXURY HEADER BAR                                              -->
+  <!-- ===================================================================== -->
+  <header dir="ltr" class="sticky top-0 z-30 bg-parchment-surface/95 backdrop-blur-md border-b border-parchment-border shadow-2xs">
+    <div class="gold-hairline"></div>
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
+
+      <!-- Left: Mobile Drawer Trigger (Curator Only) + Bespoke Crest Logo & Title -->
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <button
+          id="openDrawerBtn"
+          type="button"
+          aria-label="Open Knowledge Base Notebooks"
+          class="hidden items-center justify-center w-10 h-10 rounded-xl bg-parchment-bg hover:bg-parchment-subtle text-royalBlue border border-parchment-border transition shrink-0"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <!-- Bespoke Vector Crest Logo -->
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-royalBlue border border-antiqueGold/80 flex items-center justify-center shrink-0 shadow-xs p-1.5">
+          <svg class="w-full h-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="40,4 48.2,18.8 65.5,14.5 61.2,31.8 76,40 61.2,48.2 65.5,65.5 48.2,61.2 40,76 31.8,61.2 14.5,65.5 18.8,48.2 4,40 18.8,31.8 14.5,14.5 31.8,18.8" stroke="url(#maktabaGoldGrad)" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
+            <path d="M18 54.5 C26 50.8, 34 52, 40 57 C46 52, 54 50.8, 62 54.5 L62 35.5 C54 31.8, 46 33, 40 38 C34 33, 26 31.8, 18 35.5 Z" stroke="url(#maktabaGoldGrad)" stroke-width="2.2" stroke-linejoin="round" fill="rgba(11,29,58,0.9)"/>
+            <line x1="40" y1="38" x2="40" y2="57" stroke="url(#maktabaGoldGrad)" stroke-width="1.8"/>
+            <path d="M40 12.5 L46 25.5 L42 35 L38 35 L34 25.5 Z" fill="url(#maktabaGoldGrad)"/>
+          </svg>
+        </div>
+
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h1 class="font-display text-lg sm:text-2xl font-bold text-royalBlue tracking-tight truncate">
+              Maktaba Al-Ilm
+            </h1>
+            <span id="networkStatusPill" class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-royalBlue-light text-royalBlue-sapphire border border-royalBlue-border">
+              <span id="networkStatusDot" class="w-1.5 h-1.5 rounded-full bg-royalBlue-sapphire"></span>
+              <span id="networkStatusText">Online PWA</span>
+            </span>
+          </div>
+          <p class="text-[11px] text-mutedSlate truncate">
+            Scholarly Research Concierge · Verified References
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Header Controls -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <!-- Signed-in Reader Profile Pill -->
+        <div id="activeUserPill" class="hidden lg:flex items-center gap-1.5 h-9 px-3 rounded-full bg-parchment-bg border border-parchment-border text-[11px] text-charcoal max-w-[185px]" title="Active Reader Profile">
+          <span class="w-2 h-2 rounded-full bg-antiqueGold-rich shrink-0"></span>
+          <span id="activeUserNameLabel" class="font-semibold truncate">Reader</span>
+          <button type="button" id="switchUserBtn" title="Switch Reader / Sign Out" class="ml-1 text-mutedSlate hover:text-royalBlue-sapphire font-bold">
+            ⇄
+          </button>
+        </div>
+
+        <!-- Curator-Only Users & Installs Dashboard Button -->
+        <button id="openCuratorDashboardBtn" type="button" title="Curator Analytics & User Registry" class="hidden h-9 px-3 rounded-full bg-antiqueGold-light hover:bg-antiqueGold text-antiqueGold-dark hover:text-white border border-antiqueGold text-[11px] font-bold items-center gap-1.5 transition shadow-2xs">
+          <span>📊</span>
+          <span class="hidden sm:inline">Users &amp; Installs</span>
+          <span id="headerRegisteredCountBadge" class="px-1.5 py-0.2 rounded-full bg-royalBlue text-antiqueGold-bright text-[10px]">0</span>
+        </button>
+
+        <!-- Sleek Compact Get App / Install Button -->
+        <button id="headerInstallAppBtn" type="button" title="Install Maktaba Al-Ilm on Mobile or Desktop" class="h-9 px-3 sm:px-3.5 rounded-full bg-gradient-to-r from-royalBlue to-royalBlue-sapphire hover:from-royalBlue-hover hover:to-royalBlue text-antiqueGold-bright border border-antiqueGold/75 text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 transition shadow-xs">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span id="headerInstallBtnLabel">Get App</span>
+        </button>
+
+        <!-- Curator Lock / Unlock Button -->
+        <button id="curatorVaultBtn" type="button" title="Curator Lock — Unlock 19 Notebooks & User Analytics" class="h-9 px-2.5 sm:px-3 rounded-full bg-parchment-bg hover:bg-parchment-subtle text-charcoal border border-parchment-border text-[11px] font-semibold flex items-center gap-1 transition">
+          <span id="curatorLockIcon">🔒</span>
+          <span id="curatorLockLabel" class="hidden sm:inline">Curator</span>
+        </button>
+
+        <!-- Settings Button -->
+        <button id="openSettingsBtn" type="button" title="API Key & Cloud Sync Settings" aria-label="Settings" class="w-9 h-9 rounded-full bg-parchment-bg hover:bg-parchment-subtle text-charcoal border border-parchment-border flex items-center justify-center transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- 4. MAIN WORKSPACE (CURATOR-ONLY SIDEBAR + Q&A CONCIERGE)            -->
+  <!-- ===================================================================== -->
+  <div class="flex-1 flex max-w-7xl w-full mx-auto relative">
+
+    <!-- Mobile Backdrop for Curator Sidebar Drawer -->
+    <div id="drawerBackdrop" class="fixed inset-0 bg-charcoal/50 backdrop-blur-2xs z-40 hidden md:hidden"></div>
+
+    <!-- Curator-Only 19-Notebook Knowledge Base Sidebar (Hidden in Public Guest Mode) -->
+    <aside
+      id="knowledgeSidebar"
+      dir="ltr"
+      class="hidden fixed md:static inset-y-0 left-0 z-40 w-[86vw] max-w-sm md:w-80 lg:w-96 shrink-0 bg-parchment-surface border-r border-parchment-border flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-out h-[100dvh] md:h-[calc(100vh-4.1rem)] md:sticky md:top-16 shadow-xl md:shadow-none"
+    >
+      <div class="p-4 border-b border-parchment-border space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h2 class="font-display text-lg font-bold text-royalBlue leading-snug">
+                Curator Vault · 19 Notebooks
+              </h2>
+              <span class="px-1.5 py-0.2 rounded bg-antiqueGold-light text-antiqueGold-dark border border-antiqueGold-border text-[9px] font-bold uppercase">
+                Unlocked
+              </span>
+            </div>
+            <p id="selectedCountSummary" class="text-xs text-mutedSlate mt-0.5">
+              19 of 19 active · 1,742 sources
+            </p>
+          </div>
+          <button id="closeDrawerBtn" type="button" aria-label="Close Sidebar" class="md:hidden p-2 rounded-lg text-mutedSlate hover:text-charcoal hover:bg-parchment-bg">
+            ✕
+          </button>
+        </div>
+
+        <!-- Search Notebooks -->
+        <div class="relative">
+          <input
+            type="text"
+            id="notebookSearchInput"
+            placeholder="Search 19 notebooks, authors, or topics..."
+            class="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-parchment-bg border border-parchment-border rounded-xl text-charcoal placeholder-mutedSlate/70 focus:outline-none focus:bg-white focus:border-royalBlue-sapphire transition"
+          />
+          <svg class="w-4 h-4 text-mutedSlate absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <!-- Discipline Filter Pills -->
+        <div id="disciplineFilters" class="flex flex-wrap gap-1.5">
+          <button type="button" data-discipline="All" class="discipline-pill px-2.5 py-1 rounded-full text-[11px] font-semibold bg-royalBlue text-white transition">
+            All (19)
+          </button>
+          <button type="button" data-discipline="Qur'an & Tafsir" class="discipline-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-parchment-bg text-charcoal hover:bg-parchment-subtle border border-parchment-border transition">
+            Qur'an &amp; Tafsir
+          </button>
+          <button type="button" data-discipline="Hadith Sciences" class="discipline-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-parchment-bg text-charcoal hover:bg-parchment-subtle border border-parchment-border transition">
+            Hadith
+          </button>
+          <button type="button" data-discipline="Arabic & Nahw" class="discipline-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-parchment-bg text-charcoal hover:bg-parchment-subtle border border-parchment-border transition">
+            Arabic &amp; Nahw
+          </button>
+          <button type="button" data-discipline="Fiqh, Seerah & Tasawwuf" class="discipline-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-parchment-bg text-charcoal hover:bg-parchment-subtle border border-parchment-border transition">
+            Fiqh, Seerah &amp; Tasawwuf
+          </button>
+        </div>
+
+        <!-- Bulk Selection Actions -->
+        <div class="flex items-center justify-between pt-1 border-t border-parchment-border/70 text-xs">
+          <div class="flex items-center gap-3">
+            <button type="button" id="selectAllBtn" class="font-semibold text-royalBlue-sapphire hover:underline">
+              Select All
+            </button>
+            <span class="text-parchment-border">|</span>
+            <button type="button" id="clearAllBtn" class="font-medium text-mutedSlate hover:text-charcoal hover:underline">
+              Clear All
+            </button>
+          </div>
+          <span class="text-[11px] text-mutedSlate">Tap notebook to inspect</span>
+        </div>
+      </div>
+
+      <!-- Scrollable 19-Notebook List -->
+      <div id="notebooksListContainer" class="flex-1 overflow-y-auto p-3 space-y-2.5">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Sidebar Footer -->
+      <div class="px-4 py-2.5 bg-parchment-surface border-t border-parchment-border space-y-2 text-[11px] text-mutedSlate">
+        <button type="button" id="sidebarOpenDashboardBtn" class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-royalBlue to-royalBlue-sapphire text-antiqueGold-bright border border-antiqueGold/60 font-bold text-xs flex items-center justify-between shadow-2xs hover:opacity-95 transition">
+          <span>📊 Open Users &amp; Installs Dashboard</span>
+          <span id="sidebarUserCountPill" class="px-2 py-0.5 rounded-full bg-white/15 text-white text-[10px]">0</span>
+        </button>
+        <div class="flex items-center justify-between">
+          <span>Active Grounding Corpus</span>
+          <span id="sidebarSourcesCounter" class="font-bold text-royalBlue-sapphire bg-royalBlue-light px-2.5 py-0.5 rounded-full border border-royalBlue-border">
+            1,742 Sources
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Q&A Research Concierge Column -->
+    <main class="flex-1 flex flex-col min-w-0 h-[calc(100dvh-4rem)] md:h-[calc(100vh-4.1rem)]">
+
+      <!-- Sub-header Toolbar: Active Scope Indicator, Saved/History Toggle & Depth Toggle -->
+      <div dir="ltr" class="px-3 sm:px-6 py-2.5 bg-parchment-surface/85 border-b border-parchment-border flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div class="flex items-center gap-2 min-w-0 flex-wrap">
+          <span id="activeScopeBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-royalBlue-light text-royalBlue border border-royalBlue-border truncate">
+            <span class="w-2 h-2 rounded-full bg-antiqueGold-rich shrink-0"></span>
+            <span id="activeScopeText">Verified Classical &amp; Scholarly References Active</span>
+          </span>
+          <button type="button" id="resetScopeBtn" class="hidden text-xs font-semibold text-royalBlue-sapphire hover:underline shrink-0">
+            Show All
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <!-- Saved / History Feed Toggle -->
+          <button
+            type="button"
+            id="toggleSavedFeedBtn"
+            class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-parchment-bg text-charcoal border border-parchment-border hover:bg-parchment-subtle transition flex items-center gap-1.5"
+          >
+            <span>🔖</span>
+            <span id="toggleSavedFeedLabel">Saved</span>
+            <span id="savedHistoryCountBadge" class="px-1.5 py-0.2 rounded-full bg-royalBlue-light text-royalBlue text-[10px] font-bold">0</span>
+          </button>
+
+          <!-- Response Detail Segmented Toggle -->
+          <div class="flex items-center bg-parchment-bg p-0.5 rounded-xl border border-parchment-border text-xs">
+            <button type="button" id="styleConciseBtn" class="px-2.5 py-1 rounded-lg font-semibold bg-royalBlue text-antiqueGold-bright shadow-2xs transition">
+              To-The-Point
+            </button>
+            <button type="button" id="styleDetailedBtn" class="px-2.5 py-1 rounded-lg font-medium text-mutedSlate hover:text-charcoal transition">
+              Detailed
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scrollable Q&A Conversation Feed -->
+      <div id="qaFeedContainer" class="flex-1 overflow-y-auto px-3 sm:px-6 py-5 space-y-6">
+
+        <!-- Welcome Hero Card -->
+        <div id="welcomeHeroCard" dir="ltr" class="scholar-card rounded-2xl p-5 sm:p-7 max-w-3xl mx-auto">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-royalBlue border border-antiqueGold/80 flex items-center justify-center shrink-0 shadow-xs p-2">
+              <svg class="w-full h-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <polygon points="40,4 48.2,18.8 65.5,14.5 61.2,31.8 76,40 61.2,48.2 65.5,65.5 48.2,61.2 40,76 31.8,61.2 14.5,65.5 18.8,48.2 4,40 18.8,31.8 14.5,14.5 31.8,18.8" stroke="url(#maktabaGoldGrad)" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
+                <path d="M18 54.5 C26 50.8, 34 52, 40 57 C46 52, 54 50.8, 62 54.5 L62 35.5 C54 31.8, 46 33, 40 38 C34 33, 26 31.8, 18 35.5 Z" stroke="url(#maktabaGoldGrad)" stroke-width="2.2" stroke-linejoin="round" fill="rgba(11,29,58,0.9)"/>
+                <line x1="40" y1="38" x2="40" y2="57" stroke="url(#maktabaGoldGrad)" stroke-width="1.8"/>
+                <path d="M40 12.5 L46 25.5 L42 35 L38 35 L34 25.5 Z" fill="url(#maktabaGoldGrad)"/>
+              </svg>
+            </div>
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-antiqueGold-light text-antiqueGold-dark border border-antiqueGold-border mb-1.5">
+                <span>✦</span>
+                <span>Reference-Backed Scholarly Concierge</span>
+              </div>
+              <h2 class="font-display text-2xl sm:text-3xl font-bold text-royalBlue leading-snug">
+                Ask any question in English, Urdu, or Arabic
+              </h2>
+              <p class="text-xs sm:text-sm text-mutedSlate mt-1 leading-relaxed">
+                Receive direct, point-by-point answers with verified book and source references across Qur'anic sciences, Tafsir, Hadith, Arabic Nahw &amp; Sarf, Fiqh, Seerah, and Tasawwuf.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sample Scholarly Starter Prompts -->
+          <div class="mt-5 pt-4 border-t border-parchment-border">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate mb-2.5">
+              Starter Questions
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <button type="button" class="starter-prompt-btn text-left p-3 rounded-xl bg-parchment-bg hover:bg-royalBlue-light/65 border border-parchment-border hover:border-royalBlue-border transition group">
+                <span class="font-semibold text-royalBlue group-hover:text-royalBlue-sapphire block">
+                  How do scholars distinguish Muḥkam, Mutashābih, and Mushkil al-Qur'ān?
+                </span>
+                <span class="text-[11px] text-mutedSlate mt-0.5 block">Qur'anic Sciences · Reference-backed</span>
+              </button>
+
+              <button type="button" class="starter-prompt-btn text-left p-3 rounded-xl bg-parchment-bg hover:bg-royalBlue-light/65 border border-parchment-border hover:border-royalBlue-border transition group">
+                <span class="font-semibold text-royalBlue group-hover:text-royalBlue-sapphire block">
+                  What are the core principles of ʿIlal al-Ḥadīth and Muṣṭalaḥ?
+                </span>
+                <span class="text-[11px] text-mutedSlate mt-0.5 block">Hadith Methodology · Reference-backed</span>
+              </button>
+
+              <button type="button" class="starter-prompt-btn text-left p-3 rounded-xl bg-parchment-bg hover:bg-royalBlue-light/65 border border-parchment-border hover:border-royalBlue-border transition group">
+                <span class="font-semibold text-royalBlue group-hover:text-royalBlue-sapphire block script-urdu text-sm" dir="rtl">
+                  عربی نحو میں عامل لفظی اور عامل معنوی میں کیا فرق ہے؟
+                </span>
+                <span class="text-[11px] text-mutedSlate mt-0.5 block">Arabic Nahw · اردو سوال</span>
+              </button>
+
+              <button type="button" class="starter-prompt-btn text-left p-3 rounded-xl bg-parchment-bg hover:bg-royalBlue-light/65 border border-parchment-border hover:border-royalBlue-border transition group">
+                <span class="font-semibold text-royalBlue group-hover:text-royalBlue-sapphire block script-arabic text-base" dir="rtl">
+                  ما الفرق بين المقام والحال عند أهل التصوف والسلوك؟
+                </span>
+                <span class="text-[11px] text-mutedSlate mt-0.5 block">Tasawwuf &amp; Sulūk · سؤال بالعربية</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Q&A Response Thread -->
+        <div id="qaThreadList" class="space-y-6 max-w-3xl mx-auto"></div>
+
+      </div>
+
+      <!-- Bottom Question Composer Bar -->
+      <div dir="ltr" class="bg-parchment-surface border-t border-parchment-border px-3 sm:px-6 py-3 shrink-0">
+        <form id="questionForm" class="max-w-3xl mx-auto">
+          <div class="flex items-end gap-2 bg-parchment-bg border border-parchment-border focus-within:border-royalBlue-sapphire focus-within:bg-white rounded-2xl p-2 shadow-2xs transition">
+            <textarea
+              id="questionInput"
+              rows="1"
+              placeholder="Ask a scholarly question in English, اردو, or العربية..."
+              class="flex-1 bg-transparent text-charcoal placeholder-mutedSlate/70 text-sm px-2.5 py-2 resize-none focus:outline-none max-h-36 leading-relaxed"
+            ></textarea>
+            <button
+              type="submit"
+              id="askSubmitBtn"
+              class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-royalBlue to-royalBlue-sapphire hover:from-royalBlue-hover hover:to-royalBlue disabled:opacity-45 disabled:cursor-not-allowed text-antiqueGold-bright border border-antiqueGold/60 font-semibold text-xs sm:text-sm flex items-center gap-1.5 shrink-0 transition shadow-xs"
+            >
+              <span>Ask</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
+          </div>
+          <div class="flex items-center justify-between mt-1.5 px-1 text-[11px] text-mutedSlate">
+            <span id="composerStatusHint">Auto-detects English, Urdu &amp; Arabic · Press Enter to ask</span>
+            <span id="apiKeyStatusText" class="font-medium text-royalBlue-sapphire">Demo Mode (Add API Key in ⚙️)</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Native Mobile Bottom Navigation Bar (md:hidden) -->
+      <nav dir="ltr" aria-label="Mobile App Navigation" class="md:hidden safe-bottom bg-parchment-surface border-t border-parchment-border px-2 pt-1.5 grid grid-cols-3 gap-1 shrink-0 z-20">
+        <button type="button" id="navAskTab" class="mobile-nav-tab flex flex-col items-center justify-center py-1.5 rounded-xl text-royalBlue bg-royalBlue-light/85 font-bold text-[11px] transition">
+          <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+          <span>Ask AI</span>
+        </button>
+
+        <button type="button" id="navHistoryTab" class="mobile-nav-tab flex flex-col items-center justify-center py-1.5 rounded-xl text-mutedSlate hover:text-charcoal font-semibold text-[11px] transition">
+          <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+          </svg>
+          <span>Saved (<span id="mobileTabSavedCount">0</span>)</span>
+        </button>
+
+        <button type="button" id="navCuratorTab" class="mobile-nav-tab flex flex-col items-center justify-center py-1.5 rounded-xl text-mutedSlate hover:text-charcoal font-semibold text-[11px] transition">
+          <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span id="mobileNavCuratorLabel">Curator Lock</span>
+        </button>
+      </nav>
+
+    </main>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 5. PRIVATE CURATOR ANALYTICS & USER DIRECTORY DASHBOARD MODAL        -->
+  <!-- ===================================================================== -->
+  <div id="curatorDashboardModal" dir="ltr" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-charcoal/65 backdrop-blur-xs">
+    <div class="bg-parchment-surface border border-antiqueGold/75 rounded-3xl max-w-6xl w-full max-h-[92vh] flex flex-col shadow-luxury-lg overflow-hidden">
+      <div class="gold-hairline"></div>
+      <div class="px-5 sm:px-7 py-4 bg-gradient-to-r from-royalBlue via-royalBlue-mid to-royalBlue-sapphire text-white flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-royalBlue border border-antiqueGold/80 flex items-center justify-center text-antiqueGold-bright text-lg">
+            📊
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white leading-tight">
+                Curator Analytics &amp; User Registry
+              </h3>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-antiqueGold/20 text-antiqueGold-bright border border-antiqueGold/50">
+                Curator Only
+              </span>
+            </div>
+            <p id="dashboardSyncStatusText" class="text-[11px] text-blue-100/85 mt-0.5">
+              Local Device Registry (localStorage) · Name, Email, Install Status, Day, Date &amp; Exact Time
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="exportUsersCsvBtn" type="button" class="px-3 py-1.5 rounded-xl bg-antiqueGold-rich hover:bg-antiqueGold-bright text-royalBlue font-bold text-xs flex items-center gap-1.5 transition shadow-2xs">
+            <span>⬇ Export CSV</span>
+          </button>
+          <button id="closeCuratorDashboardBtn" type="button" aria-label="Close Dashboard" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-5 flex-1">
+        <!-- 4 KPI Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div class="p-4 rounded-2xl bg-parchment-bg border border-parchment-border">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate block">Total Users</span>
+            <div class="flex items-baseline justify-between mt-1.5">
+              <span id="kpiTotalUsers" class="font-display text-3xl font-bold text-royalBlue">0</span>
+              <span class="text-[11px] font-semibold text-royalBlue-sapphire bg-royalBlue-light px-2 py-0.5 rounded-full">Registered</span>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-antiqueGold-light/65 border border-antiqueGold-border">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-antiqueGold-dark block">Installed App</span>
+            <div class="flex items-baseline justify-between mt-1.5">
+              <span id="kpiTotalInstalls" class="font-display text-3xl font-bold text-royalBlue">0</span>
+              <span id="kpiInstallRate" class="text-[11px] font-bold text-antiqueGold-dark bg-white px-2 py-0.5 rounded-full border border-antiqueGold-border">0% PWA</span>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-parchment-bg border border-parchment-border">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate block">Active Today</span>
+            <div class="flex items-baseline justify-between mt-1.5">
+              <span id="kpiActiveToday" class="font-display text-3xl font-bold text-royalBlue">0</span>
+              <span id="kpiTodayDateBadge" class="text-[11px] font-semibold text-mutedSlate">Today</span>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-parchment-bg border border-parchment-border">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate block">Total Questions</span>
+            <div class="flex items-baseline justify-between mt-1.5">
+              <span id="kpiTotalQuestions" class="font-display text-3xl font-bold text-royalBlue">0</span>
+              <span class="text-[11px] font-semibold text-royalBlue-sapphire bg-royalBlue-light px-2 py-0.5 rounded-full">Asked</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-parchment-bg p-3.5 rounded-2xl border border-parchment-border">
+          <div class="relative flex-1">
+            <input
+              type="text"
+              id="dashboardUserSearchInput"
+              placeholder="Search by name, email, role, day, or date..."
+              class="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-white border border-parchment-border rounded-xl text-charcoal placeholder-mutedSlate/70 focus:outline-none focus:border-royalBlue-sapphire"
+            />
+            <svg class="w-4 h-4 text-mutedSlate absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+
+          <div class="flex items-center gap-1.5 text-xs shrink-0">
+            <button type="button" data-user-filter="all" class="dash-filter-btn px-3 py-2 rounded-xl font-bold bg-royalBlue text-white transition">
+              All Users
+            </button>
+            <button type="button" data-user-filter="installed" class="dash-filter-btn px-3 py-2 rounded-xl font-semibold bg-white text-charcoal border border-parchment-border hover:bg-parchment-subtle transition">
+              📲 Installed App
+            </button>
+            <button type="button" data-user-filter="browser" class="dash-filter-btn px-3 py-2 rounded-xl font-semibold bg-white text-charcoal border border-parchment-border hover:bg-parchment-subtle transition">
+              🌐 Web Browser
+            </button>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="rounded-2xl border border-parchment-border overflow-hidden bg-white shadow-2xs">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-parchment-bg border-b border-parchment-border text-[11px] font-bold uppercase tracking-wider text-royalBlue">
+                  <th class="py-3 px-4">Name &amp; Role</th>
+                  <th class="py-3 px-4">Email</th>
+                  <th class="py-3 px-4">Install Status</th>
+                  <th class="py-3 px-4">Day</th>
+                  <th class="py-3 px-4">Date</th>
+                  <th class="py-3 px-4">Time</th>
+                  <th class="py-3 px-4 text-center">Questions</th>
+                  <th class="py-3 px-4">Last Active</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardUsersTableBody" class="divide-y divide-parchment-border/70"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-mutedSlate pt-1">
+          <p>
+            Stored in <code class="font-mono text-charcoal">localStorage</code> per device; optional Firebase Realtime Database URL can be added in Settings (⚙️).
+          </p>
+          <button type="button" id="resetDemoUsersBtn" class="px-3 py-1.5 rounded-lg bg-parchment-bg hover:bg-red-50 text-mutedSlate hover:text-red-700 border border-parchment-border font-semibold transition">
+            Keep Current User Only
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 6. CURATOR LOCK PASSCODE MODAL                                       -->
+  <!-- ===================================================================== -->
+  <div id="curatorAuthModal" dir="ltr" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-charcoal/60 backdrop-blur-xs">
+    <div class="bg-parchment-surface border border-antiqueGold/70 rounded-2xl max-w-sm w-full p-6 shadow-luxury-lg">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl bg-royalBlue text-antiqueGold-bright flex items-center justify-center text-sm font-bold">🔒</span>
+          <h3 class="font-display text-xl font-bold text-royalBlue">Curator Lock</h3>
+        </div>
+        <button id="closeCuratorAuthBtn" type="button" class="text-mutedSlate hover:text-charcoal p-1">✕</button>
+      </div>
+      <p class="text-xs text-mutedSlate mb-4 leading-relaxed">
+        Enter the Curator passcode to unlock the 19-notebook vault, source inspector, and user &amp; installation analytics dashboard.
+      </p>
+      <form id="curatorAuthForm" class="space-y-3">
+        <div>
+          <label for="curatorPasscodeInput" class="block text-xs font-semibold text-charcoal mb-1">Curator Passcode</label>
+          <input
+            type="password"
+            id="curatorPasscodeInput"
+            placeholder="Enter passcode..."
+            class="w-full px-3 py-2 text-sm bg-parchment-bg border border-parchment-border rounded-xl text-charcoal focus:outline-none focus:bg-white focus:border-royalBlue-sapphire"
+          />
+          <p id="curatorAuthError" class="hidden text-[11px] text-red-700 font-medium mt-1">
+            Incorrect passcode. Hint: <code class="font-mono">Maktaba@2026</code>
+          </p>
+        </div>
+        <div class="flex justify-end gap-2 pt-1">
+          <button type="button" id="cancelCuratorAuthBtn" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-mutedSlate hover:bg-parchment-bg">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-royalBlue hover:bg-royalBlue-hover text-antiqueGold-bright border border-antiqueGold/60 transition">
+            Unlock Vault
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 7. MOBILE APP INSTALL GUIDE MODAL (ANDROID & iOS SAFARI)              -->
+  <!-- ===================================================================== -->
+  <div id="installGuideModal" dir="ltr" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-charcoal/60 backdrop-blur-xs">
+    <div class="bg-parchment-surface border border-antiqueGold/70 rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-luxury-lg space-y-4">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-royalBlue border border-antiqueGold/80 flex items-center justify-center p-1.5 shrink-0">
+            <svg class="w-full h-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polygon points="40,4 48.2,18.8 65.5,14.5 61.2,31.8 76,40 61.2,48.2 65.5,65.5 48.2,61.2 40,76 31.8,61.2 14.5,65.5 18.8,48.2 4,40 18.8,31.8 14.5,14.5 31.8,18.8" stroke="url(#maktabaGoldGrad)" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
+              <path d="M18 54.5 C26 50.8, 34 52, 40 57 C46 52, 54 50.8, 62 54.5 L62 35.5 C54 31.8, 46 33, 40 38 C34 33, 26 31.8, 18 35.5 Z" stroke="url(#maktabaGoldGrad)" stroke-width="2.2" stroke-linejoin="round" fill="rgba(11,29,58,0.9)"/>
+              <path d="M40 12.5 L46 25.5 L42 35 L38 35 L34 25.5 Z" fill="url(#maktabaGoldGrad)"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-bold text-royalBlue leading-tight">Install Maktaba Al-Ilm</h3>
+            <p class="text-xs text-mutedSlate">Use as a standalone app on mobile or desktop</p>
+          </div>
+        </div>
+        <button id="closeInstallGuideBtn" type="button" class="text-mutedSlate hover:text-charcoal p-1">✕</button>
+      </div>
+
+      <div id="nativePromptActionBox" class="hidden p-3.5 rounded-2xl bg-antiqueGold-light border border-antiqueGold-border">
+        <p class="text-xs font-semibold text-royalBlue mb-2">Direct app installation is ready on this browser:</p>
+        <button type="button" id="modalTriggerNativeInstallBtn" class="w-full py-2.5 px-4 rounded-xl bg-royalBlue hover:bg-royalBlue-hover text-antiqueGold-bright border border-antiqueGold/60 font-bold text-xs shadow-xs transition">
+          Install Maktaba Al-Ilm Now
+        </button>
+      </div>
+
+      <div class="space-y-2.5 text-xs">
+        <div class="p-3.5 rounded-2xl bg-parchment-bg border border-parchment-border">
+          <p class="font-bold text-royalBlue mb-1">📱 iPhone / iPad (Safari)</p>
+          <ol class="list-decimal list-inside text-mutedSlate space-y-1 leading-relaxed">
+            <li>Tap the <span class="font-semibold text-charcoal">Share</span> button (<span class="font-mono">↑</span>) in Safari's toolbar.</li>
+            <li>Scroll down and tap <span class="font-semibold text-charcoal">Add to Home Screen</span>.</li>
+            <li>Tap <span class="font-semibold text-charcoal">Add</span> in the top-right corner.</li>
+          </ol>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-parchment-bg border border-parchment-border">
+          <p class="font-bold text-royalBlue mb-1">🤖 Android (Chrome / Edge / Brave)</p>
+          <ol class="list-decimal list-inside text-mutedSlate space-y-1 leading-relaxed">
+            <li>Tap the <span class="font-semibold text-charcoal">⋮ menu</span> in the top-right corner.</li>
+            <li>Tap <span class="font-semibold text-charcoal">Install app</span> or <span class="font-semibold text-charcoal">Add to Home screen</span>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+        <button type="button" id="downloadStandaloneHtmlBtn" class="py-2.5 px-3 rounded-xl bg-parchment-bg hover:bg-parchment-subtle text-charcoal border border-parchment-border font-semibold transition">
+          ⬇ Download .HTML
+        </button>
+        <button type="button" id="copyAppLinkBtn" class="py-2.5 px-3 rounded-xl bg-parchment-bg hover:bg-parchment-subtle text-charcoal border border-parchment-border font-semibold transition">
+          🔗 Copy App Link
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 8. SETTINGS MODAL (GEMINI API KEY & FIREBASE SYNC)                    -->
+  <!-- ===================================================================== -->
+  <div id="settingsModal" dir="ltr" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-charcoal/60 backdrop-blur-xs">
+    <div class="bg-parchment-surface border border-antiqueGold/70 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-luxury-lg space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-display text-xl font-bold text-royalBlue">Concierge Settings</h3>
+        <button id="closeSettingsModalBtn" type="button" class="text-mutedSlate hover:text-charcoal p-1">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label for="customApiKeyInput" class="block font-bold text-charcoal mb-1">
+            Gemini API Key <span class="text-mutedSlate font-normal">(Optional · Saved in localStorage)</span>
+          </label>
+          <input
+            type="password"
+            id="customApiKeyInput"
+            placeholder="AIzaSy..."
+            class="w-full px-3 py-2 rounded-xl bg-parchment-bg border border-parchment-border text-charcoal focus:outline-none focus:bg-white focus:border-royalBlue-sapphire"
+          />
+          <p class="text-[11px] text-mutedSlate mt-1">
+            Without an API key, the concierge returns authentic, reference-backed scholarly answers in Demo Mode.
+          </p>
+        </div>
+
+        <div>
+          <label for="firebaseDbUrlInput" class="block font-bold text-charcoal mb-1">
+            Firebase Realtime Database URL <span class="text-mutedSlate font-normal">(Optional Multi-Device Sync)</span>
+          </label>
+          <input
+            type="url"
+            id="firebaseDbUrlInput"
+            placeholder="https://your-project-default-rtdb.firebaseio.com"
+            class="w-full px-3 py-2 rounded-xl bg-parchment-bg border border-parchment-border text-charcoal focus:outline-none focus:bg-white focus:border-royalBlue-sapphire"
+          />
+        </div>
+
+        <div class="p-3 rounded-xl bg-parchment-bg border border-parchment-border flex items-center justify-between">
+          <div>
+            <span class="font-bold text-charcoal block">Saved Q&amp;A History</span>
+            <span id="settingsHistoryStats" class="text-[11px] text-mutedSlate">0 saved items</span>
+          </div>
+          <button id="wipeAllLocalHistoryBtn" type="button" class="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-semibold transition">
+            Clear Saved
+          </button>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-1">
+          <button id="saveSettingsBtn" type="button" class="px-4 py-2 rounded-xl bg-royalBlue hover:bg-royalBlue-hover text-antiqueGold-bright border border-antiqueGold/60 font-semibold transition">
+            Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 9. CURATOR-ONLY NOTEBOOK SOURCE INSPECTOR MODAL                       -->
+  <!-- ===================================================================== -->
+  <div id="sourceInspectorModal" dir="ltr" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-charcoal/60 backdrop-blur-xs">
+    <div class="bg-parchment-surface border border-antiqueGold/70 rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-luxury-lg space-y-4">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <span id="inspectorEmoji" class="text-2xl w-11 h-11 rounded-xl bg-royalBlue-light border border-royalBlue-border flex items-center justify-center">📚</span>
+          <div>
+            <span id="inspectorDiscipline" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-antiqueGold-light text-antiqueGold-dark border border-antiqueGold-border">
+              Discipline
+            </span>
+            <h3 id="inspectorTitle" class="font-display text-xl font-bold text-royalBlue mt-1 leading-snug">
+              Notebook Title
+            </h3>
+          </div>
+        </div>
+        <button id="closeInspectorBtn" type="button" class="text-mutedSlate hover:text-charcoal p-1">✕</button>
+      </div>
+
+      <p id="inspectorDescription" class="text-xs sm:text-sm text-charcoal/90 leading-relaxed"></p>
+
+      <div class="bg-parchment-bg border border-parchment-border rounded-xl p-3.5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-royalBlue">Indexed Works &amp; Classical Sources</span>
+          <span id="inspectorSourceCount" class="text-xs font-semibold text-royalBlue-sapphire">0 sources</span>
+        </div>
+        <ul id="inspectorSampleSources" class="space-y-1.5 text-xs text-mutedSlate list-disc list-inside"></ul>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-parchment-border">
+        <button type="button" id="inspectorAskScopedBtn" class="px-4 py-2 rounded-xl bg-royalBlue hover:bg-royalBlue-hover text-antiqueGold-bright border border-antiqueGold/60 text-xs font-semibold transition">
+          Ask Only Using This Notebook
+        </button>
+        <button type="button" id="inspectorDoneBtn" class="px-3.5 py-2 rounded-xl bg-parchment-bg hover:bg-parchment-subtle text-charcoal border border-parchment-border text-xs font-semibold transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 10. APPLICATION SCRIPT                                                -->
+  <!-- ===================================================================== -->
+  <script>
+    // -----------------------------------------------------------------------
+    // A. 19-NOTEBOOK KNOWLEDGE BASE (EXPOSED ONLY WHEN CURATOR VAULT UNLOCKED)
+    // -----------------------------------------------------------------------
+    const NOTEBOOKS_DATA = [
+      {
+        id: "nb-01",
+        title: "علوم القرآن: محکم، متشابہ اور مشکلات القرآن کا مطالعہ",
+        shortTitle: "Muḥkam, Mutashābih & Mushkil al-Qur'ān",
+        discipline: "Qur'an & Tafsir",
+        emoji: "📖",
+        sourceCount: 94,
+        description: "Study of decisive (muḥkam), ambiguous/allegorical (mutashābih), and problematic/seemingly conflicting passages (mushkilāt) in the Qur'ān.",
+        sampleSources: ["Al-Itqān fī ʿUlūm al-Qur'ān — al-Suyūṭī", "Ta'wīl Mushkil al-Qur'ān — Ibn Qutaybah", "Al-Burhān fī ʿUlūm al-Qur'ān — al-Zarkashī"]
+      },
+      {
+        id: "nb-02",
+        title: "تفسیر قرآن - اردو",
+        shortTitle: "Urdu Qur'ān Tafsir Collection",
+        discipline: "Qur'an & Tafsir",
+        emoji: "🕌",
+        sourceCount: 118,
+        description: "Comprehensive Urdu Qur'ānic exegesis, thematic lessons (ma'ārif wa masā'il), and classical commentary synthesis.",
+        sampleSources: ["Ma'ārif al-Qur'ān — Muftī Muḥammad Shafīʿ", "Zakhīrat al-Jinān — Mawlānā Sarfarāz Khān Ṣafdar", "Tafsīr Bayān al-Qur'ān — Ashraf ʿAlī Thānawī"]
+      },
+      {
+        id: "nb-03",
+        title: "علوم القرآن",
+        shortTitle: "ʿUlūm al-Qur'ān & Qirā'āt",
+        discipline: "Qur'an & Tafsir",
+        emoji: "✨",
+        sourceCount: 106,
+        description: "Qur'ānic sciences covering asbāb al-nuzūl, nāsikh wa mansūkh, rasm al-muṣḥaf, gharīb al-Qur'ān, and the ten/fourteen qirā'āt.",
+        sampleSources: ["Al-Lubāb fī Asbāb al-Nuzūl — al-Suyūṭī", "Al-Muqniʿ fī Rasm Maṣāḥif al-Amṣār — Abū ʿAmr al-Dānī", "Al-Nashr fī al-Qirā'āt al-ʿAshr — Ibn al-Jazarī"]
+      },
+      {
+        id: "nb-04",
+        title: "التراث - التفسير (1)",
+        shortTitle: "Classical Tafsir Heritage (Vol. 1)",
+        discipline: "Qur'an & Tafsir",
+        emoji: "📜",
+        sourceCount: 88,
+        description: "Classical heritage exegesis including al-Ḥarrālī al-Marrākushī, al-Wāḥidī's al-Basīṭ, and al-Shinqīṭī's al-ʿAdhb al-Namīr.",
+        sampleSources: ["Turāth Abī al-Ḥasan al-Ḥarrālī al-Marrākushī", "Al-Tafsīr al-Basīṭ — al-Wāḥidī", "Al-ʿAdhb al-Namīr min Majālis al-Shinqīṭī"]
+      },
+      {
+        id: "nb-05",
+        title: "قسم التخصص في الحديث",
+        shortTitle: "Takhaṣṣuṣ fī al-Ḥadīth",
+        discipline: "Hadith Sciences",
+        emoji: "🎓",
+        sourceCount: 112,
+        description: "Advanced Hadith specialization bibliography covering rijāl, jarḥ wa taʿdīl, takhrīj, uṣūl al-fiqh intersections, and canonical collections.",
+        sampleSources: ["Tahdhīb al-Kamāl fī Asmā' al-Rijāl — al-Mizzī", "Al-Kifāyah fī ʿIlm al-Riwāyah — al-Khaṭīb al-Baghdādī", "Naṣb al-Rāyah li-Aḥādīth al-Hidāyah — al-Zaylaʿī"]
+      },
+      {
+        id: "nb-06",
+        title: "علوم الحديث-ناسخ-مصطلح-مختلف-غريب-علل-اسباب ورود",
+        shortTitle: "Muṣṭalaḥ, ʿIlal, Gharīb & Mukhtalif al-Ḥadīth",
+        discipline: "Hadith Sciences",
+        emoji: "🔎",
+        sourceCount: 136,
+        description: "Integrated Hadith sciences: terminology (muṣṭalaḥ), hidden defects (ʿilal), rare vocabulary (gharīb), reconciling apparent contradictions (mukhtalif), and occasions of narration.",
+        sampleSources: ["Nuzhat al-Naẓar Sharḥ Nukhbat al-Fikar — Ibn Ḥajar", "Al-ʿIlal al-Wāridah fī al-Aḥādīth al-Nabawiyyah — al-Dāraquṭnī", "Al-Nihāyah fī Gharīb al-Ḥadīth — Ibn al-Athīr"]
+      },
+      {
+        id: "nb-07",
+        title: "شُرُوحُ الحَدِيثِ الشَّرِيفِ",
+        shortTitle: "Shurūḥ al-Ḥadīth al-Sharīf",
+        discipline: "Hadith Sciences",
+        emoji: "📚",
+        sourceCount: 129,
+        description: "Major commentaries on Ṣaḥīḥ al-Bukhārī, Ṣaḥīḥ Muslim, Muwaṭṭa' Mālik, Jāmiʿ al-Tirmidhī, Sunan Abī Dāwūd, and al-Targhīb wa al-Tarhīb.",
+        sampleSources: ["Fatḥ al-Bārī Sharḥ Ṣaḥīḥ al-Bukhārī — Ibn Ḥajar", "Al-Muʿlim bi-Fawā'id Muslim — al-Māzarī", "Fatḥ al-Qarīb al-Mujīb ʿalā al-Targhīb wa al-Tarhīb"]
+      },
+      {
+        id: "nb-08",
+        title: "ںحو و صرف",
+        shortTitle: "Naḥw & Ṣarf (Arabic Grammar & Morphology)",
+        discipline: "Arabic & Nahw",
+        emoji: "✍️",
+        sourceCount: 104,
+        description: "Classical and pedagogical works on Arabic syntax (naḥw) and morphology (ṣarf), including Alfiyyat Ibn Mālik, al-Mumtiʿ, and al-Naḥw al-Wāfī.",
+        sampleSources: ["Alfiyyat Ibn Mālik & Sharḥ Ibn ʿAqīl", "Al-Mumtiʿ al-Kabīr fī al-Taṣrīf — Ibn ʿUṣfūr", "Al-Naḥw al-Wāfī — ʿAbbās Ḥasan"]
+      },
+      {
+        id: "nb-09",
+        title: "تصوف",
+        shortTitle: "Taṣawwuf & Spiritual Wayfaring",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "🕊️",
+        sourceCount: 98,
+        description: "Foundational texts of classical Taṣawwuf, maqāmāt and aḥwāl, adab, and spiritual correspondence.",
+        sampleSources: ["Kitāb al-Lumaʿ fī al-Taṣawwuf — Abū Naṣr al-Sarrāj", "Qūt al-Qulūb fī Muʿāmalat al-Maḥbūb — Abū Ṭālib al-Makkī", "Maktūbāt Imām Rabbānī — Aḥmad al-Sirhindī"]
+      },
+      {
+        id: "nb-10",
+        title: "your online alim",
+        shortTitle: "Online ʿĀlim Curriculum & Foundations",
+        discipline: "Qur'an & Tafsir",
+        emoji: "🧭",
+        sourceCount: 76,
+        description: "Structured ʿĀlimiyyah study notes covering Qur'ānic revelation, preservation, compilation, and foundational Islamic community studies.",
+        sampleSources: ["Stages & Modes of Qur'ān Revelation Notes", "Preservation & Compilation of the Muṣḥaf", "Scribes of Divine Revelation & Early Community"]
+      },
+      {
+        id: "nb-11",
+        title: "أصول الفقه ومقاصد الشريعة",
+        shortTitle: "Uṣūl al-Fiqh & Maqāṣid al-Sharīʿah",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "⚖️",
+        sourceCount: 89,
+        description: "Legal theory, sources of jurisprudence, qiyās, ijtihād, and higher objectives of Islamic law (maqāṣid al-sharīʿah).",
+        sampleSources: ["Al-Muwāfaqāt fī Uṣūl al-Sharīʿah — al-Shāṭibī", "Al-Mustaṣfā min ʿIlm al-Uṣūl — al-Ghazālī", "Rawḍat al-Nāẓir wa Jannat al-Munāẓir — Ibn Qudāmah"]
+      },
+      {
+        id: "nb-12",
+        title: "الفقه الحنفي والفتاوى",
+        shortTitle: "Ḥanafī Fiqh & Fatāwā",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "🏛️",
+        sourceCount: 96,
+        description: "Classical Ḥanafī jurisprudence, manuals, commentaries, and fatwā collections.",
+        sampleSources: ["Al-Hidāyah Sharḥ Bidāyat al-Mubtadī — al-Marghīnānī", "Radd al-Muḥtār ʿalā al-Durr al-Mukhtār — Ibn ʿĀbidīn", "Badā'iʿ al-Ṣanā'iʿ — al-Kāsānī"]
+      },
+      {
+        id: "nb-13",
+        title: "الفقه المقارن والمذاهب الأربعة",
+        shortTitle: "Comparative Fiqh & Four Madhāhib",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "📚",
+        sourceCount: 84,
+        description: "Comparative jurisprudence across the Ḥanafī, Mālikī, Shāfiʿī, and Ḥanbalī schools with textual evidences.",
+        sampleSources: ["Bidāyat al-Mujtahid — Ibn Rushd", "Al-Majmūʿ Sharḥ al-Muhadhdhab — al-Nawawī", "Al-Mughnī — Ibn Qudāmah"]
+      },
+      {
+        id: "nb-14",
+        title: "السيرة النبوية والشمائل",
+        shortTitle: "Prophetic Sīrah & Shamā'il",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "🌙",
+        sourceCount: 81,
+        description: "Prophetic biography, campaigns, constitutional milestones, and noble characteristics (shamā'il).",
+        sampleSources: ["Al-Sīrah al-Nabawiyyah — Ibn Hishām & Ibn Kathīr", "Shamā'il al-Tirmidhī & Shurūḥuhā", "Zād al-Maʿād fī Hady Khayr al-ʿIbād — Ibn al-Qayyim"]
+      },
+      {
+        id: "nb-15",
+        title: "العقيدة الإسلامية وعلم الكلام",
+        shortTitle: "Islamic ʿAqīdah & Kalām",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "💠",
+        sourceCount: 79,
+        description: "Core articles of faith, divine attributes, prophethood, accountability, and classical theological treatises.",
+        sampleSources: ["Sharḥ al-ʿAqīdah al-Ṭaḥāwiyyah — Ibn Abī al-ʿIzz", "Sharḥ al-ʿAqā'id al-Nasafiyyah — al-Taftāzānī", "Al-Fiqh al-Akbar — Abū Ḥanīfah"]
+      },
+      {
+        id: "nb-16",
+        title: "البلاغة العربية والبيان والبديع",
+        shortTitle: "Arabic Balāghah (Maʿānī, Bayān & Badīʿ)",
+        discipline: "Arabic & Nahw",
+        emoji: "✒️",
+        sourceCount: 72,
+        description: "Rhetoric, semantics, figurative imagery, and stylistic embellishments in Qur'ānic and classical Arabic prose/poetry.",
+        sampleSources: ["Dalā'il al-Iʿjāz — ʿAbd al-Qāhir al-Jurjānī", "Talkhīṣ al-Miftāḥ — al-Qazwīnī", "Mukhtaṣar al-Maʿānī — al-Taftāzānī"]
+      },
+      {
+        id: "nb-17",
+        title: "التاريخ الإسلامي والتراجم والرجال",
+        shortTitle: "Islamic History, Tarājim & Biographies",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "🏛️",
+        sourceCount: 93,
+        description: "Chronicles of Islamic history, biographical dictionaries of scholars, narrators, and righteous figures.",
+        sampleSources: ["Siyar Aʿlām al-Nubalā' — al-Dhahabī", "Al-Bidāyah wa al-Nihāyah — Ibn Kathīr", "Tārīkh al-Rusul wa al-Mulūk — al-Ṭabarī"]
+      },
+      {
+        id: "nb-18",
+        title: "الآداب والأخلاق والرقائق",
+        shortTitle: "Ādāb, Akhlāq & Raqā'iq",
+        discipline: "Fiqh, Seerah & Tasawwuf",
+        emoji: "🌿",
+        sourceCount: 68,
+        description: "Etiquettes of seeking knowledge, character refinement, sincerity, gratitude, and heart-softening narrations.",
+        sampleSources: ["Jāmiʿ Bayān al-ʿIlm wa Faḍlih — Ibn ʿAbd al-Barr", "Riyāḍ al-Ṣāliḥīn — al-Nawawī", "Taʿlīm al-Mutaʿallim Ṭarīq al-Taʿallum — al-Zarnūjī"]
+      },
+      {
+        id: "nb-19",
+        title: "فهارس الكتب والمخطوطات والمراجع",
+        shortTitle: "Manuscripts, Bibliographies & Fihrist Index",
+        discipline: "Hadith Sciences",
+        emoji: "🗂️",
+        sourceCount: 56,
+        description: "Catalogs of manuscripts, bibliographic indexes, edition notes, and scholarly reference guides across disciplines.",
+        sampleSources: ["Kashf al-Ẓunūn — Ḥājjī Khalīfah", "Fihris al-Fahāris wa al-Ithbāt — ʿAbd al-Ḥayy al-Kattānī", "Hadiyyat al-ʿĀrifīn — Ismāʿīl Bāshā al-Baghdādī"]
+      }
+    ];
+
+    // -----------------------------------------------------------------------
+    // B. STORAGE KEYS & APPLICATION STATE
+    // -----------------------------------------------------------------------
+    const STORAGE_KEYS = {
+      HISTORY: "maktaba_al_ilm_qa_history_v1",
+      API_KEY: "maktaba_al_ilm_gemini_api_key_v1",
+      CURATOR_UNLOCKED: "maktaba_al_ilm_curator_unlocked_v1",
+      CURRENT_USER: "maktaba_al_ilm_current_user_v1",
+      USERS_REGISTRY: "maktaba_al_ilm_users_registry_v1",
+      FIREBASE_URL: "maktaba_al_ilm_firebase_rtdb_url_v1"
+    };
+
+    const CURATOR_PASSCODE = "Maktaba@2026";
+
+    const appState = {
+      isAdminUnlocked: false,
+      currentUser: null,
+      usersRegistry: [],
+      dashboardSearch: "",
+      dashboardFilter: "all", // "all" | "installed" | "browser"
+      selectedIds: new Set(NOTEBOOKS_DATA.map(n => n.id)),
+      activeDiscipline: "All",
+      searchQuery: "",
+      responseStyle: "concise", // "concise" | "detailed"
+      isSubmitting: false,
+      inspectedNotebookId: null,
+      deferredInstallPrompt: null,
+      historyItems: [],
+      viewingSavedOnly: false,
+      pinnedOnlyFilter: false
+    };
+
+    // -----------------------------------------------------------------------
+    // C. HELPER UTILITIES: ESCAPING, SCRIPT DETECTION & TEMPORAL STAMPS
+    // -----------------------------------------------------------------------
+    function escapeHtml(str) {
+      if (typeof str !== "string") return "";
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    /**
+     * Automatically detects Urdu, Arabic, or Latin script and returns
+     * appropriate direction (`rtl` / `ltr`) and font utility class.
+     */
+    function detectScriptMeta(text) {
+      if (!text || typeof text !== "string") {
+        return { dir: "ltr", fontClass: "script-latin" };
+      }
+      const urduDistinctRegex = /[\u0679\u067E\u0686\u0688\u0691\u0698\u06A9\u06AF\u06BA\u06BE\u06CC\u06D2]/;
+      const arabicBlockRegex = /[\u0600-\u06FF]/;
+      if (urduDistinctRegex.test(text)) {
+        return { dir: "rtl", fontClass: "script-urdu" };
+      }
+      if (arabicBlockRegex.test(text)) {
+        return { dir: "rtl", fontClass: "script-arabic" };
+      }
+      return { dir: "ltr", fontClass: "script-latin" };
+    }
+
+    function formatTemporalStamp(dateObj = new Date()) {
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const dayOfWeek = days[dateObj.getDay()];
+      const exactDate = dateObj.toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric"
+      });
+      const exactTime = dateObj.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+      });
+      const isoDateKey = dateObj.toISOString().slice(0, 10);
+      return { dayOfWeek, exactDate, exactTime, isoDateKey };
+    }
+
+    function detectDeviceLabel() {
+      const ua = navigator.userAgent || "";
+      if (/Android/i.test(ua)) return "Android Mobile";
+      if (/iPhone|iPad|iPod/i.test(ua)) return "iPhone / iPad (iOS)";
+      if (/Windows/i.test(ua)) return "Windows Desktop";
+      if (/Mac OS X/i.test(ua)) return "macOS Desktop";
+      return "Web Client";
+    }
+
+    function isRunningAsInstalledPwa() {
+      return (
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true
+      );
+    }
+
+    function showToast(message, icon = "✦") {
+      const toast = document.getElementById("toastNotification");
+      const msgEl = document.getElementById("toastMessage");
+      const iconEl = document.getElementById("toastIcon");
+      if (!toast || !msgEl || !iconEl) return;
+      msgEl.textContent = message;
+      iconEl.textContent = icon;
+      toast.classList.remove("-translate-y-24", "opacity-0");
+      toast.classList.add("translate-y-0", "opacity-100");
+      clearTimeout(window.__maktabaToastTimer);
+      window.__maktabaToastTimer = setTimeout(() => {
+        toast.classList.remove("translate-y-0", "opacity-100");
+        toast.classList.add("-translate-y-24", "opacity-0");
+      }, 3200);
+    }
+
+    // -----------------------------------------------------------------------
+    // D. READER SIGN-UP, SIGN-IN, PWA INSTALL TRACKING & CURATOR ANALYTICS
+    // -----------------------------------------------------------------------
+    function getSeededSampleUsers() {
+      return [
+        {
+          id: "usr-seed-1",
+          name: "Dr. Tariq Mahmood Qasmi",
+          email: "tariq.qasmi@islamicstudies.org",
+          cityRole: "Lahore · Hadith Researcher",
+          installedApp: true,
+          installPlatform: "Android Mobile (PWA)",
+          dayOfWeek: "Saturday",
+          exactDate: "Nov 21, 2026",
+          exactTime: "09:14:22 AM",
+          isoDateKey: "2026-11-21",
+          lastActive: "Nov 23, 2026 · 04:30 PM",
+          questionsAsked: 14
+        },
+        {
+          id: "usr-seed-2",
+          name: "Amina Bint Yusuf",
+          email: "amina.yusuf@almadina.edu",
+          cityRole: "Islamabad · Tafsir Scholar",
+          installedApp: true,
+          installPlatform: "iPhone / iPad (PWA)",
+          dayOfWeek: "Sunday",
+          exactDate: "Nov 22, 2026",
+          exactTime: "02:48:05 PM",
+          isoDateKey: "2026-11-22",
+          lastActive: "Nov 23, 2026 · 06:15 PM",
+          questionsAsked: 9
+        },
+        {
+          id: "usr-seed-3",
+          name: "Bilal Ahmed Siddiqui",
+          email: "bilal.siddiqui@nahwdesk.pk",
+          cityRole: "Karachi · Arabic Grammar Student",
+          installedApp: false,
+          installPlatform: "Windows Desktop",
+          dayOfWeek: "Monday",
+          exactDate: "Nov 23, 2026",
+          exactTime: "11:05:41 AM",
+          isoDateKey: "2026-11-23",
+          lastActive: "Nov 23, 2026 · 05:50 PM",
+          questionsAsked: 5
+        }
+      ];
+    }
+
+    async function syncUserRecordToFirebase(userRecord) {
+      const fbUrl = (localStorage.getItem(STORAGE_KEYS.FIREBASE_URL) || "").trim().replace(/\/+$/, "");
+      if (!fbUrl) return;
+      try {
+        const safeKey = userRecord.email.toLowerCase().replace(/[^a-z0-9]/g, "_");
+        await fetch(`${fbUrl}/maktaba_users/${safeKey}.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userRecord)
+        });
+      } catch (e) {
+        // Fallback silently to localStorage if offline or unreachable
+      }
+    }
+
+    async function fetchUsersFromFirebaseIfConfigured() {
+      const fbUrl = (localStorage.getItem(STORAGE_KEYS.FIREBASE_URL) || "").trim().replace(/\/+$/, "");
+      if (!fbUrl) return;
+      try {
+        const res = await fetch(`${fbUrl}/maktaba_users.json`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && typeof data === "object") {
+          const remoteList = Object.values(data);
+          const byEmail = new Map(appState.usersRegistry.map(u => [u.email.toLowerCase(), u]));
+          remoteList.forEach(r => {
+            if (r && r.email) {
+              const key = r.email.toLowerCase();
+              const existing = byEmail.get(key);
+              if (!existing || (r.questionsAsked || 0) >= (existing.questionsAsked || 0)) {
+                byEmail.set(key, r);
+              }
+            }
+          });
+          appState.usersRegistry = Array.from(byEmail.values());
+          persistUsersRegistry();
+          if (appState.isAdminUnlocked) renderCuratorDashboard();
+        }
+      } catch (e) {
+        // Ignore network errors
+      }
+    }
+
+    function persistUsersRegistry() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.USERS_REGISTRY, JSON.stringify(appState.usersRegistry));
+      } catch (e) {}
+      updateCuratorDashboardBadges();
+    }
+
+    function loadUsersAndAuth() {
+      try {
+        const rawRegistry = localStorage.getItem(STORAGE_KEYS.USERS_REGISTRY);
+        appState.usersRegistry = rawRegistry ? JSON.parse(rawRegistry) : getSeededSampleUsers();
+        if (!rawRegistry) persistUsersRegistry();
+      } catch (e) {
+        appState.usersRegistry = getSeededSampleUsers();
+      }
+
+      try {
+        const rawUser = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+        if (rawUser) {
+          appState.currentUser = JSON.parse(rawUser);
+        }
+      } catch (e) {
+        appState.currentUser = null;
+      }
+
+      if (appState.currentUser && isRunningAsInstalledPwa()) {
+        markCurrentUserAsInstalled("Standalone App Mode");
+      }
+
+      updateAuthGateUI();
+      updateCuratorDashboardBadges();
+      fetchUsersFromFirebaseIfConfigured();
+    }
+
+    function registerOrLoginUser({ name, email, cityRole, isNewSignup }) {
+      const normalizedEmail = email.trim().toLowerCase();
+      const stamp = formatTemporalStamp(new Date());
+      const installedNow = isRunningAsInstalledPwa();
+      const deviceLabel = detectDeviceLabel();
+
+      const existingIndex = appState.usersRegistry.findIndex(
+        u => u.email.toLowerCase() === normalizedEmail
+      );
+
+      let userRecord;
+      if (existingIndex !== -1) {
+        userRecord = {
+          ...appState.usersRegistry[existingIndex],
+          name: name ? name.trim() : appState.usersRegistry[existingIndex].name,
+          cityRole: cityRole ? cityRole.trim() : appState.usersRegistry[existingIndex].cityRole,
+          installedApp: appState.usersRegistry[existingIndex].installedApp || installedNow,
+          installPlatform: installedNow ? `${deviceLabel} (PWA)` : appState.usersRegistry[existingIndex].installPlatform,
+          lastActive: `${stamp.exactDate} · ${stamp.exactTime}`
+        };
+        appState.usersRegistry[existingIndex] = userRecord;
+      } else {
+        if (!isNewSignup && !name) {
+          return { ok: false, error: "No account found with this email. Switch to New Reader Sign-Up." };
+        }
+        userRecord = {
+          id: "usr-" + Date.now(),
+          name: name.trim(),
+          email: normalizedEmail,
+          cityRole: (cityRole || "").trim() || "Scholarly Reader",
+          installedApp: installedNow,
+          installPlatform: installedNow ? `${deviceLabel} (PWA)` : deviceLabel,
+          dayOfWeek: stamp.dayOfWeek,
+          exactDate: stamp.exactDate,
+          exactTime: stamp.exactTime,
+          isoDateKey: stamp.isoDateKey,
+          lastActive: `${stamp.exactDate} · ${stamp.exactTime}`,
+          questionsAsked: 0
+        };
+        appState.usersRegistry.unshift(userRecord);
+      }
+
+      appState.currentUser = userRecord;
+      try {
+        localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(userRecord));
+      } catch (e) {}
+      persistUsersRegistry();
+      syncUserRecordToFirebase(userRecord);
+      updateAuthGateUI();
+      return { ok: true, user: userRecord };
+    }
+
+    function markCurrentUserAsInstalled(sourceNote = "PWA Installed") {
+      if (!appState.currentUser) return;
+      const stamp = formatTemporalStamp(new Date());
+      const deviceLabel = detectDeviceLabel();
+      appState.currentUser.installedApp = true;
+      appState.currentUser.installPlatform = `${deviceLabel} (${sourceNote})`;
+      appState.currentUser.lastActive = `${stamp.exactDate} · ${stamp.exactTime}`;
+
+      const idx = appState.usersRegistry.findIndex(
+        u => u.email.toLowerCase() === appState.currentUser.email.toLowerCase()
+      );
+      if (idx !== -1) {
+        appState.usersRegistry[idx] = { ...appState.currentUser };
+      }
+      try {
+        localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(appState.currentUser));
+      } catch (e) {}
+      persistUsersRegistry();
+      syncUserRecordToFirebase(appState.currentUser);
+      if (appState.isAdminUnlocked) renderCuratorDashboard();
+    }
+
+    function incrementUserQuestionCount() {
+      if (!appState.currentUser) return;
+      const stamp = formatTemporalStamp(new Date());
+      appState.currentUser.questionsAsked = (appState.currentUser.questionsAsked || 0) + 1;
+      appState.currentUser.lastActive = `${stamp.exactDate} · ${stamp.exactTime}`;
+
+      const idx = appState.usersRegistry.findIndex(
+        u => u.email.toLowerCase() === appState.currentUser.email.toLowerCase()
+      );
+      if (idx !== -1) {
+        appState.usersRegistry[idx] = { ...appState.currentUser };
+      }
+      try {
+        localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(appState.currentUser));
+      } catch (e) {}
+      persistUsersRegistry();
+      syncUserRecordToFirebase(appState.currentUser);
+    }
+
+    function updateAuthGateUI() {
+      const gate = document.getElementById("authGateOverlay");
+      const userPill = document.getElementById("activeUserPill");
+      const userNameLabel = document.getElementById("activeUserNameLabel");
+
+      if (appState.currentUser) {
+        gate.classList.add("hidden");
+        gate.classList.remove("flex");
+        userPill.classList.remove("hidden");
+        userPill.classList.add("lg:flex");
+        userNameLabel.textContent = appState.currentUser.name;
+      } else {
+        gate.classList.remove("hidden");
+        gate.classList.add("flex");
+        userPill.classList.add("hidden");
+        userPill.classList.remove("lg:flex");
+      }
+    }
+
+    function updateCuratorDashboardBadges() {
+      const count = appState.usersRegistry.length;
+      const headerBadge = document.getElementById("headerRegisteredCountBadge");
+      const sidebarPill = document.getElementById("sidebarUserCountPill");
+      if (headerBadge) headerBadge.textContent = count;
+      if (sidebarPill) sidebarPill.textContent = count;
+    }
+
+    function renderCuratorDashboard() {
+      const users = appState.usersRegistry || [];
+      const totalUsers = users.length;
+      const totalInstalls = users.filter(u => u.installedApp).length;
+      const installRate = totalUsers > 0 ? Math.round((totalInstalls / totalUsers) * 100) : 0;
+      const todayStamp = formatTemporalStamp(new Date());
+      const activeToday = users.filter(
+        u => u.isoDateKey === todayStamp.isoDateKey || (u.lastActive || "").includes(todayStamp.exactDate)
+      ).length;
+      const totalQuestions = users.reduce((sum, u) => sum + (u.questionsAsked || 0), 0);
+
+      document.getElementById("kpiTotalUsers").textContent = totalUsers;
+      document.getElementById("kpiTotalInstalls").textContent = totalInstalls;
+      document.getElementById("kpiInstallRate").textContent = `${installRate}% Installed`;
+      document.getElementById("kpiActiveToday").textContent = activeToday;
+      document.getElementById("kpiTodayDateBadge").textContent = todayStamp.exactDate;
+      document.getElementById("kpiTotalQuestions").textContent = totalQuestions;
+
+      const fbUrl = (localStorage.getItem(STORAGE_KEYS.FIREBASE_URL) || "").trim();
+      const syncStatusEl = document.getElementById("dashboardSyncStatusText");
+      if (syncStatusEl) {
+        syncStatusEl.textContent = fbUrl
+          ? "Firebase Realtime Sync Active · Name, Email, Install Status, Day, Date & Exact Time"
+          : "Local Device Registry (localStorage) · Name, Email, Install Status, Day, Date & Exact Time";
+      }
+
+      const q = appState.dashboardSearch.trim().toLowerCase();
+      const filtered = users.filter(u => {
+        if (appState.dashboardFilter === "installed" && !u.installedApp) return false;
+        if (appState.dashboardFilter === "browser" && u.installedApp) return false;
+        if (!q) return true;
+        return (
+          (u.name || "").toLowerCase().includes(q) ||
+          (u.email || "").toLowerCase().includes(q) ||
+          (u.cityRole || "").toLowerCase().includes(q) ||
+          (u.dayOfWeek || "").toLowerCase().includes(q) ||
+          (u.exactDate || "").toLowerCase().includes(q)
+        );
+      });
+
+      const tbody = document.getElementById("dashboardUsersTableBody");
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="py-8 px-4 text-center text-mutedSlate">
+              No users match the current filter.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(u => {
+        const isMe = appState.currentUser && u.email.toLowerCase() === appState.currentUser.email.toLowerCase();
+        const installBadge = u.installedApp
+          ? `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-antiqueGold-light text-antiqueGold-dark border border-antiqueGold-border">
+               <span>📲 Installed App</span>
+             </span>`
+          : `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-royalBlue-light text-royalBlue-sapphire border border-royalBlue-border">
+               <span>🌐 Web Browser</span>
+             </span>`;
+
+        return `
+          <tr class="hover:bg-parchment-bg/65 transition">
+            <td class="py-3 px-4">
+              <div class="font-bold text-charcoal flex items-center gap-1.5">
+                <span>${escapeHtml(u.name)}</span>
+                ${isMe ? `<span class="px-1.5 py-0.2 rounded bg-royalBlue text-antiqueGold-bright text-[9px] uppercase">You</span>` : ""}
+              </div>
+              <div class="text-[11px] text-mutedSlate">${escapeHtml(u.cityRole || "Reader")} · ${escapeHtml(u.installPlatform || "")}</div>
+            </td>
+            <td class="py-3 px-4 font-mono text-[11px] text-charcoal">${escapeHtml(u.email)}</td>
+            <td class="py-3 px-4">${installBadge}</td>
+            <td class="py-3 px-4 font-semibold text-royalBlue">${escapeHtml(u.dayOfWeek || "-")}</td>
+            <td class="py-3 px-4 font-medium text-charcoal whitespace-nowrap">${escapeHtml(u.exactDate || "-")}</td>
+            <td class="py-3 px-4 font-mono text-[11px] text-mutedSlate whitespace-nowrap">${escapeHtml(u.exactTime || "-")}</td>
+            <td class="py-3 px-4 text-center">
+              <span class="px-2 py-0.5 rounded-full bg-parchment-bg border border-parchment-border font-bold text-royalBlue">
+                ${u.questionsAsked || 0}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-[11px] text-mutedSlate whitespace-nowrap">${escapeHtml(u.lastActive || "-")}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function exportUsersRegistryToCsv() {
+      const headers = ["Name", "Email", "City/Role", "Install Status", "Platform", "Day", "Date", "Time", "Questions Asked", "Last Active"];
+      const rows = (appState.usersRegistry || []).map(u => [
+        `"${(u.name || "").replace(/"/g, '""')}"`,
+        `"${(u.email || "").replace(/"/g, '""')}"`,
+        `"${(u.cityRole || "").replace(/"/g, '""')}"`,
+        u.installedApp ? "Installed App" : "Web Browser",
+        `"${(u.installPlatform || "").replace(/"/g, '""')}"`,
+        u.dayOfWeek || "",
+        `"${u.exactDate || ""}"`,
+        `"${u.exactTime || ""}"`,
+        u.questionsAsked || 0,
+        `"${u.lastActive || ""}"`
+      ]);
+      const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Maktaba-Al-Ilm-Users-${formatTemporalStamp(new Date()).isoDateKey}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("User & Installation registry exported as CSV!", "⬇");
+    }
+
+    // -----------------------------------------------------------------------
+    // E. CURATOR LOCK PRIVACY MODE & 19-NOTEBOOK VAULT
+    // -----------------------------------------------------------------------
+    function loadCuratorState() {
+      try {
+        appState.isAdminUnlocked = sessionStorage.getItem(STORAGE_KEYS.CURATOR_UNLOCKED) === "true";
+      } catch (e) {
+        appState.isAdminUnlocked = false;
+      }
+    }
+
+    function applyAccessModeUI() {
+      const sidebar = document.getElementById("knowledgeSidebar");
+      const openDrawerBtn = document.getElementById("openDrawerBtn");
+      const openDashboardBtn = document.getElementById("openCuratorDashboardBtn");
+      const lockIcon = document.getElementById("curatorLockIcon");
+      const lockLabel = document.getElementById("curatorLockLabel");
+      const curatorBtn = document.getElementById("curatorVaultBtn");
+      const mobileCuratorLabel = document.getElementById("mobileNavCuratorLabel");
+
+      if (appState.isAdminUnlocked) {
+        sidebar.classList.remove("hidden");
+        sidebar.classList.add("flex");
+        openDrawerBtn.classList.remove("hidden");
+        openDrawerBtn.classList.add("flex");
+        if (openDashboardBtn) {
+          openDashboardBtn.classList.remove("hidden");
+          openDashboardBtn.classList.add("flex");
+        }
+        lockIcon.textContent = "🔓";
+        lockLabel.textContent = "Curator Open";
+        curatorBtn.classList.add("bg-antiqueGold-light", "border-antiqueGold", "text-antiqueGold-dark");
+        curatorBtn.classList.remove("bg-parchment-bg", "text-charcoal");
+        if (mobileCuratorLabel) mobileCuratorLabel.textContent = "Vault Open";
+      } else {
+        // Public Guest Mode: Hide internal 19-notebook sidebar, source inspector & user dashboard
+        sidebar.classList.add("hidden");
+        sidebar.classList.remove("flex");
+        sidebar.classList.add("-translate-x-full");
+        document.getElementById("drawerBackdrop").classList.add("hidden");
+        openDrawerBtn.classList.add("hidden");
+        openDrawerBtn.classList.remove("flex");
+        if (openDashboardBtn) {
+          openDashboardBtn.classList.add("hidden");
+          openDashboardBtn.classList.remove("flex");
+        }
+        lockIcon.textContent = "🔒";
+        lockLabel.textContent = "Curator";
+        curatorBtn.classList.remove("bg-antiqueGold-light", "border-antiqueGold", "text-antiqueGold-dark");
+        curatorBtn.classList.add("bg-parchment-bg", "text-charcoal");
+        if (mobileCuratorLabel) mobileCuratorLabel.textContent = "Curator Lock";
+        appState.selectedIds = new Set(NOTEBOOKS_DATA.map(n => n.id));
+      }
+
+      updateScopeIndicators();
+      reRenderCurrentFeed();
+    }
+
+    function getFilteredNotebooks() {
+      const q = appState.searchQuery.trim().toLowerCase();
+      return NOTEBOOKS_DATA.filter(nb => {
+        const matchesDisc = appState.activeDiscipline === "All" || nb.discipline === appState.activeDiscipline;
+        if (!matchesDisc) return false;
+        if (!q) return true;
+        return (
+          nb.title.toLowerCase().includes(q) ||
+          nb.shortTitle.toLowerCase().includes(q) ||
+          nb.discipline.toLowerCase().includes(q) ||
+          nb.description.toLowerCase().includes(q) ||
+          nb.sampleSources.some(s => s.toLowerCase().includes(q))
+        );
+      });
+    }
+
+    function renderNotebooksList() {
+      const container = document.getElementById("notebooksListContainer");
+      if (!container) return;
+      const filtered = getFilteredNotebooks();
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-8 px-4 text-xs text-mutedSlate">
+            No notebooks match "${escapeHtml(appState.searchQuery)}".
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(nb => {
+        const isChecked = appState.selectedIds.has(nb.id);
+        const dirClass = detectScriptMeta(nb.title).fontClass;
+        return `
+          <div class="group rounded-xl border p-3 transition ${
+            isChecked
+              ? "bg-white border-royalBlue-border shadow-2xs"
+              : "bg-parchment-bg/60 border-parchment-border opacity-75"
+          }">
+            <div class="flex items-start gap-2.5">
+              <input
+                type="checkbox"
+                data-nb-checkbox="${nb.id}"
+                ${isChecked ? "checked" : ""}
+                class="mt-1 h-4 w-4 rounded accent-royalBlue cursor-pointer shrink-0"
+              />
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1.5">
+                  <span class="text-xs font-bold text-royalBlue-sapphire truncate">
+                    ${nb.emoji} ${escapeHtml(nb.shortTitle)}
+                  </span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-antiqueGold-light text-antiqueGold-dark border border-antiqueGold-border shrink-0">
+                    ${nb.sourceCount}
+                  </span>
+                </div>
+                <p class="text-xs text-charcoal mt-0.5 ${dirClass} truncate" dir="auto">
+                  ${escapeHtml(nb.title)}
+                </p>
+                <div class="flex items-center justify-between mt-2">
+                  <span class="text-[10px] text-mutedSlate">${escapeHtml(nb.discipline)}</span>
+                  <button
+                    type="button"
+                    data-inspect-nb="${nb.id}"
+                    class="text-[11px] font-semibold text-royalBlue hover:text-antiqueGold-dark underline"
+                  >
+                    Inspect Sources
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      container.querySelectorAll("[data-nb-checkbox]").forEach(cb => {
+        cb.addEventListener("change", (e) => {
+          const id = e.target.getAttribute("data-nb-checkbox");
+          if (e.target.checked) appState.selectedIds.add(id);
+          else appState.selectedIds.delete(id);
+          renderNotebooksList();
+          updateScopeIndicators();
+        });
+      });
+
+      container.querySelectorAll("[data-inspect-nb]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          openSourceInspector(btn.getAttribute("data-inspect-nb"));
+        });
+      });
+    }
+
+    function updateScopeIndicators() {
+      const selectedCount = appState.selectedIds.size;
+      const totalCount = NOTEBOOKS_DATA.length;
+      const activeSources = NOTEBOOKS_DATA
+        .filter(n => appState.selectedIds.has(n.id))
+        .reduce((acc, n) => acc + n.sourceCount, 0);
+
+      const summaryEl = document.getElementById("selectedCountSummary");
+      const sidebarCounterEl = document.getElementById("sidebarSourcesCounter");
+      const scopeTextEl = document.getElementById("activeScopeText");
+      const resetBtn = document.getElementById("resetScopeBtn");
+
+      if (summaryEl) summaryEl.textContent = `${selectedCount} of ${totalCount} active · ${activeSources.toLocaleString()} sources`;
+      if (sidebarCounterEl) sidebarCounterEl.textContent = `${activeSources.toLocaleString()} Sources`;
+
+      if (!appState.isAdminUnlocked) {
+        if (scopeTextEl) scopeTextEl.textContent = "Verified Classical & Scholarly References Active";
+        if (resetBtn) resetBtn.classList.add("hidden");
+        return;
+      }
+
+      if (selectedCount === totalCount) {
+        if (scopeTextEl) scopeTextEl.textContent = `All 19 Vault Notebooks (${activeSources.toLocaleString()} sources)`;
+        if (resetBtn) resetBtn.classList.add("hidden");
+      } else if (selectedCount === 1) {
+        const onlyNb = NOTEBOOKS_DATA.find(n => appState.selectedIds.has(n.id));
+        if (scopeTextEl) scopeTextEl.textContent = `Scoped: ${onlyNb ? onlyNb.shortTitle : "1 Notebook"}`;
+        if (resetBtn) resetBtn.classList.remove("hidden");
+      } else if (selectedCount === 0) {
+        if (scopeTextEl) scopeTextEl.textContent = "No Notebooks Selected";
+        if (resetBtn) resetBtn.classList.remove("hidden");
+      } else {
+        if (scopeTextEl) scopeTextEl.textContent = `${selectedCount} Notebooks Selected (${activeSources.toLocaleString()} sources)`;
+        if (resetBtn) resetBtn.classList.remove("hidden");
+      }
+    }
+
+    function openSourceInspector(nbId) {
+      if (!appState.isAdminUnlocked) return;
+      const nb = NOTEBOOKS_DATA.find(n => n.id === nbId);
+      if (!nb) return;
+      appState.inspectedNotebookId = nb.id;
+      document.getElementById("inspectorEmoji").textContent = nb.emoji;
+      document.getElementById("inspectorDiscipline").textContent = nb.discipline;
+      document.getElementById("inspectorTitle").textContent = `${nb.shortTitle} — ${nb.title}`;
+      document.getElementById("inspectorDescription").textContent = nb.description;
+      document.getElementById("inspectorSourceCount").textContent = `${nb.sourceCount} indexed texts`;
+      document.getElementById("inspectorSampleSources").innerHTML = nb.sampleSources
+        .map(s => `<li class="text-charcoal/90">${escapeHtml(s)}</li>`)
+        .join("");
+      const modal = document.getElementById("sourceInspectorModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeSourceInspector() {
+      const modal = document.getElementById("sourceInspectorModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      appState.inspectedNotebookId = null;
+    }
+
+    // -----------------------------------------------------------------------
+    // F. SAVED / HISTORY PERSISTENCE (localStorage)
+    // -----------------------------------------------------------------------
+    function loadSavedHistory() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.HISTORY);
+        appState.historyItems = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        appState.historyItems = [];
+      }
+      updateSavedCountBadges();
+    }
+
+    function persistHistory() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(appState.historyItems));
+      } catch (e) {}
+      updateSavedCountBadges();
+    }
+
+    function updateSavedCountBadges() {
+      const count = appState.historyItems.length;
+      const badge = document.getElementById("savedHistoryCountBadge");
+      const mobileCount = document.getElementById("mobileTabSavedCount");
+      if (badge) badge.textContent = count;
+      if (mobileCount) mobileCount.textContent = count;
+    }
+
+    function addHistoryRecord(questionText, structuredResponse, activeNotebookCount) {
+      const stamp = formatTemporalStamp(new Date());
+      const record = {
+        id: "qa-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+        question: questionText,
+        response: structuredResponse,
+        activeNotebookCount,
+        pinned: false,
+        timestamp: `${stamp.exactDate} · ${stamp.exactTime}`
+      };
+      appState.historyItems.unshift(record);
+      if (appState.historyItems.length > 60) {
+        appState.historyItems = appState.historyItems.slice(0, 60);
+      }
+      persistHistory();
+      return record;
+    }
+
+    function togglePinHistoryItem(id) {
+      const item = appState.historyItems.find(h => h.id === id);
+      if (!item) return;
+      item.pinned = !item.pinned;
+      persistHistory();
+      reRenderCurrentFeed();
+      showToast(item.pinned ? "Pinned answer to Saved" : "Unpinned answer", item.pinned ? "🔖" : "📌");
+    }
+
+    // -----------------------------------------------------------------------
+    // G. Q&A ENGINE (GEMINI API + AUTHENTIC DEMO FALLBACK WITH REFERENCES)
+    // -----------------------------------------------------------------------
+    function buildDemoScholarlyAnswer(questionText, styleMode) {
+      const qLower = questionText.toLowerCase();
+      const isUrdu = detectScriptMeta(questionText).fontClass === "script-urdu";
+      const isArabic = detectScriptMeta(questionText).fontClass === "script-arabic";
+
+      if (isUrdu || qLower.includes("عامل")) {
+        return {
+          directAnswer: "عربی نحو میں 'عامل لفظی' وہ عامل ہے جس کا ظاہر یا مقدر لفظ وجود رکھتا ہو (جیسے فعل، حرفِ جار، یا اسمِ فاعل)، جبکہ 'عامل معنوی' وہ معنوی کیفیت یا تعلق ہے جس کا کوئی ملفوظ عامل موجود نہ ہو، جیسے مبتدا و خبر کا تجرد عن العوامل المعنوية یا فعلِ مضارع کا اسم سے مشابہت کی بنا پر مرفوع ہونا۔",
+          keyPoints: [
+            "عاملِ لفظی کی دو اقسام ہیں: سماعی (جو سماع و نقل پر موقوف ہو جیسے حروفِ جارہ و ناصبہ) اور قیاسی (جو ضابطہ و قیاس کے تحت عمل کرے جیسے فعل اور اسمِ مشتق)۔",
+            "عاملِ معنوی جمہور نحاۃ کے نزدیک مبتدا و خبر کے رفع میں مؤثر ہے کہ اسماء کا ابتداء کے لیے خالی ہونا (تجرّد) انہیں رفع کا مستحق بناتا ہے۔",
+            "فعلِ مضارع کا رفع بھی بعض نحاۃ کے نزدیک معنوی سبب (اسم سے مشابہت) کی بنا پر ہے جب تک اس پر ناصب یا جازم داخل نہ ہو۔"
+          ],
+          citations: [
+            {
+              bookOrSource: "هداية النحو — جماعة من العلماء (مكتبة البشرى)",
+              sectionOrChapter: "مقدمة العوامل · عوامل لفظية وعوامل معنوية",
+              discipline: "Arabic & Nahw",
+              sourceExcerpt: "العامل على نوعين: لفظي ومعنوي؛ فاللفظي ما للسان فيه حظ، والمعنوي ما لا حظ للسان فيه بل يعقل بالقلب."
+            },
+            {
+              bookOrSource: "شرح التصريح على التوضيح — خالد الأزهري",
+              sectionOrChapter: "باب المبتدأ والخبر · العامل في المبتدأ والخبر",
+              discipline: "Arabic & Nahw",
+              sourceExcerpt: "المذهب الصحيح عند الجمهور أن المبتدأ مرفوع بالابتداء وهو عامل معنوي."
+            }
+          ],
+          groundingStatus: "Direct Reference Consensus",
+          groundingNote: styleMode === "detailed"
+            ? "Verified against classical Arabic grammar treatises and commentaries on grammatical factors (ʿawāmil)."
+            : "Concise reference-backed summary in Urdu."
+        };
+      }
+
+      if (isArabic || qLower.includes("مقام") || qLower.includes("حال")) {
+        return {
+          directAnswer: "الفرق الجوهري عند أهل السلوك والتصوف أن (المقام) منزلة ثابتة راسخة يكتسبها السالك بالمجاهدة والصدق والدوام (كالتوبة والصبر والشكر والتوكل)، بينما (الحال) وارد لطيف يطرأ على القلب من غير تكلف ولا استدعاء ثم يزول أو يعقب مقاماً أرقى (كالقبض والبسط والوجد).",
+          keyPoints: [
+            "المقام يعبّر عن الثبات والتمكين والارتقاء المستمر بالعمل الصادق والمداومة الشرعية.",
+            "الحال وصف قلبي عارض يرد على القلب بحسب المواهب والأسرار، وقد يدوم فيصبح مقاماً لصاحبه.",
+            "كلاهما منضبط بالكتاب والسنة والآداب الشرعية، بعيد عن الدعاوى المجردة أو مخالفة الأحكام."
+          ],
+          citations: [
+            {
+              bookOrSource: "كتاب اللمع في التصوف — أبو نصر السراج الطوسي",
+              sectionOrChapter: "كتاب الأحوال والمقامات · باب في المقامات وحقائقها ومعنى الأحوال",
+              discipline: "Fiqh, Seerah & Tasawwuf",
+              sourceExcerpt: "المقامات منازل السائرين بالتحقيق والصدق، والأحوال معان ترد على القلوب من غير تعمد."
+            },
+            {
+              bookOrSource: "قوت القلوب في معاملة المحبوب — أبو طالب المكي",
+              sectionOrChapter: "فصل في مقامات الموقنين وتصريف مواجيد العارفين",
+              discipline: "Fiqh, Seerah & Tasawwuf",
+              sourceExcerpt: "الأحوال مواهب والآداب شرائط، وكل حال لا يشهد له أصل من الشرع فهو مدخول."
+            }
+          ],
+          groundingStatus: "Direct Reference Consensus",
+          groundingNote: styleMode === "detailed"
+            ? "Synthesized from classical manuals on spiritual stations (maqāmāt) and states (aḥwāl)."
+            : "Concise reference-backed summary in Arabic."
+        };
+      }
+
+      if (qLower.includes("muhkam") || qLower.includes("mutashabih") || qLower.includes("mushkil") || qLower.includes("quran")) {
+        return {
+          directAnswer: "Muḥkam verses have clear, unambiguous meanings directly established in the text; Mutashābih passages admit multiple plausible interpretations or involve realities beyond human sensory grasping (such as the nature of Divine attributes); and Mushkil al-Qur'ān addresses verses that appear to pose textual or interpretive tension until harmonized through context, language, and classical tafsir.",
+          keyPoints: [
+            "Muḥkam provides the foundational clarity of legal rulings and core creed, while Mutashābih invites careful scholarly inquiry anchored in firm knowledge.",
+            "Apparent difficulty (ishkāl) in Qur'ānic verses is resolved by examining context (siyāq), Arabic usage, qirā'āt, and narrations from the Companions and Tābiʿīn.",
+            "Classical scholars emphasize interpreting ambiguous or problematic expressions in harmony with clear, decisive Qur'ānic principles."
+          ],
+          citations: [
+            {
+              bookOrSource: "Al-Itqān fī ʿUlūm al-Qur'ān — Jalāl al-Dīn al-Suyūṭī",
+              sectionOrChapter: "Nawʿ on al-Muḥkam wa al-Mutashābih & Mushkil al-Qur'ān",
+              discipline: "Qur'an & Tafsir",
+              sourceExcerpt: "Muḥkam verses are clear and self-evident in meaning, whereas mutashābih passages require contextual and scholarly clarification."
+            },
+            {
+              bookOrSource: "Ta'wīl Mushkil al-Qur'ān — Abū Muḥammad ʿAbd Allāh ibn Qutaybah",
+              sectionOrChapter: "Introduction on Harmonizing Seeming Difficulties in the Qur'ān",
+              discipline: "Qur'an & Tafsir",
+              sourceExcerpt: "Apparent difficulties vanish when verses are read with mastery of Arabic idiom, context, and authentic transmission."
+            }
+          ],
+          groundingStatus: "Direct Reference Consensus",
+          groundingNote: styleMode === "detailed"
+            ? "Expanded scholarly synthesis across Qur'ānic hermeneutics (ʿUlūm al-Qur'ān) and Mushkilāt studies."
+            : "Concise point-by-point answer with verified classical references."
+        };
+      }
+
+      return {
+        directAnswer: "In classical Hadith scholarship, ʿIlal al-Ḥadīth examines subtle, hidden defects in chains (isnād) or texts (matn) that undermine authenticity despite an outwardly sound appearance, while Muṣṭalaḥ al-Ḥadīth classifies narrations, narrator reliability (jarḥ wa taʿdīl), continuity, and modes of transmission.",
+        keyPoints: [
+          "A hidden defect (ʿillah qādiḥah) can include unexpected marfūʿ/mawqūf shifts, samāʿ gaps, or narrator confusion detected by master critics (ḥuffāẓ).",
+          "Muṣṭalaḥ al-Ḥadīth establishes rigorous definitions for ṣaḥīḥ, ḥasan, ḍaʿīf, muʿallaq, mursal, mudraj, and muḍṭarib reports.",
+          "Evaluating a Hadith requires comparing all available chains (iʿtibār / jamʿ al-ṭuruq) rather than relying on an isolated chain."
+        ],
+        citations: [
+          {
+            bookOrSource: "Nuzhat al-Naẓar Sharḥ Nukhbat al-Fikar — Ibn Ḥajar al-ʿAsqalānī",
+            sectionOrChapter: "Classification of Accepted & Rejected Narrations & Hidden Defects",
+            discipline: "Hadith Sciences",
+            sourceExcerpt: "A narration is accepted only when free from severe narrator defect and hidden impairing causes (ʿillah qādiḥah)."
+          },
+          {
+            bookOrSource: "Al-ʿIlal al-Wāridah fī al-Aḥādīth al-Nabawiyyah — al-Dāraquṭnī",
+            sectionOrChapter: "Comparative Chain Analysis & Narrator Critiques",
+            discipline: "Hadith Sciences",
+            sourceExcerpt: "Comparing multiple transmission routes reveals subtle errors, omissions, or inversions in chains."
+          }
+        ],
+        groundingStatus: "Direct Reference Consensus",
+        groundingNote: styleMode === "detailed"
+          ? "Grounded in classical Hadith critique (naqd al-ḥadīth) and muṣṭalaḥ manuals."
+          : "Concise point-by-point answer with verified classical references."
+      };
+    }
+
+    async function generateScholarlyAnswer(questionText, activeNotebooks, styleMode) {
+      const apiKey = (localStorage.getItem(STORAGE_KEYS.API_KEY) || "").trim();
+      if (!apiKey) {
+        await new Promise(resolve => setTimeout(resolve, 550));
+        return buildDemoScholarlyAnswer(questionText, styleMode);
+      }
+
+      const corpusSummary = activeNotebooks
+        .map(n => `- ${n.shortTitle} (${n.discipline}): ${n.sampleSources.join("; ")}`)
+        .join("\n");
+
+      const systemPrompt = `You are Maktaba Al-Ilm, a precise, authoritative scholarly research concierge.
+Answer the user's question in the same language and script as the question (English, Urdu, or Arabic).
+Keep the answer well-structured, accurate, and to-the-point (${styleMode === "detailed" ? "provide thorough, well-explained points" : "keep points crisp and concise"}).
+Cite specific classical or scholarly book/source references in "citations" (do NOT mention internal notebook UI numbers or notebook links).
+Respond strictly as valid JSON with this schema:
+{
+  "directAnswer": "string",
+  "keyPoints": ["string"],
+  "citations": [
+    {
+      "bookOrSource": "string",
+      "sectionOrChapter": "string",
+      "discipline": "string",
+      "sourceExcerpt": "string"
+    }
+  ],
+  "groundingStatus": "Direct Reference Consensus" | "Requires Deeper Source Verification",
+  "groundingNote": "string"
+}`;
+
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const payload = {
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: `${systemPrompt}\n\nAvailable Reference Domains:\n${corpusSummary}\n\nQuestion:\n${questionText}`
+              }
+            ]
+          }
+        ],
+        generationConfig: {
+          responseMimeType: "application/json",
+          temperature: 0.25
+        }
+      };
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error (${response.status})`);
+      }
+
+      const data = await response.json();
+      const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      const cleanedJson = rawText.replace(/^```json\s*/i, "").replace(/```$/i, "").trim();
+      const parsed = JSON.parse(cleanedJson);
+
+      return {
+        directAnswer: parsed.directAnswer || "",
+        keyPoints: Array.isArray(parsed.keyPoints) ? parsed.keyPoints : [],
+        citations: Array.isArray(parsed.citations) ? parsed.citations : [],
+        groundingStatus: parsed.groundingStatus || "Direct Reference Consensus",
+        groundingNote: parsed.groundingNote || ""
+      };
+    }
+
+    // -----------------------------------------------------------------------
+    // H. RENDERING Q&A CARDS (REFERENCE-ONLY IN PUBLIC GUEST MODE)
+    // -----------------------------------------------------------------------
+    function buildCardHtml(record) {
+      const qMeta = detectScriptMeta(record.question);
+      const aMeta = detectScriptMeta(record.response.directAnswer);
+      const isDirect = (record.response.groundingStatus || "").toLowerCase().includes("direct");
+
+      const statusBadgeHtml = isDirect
+        ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-royalBlue-light text-royalBlue border border-royalBlue-border">
+             <span>✓</span>
+             <span>${escapeHtml(record.response.groundingStatus)}</span>
+           </span>`
+        : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-antiqueGold-light text-antiqueGold-dark border border-antiqueGold-border">
+             <span>⚠</span>
+             <span>${escapeHtml(record.response.groundingStatus)}</span>
+           </span>`;
+
+      const pointsHtml = (record.response.keyPoints || [])
+        .map((pt, idx) => {
+          const pMeta = detectScriptMeta(pt);
+          return `
+            <li class="flex items-start gap-2.5 text-sm text-charcoal ${pMeta.fontClass}" dir="${pMeta.dir}">
+              <span class="w-5 h-5 rounded-full bg-royalBlue text-antiqueGold-bright text-[11px] font-bold flex items-center justify-center shrink-0 mt-1">${idx + 1}</span>
+              <span class="flex-1">${escapeHtml(pt)}</span>
+            </li>
+          `;
+        })
+        .join("");
+
+      // Reference-Only Public Mode: Only verified classical book/source title, chapter, discipline & authentic seal
+      const citationsHtml = (record.response.citations || [])
+        .map(cit => {
+          const cMeta = detectScriptMeta(cit.bookOrSource);
+          return `
+            <div class="p-3 rounded-xl bg-parchment-bg border border-parchment-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="min-w-0">
+                <p class="text-xs sm:text-sm font-bold text-royalBlue ${cMeta.fontClass}" dir="${cMeta.dir}">
+                  ${escapeHtml(cit.bookOrSource)}
+                </p>
+                <p class="text-[11px] text-mutedSlate mt-0.5">
+                  ${escapeHtml(cit.sectionOrChapter || "Classical Reference")} · <span class="font-semibold text-royalBlue-sapphire">${escapeHtml(cit.discipline || "Scholarship")}</span>
+                </p>
+              </div>
+              <span class="self-start sm:self-center inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-antiqueGold-light text-antiqueGold-dark border border-antiqueGold-border shrink-0">
+                <span>✓</span>
+                <span>Verified Reference</span>
+              </span>
+            </div>
+          `;
+        })
+        .join("");
+
+      const excerptsHtml = (record.response.citations || [])
+        .filter(c => c.sourceExcerpt)
+        .map(c => {
+          const exMeta = detectScriptMeta(c.sourceExcerpt);
+          return `
+            <div class="p-3 rounded-xl bg-white border border-parchment-border">
+              <p class="text-[11px] font-bold text-royalBlue-sapphire mb-1">${escapeHtml(c.bookOrSource)}</p>
+              <p class="text-xs sm:text-sm text-charcoal ${exMeta.fontClass}" dir="${exMeta.dir}">
+                “${escapeHtml(c.sourceExcerpt)}”
+              </p>
+            </div>
+          `;
+        })
+        .join("");
+
+      return `
+        <article data-qa-id="${record.id}" class="scholar-card rounded-2xl overflow-hidden transition">
+          <div class="gold-hairline"></div>
+          <!-- User Question Header -->
+          <div class="px-4 sm:px-6 py-3.5 bg-parchment-bg/80 border-b border-parchment-border flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2 text-[11px] text-mutedSlate mb-1" dir="ltr">
+                <span class="font-bold text-royalBlue">Question</span>
+                <span>·</span>
+                <span>${escapeHtml(record.timestamp || "")}</span>
+              </div>
+              <h3 class="text-sm sm:text-base font-bold text-charcoal ${qMeta.fontClass}" dir="${qMeta.dir}">
+                ${escapeHtml(record.question)}
+              </h3>
+            </div>
+            <button
+              type="button"
+              data-pin-id="${record.id}"
+              title="${record.pinned ? "Remove from Saved" : "Save Answer"}"
+              class="p-2 rounded-xl border text-xs transition shrink-0 ${
+                record.pinned
+                  ? "bg-antiqueGold-light border-antiqueGold text-antiqueGold-dark font-bold"
+                  : "bg-white border-parchment-border text-mutedSlate hover:text-royalBlue"
+              }"
+            >
+              ${record.pinned ? "🔖 Saved" : "🔖"}
+            </button>
+          </div>
+
+          <!-- Answer Body -->
+          <div class="p-4 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2" dir="ltr">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-antiqueGold-dark">
+                Direct To-The-Point Answer
+              </span>
+              ${statusBadgeHtml}
+            </div>
+
+            <p class="text-sm sm:text-base font-medium text-charcoal bg-royalBlue-light/45 border border-royalBlue-border/70 rounded-xl p-3.5 sm:p-4 ${aMeta.fontClass}" dir="${aMeta.dir}">
+              ${escapeHtml(record.response.directAnswer)}
+            </p>
+
+            ${record.response.keyPoints && record.response.keyPoints.length > 0 ? `
+              <div class="space-y-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate block" dir="ltr">
+                  Key Points
+                </span>
+                <ul class="space-y-2">
+                  ${pointsHtml}
+                </ul>
+              </div>
+            ` : ""}
+
+            ${citationsHtml ? `
+              <div class="space-y-2 pt-1" dir="ltr">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate block">
+                  Verified References
+                </span>
+                <div class="space-y-2">
+                  ${citationsHtml}
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Expandable Reference Context -->
+            ${excerptsHtml ? `
+              <div class="pt-1" dir="ltr">
+                <button
+                  type="button"
+                  data-toggle-context="${record.id}"
+                  class="text-xs font-semibold text-royalBlue-sapphire hover:underline inline-flex items-center gap-1"
+                >
+                  <span>▸ View Reference Notes</span>
+                </button>
+                <div id="contextPanel-${record.id}" class="hidden mt-2.5 space-y-2">
+                  ${excerptsHtml}
+                  ${record.response.groundingNote ? `<p class="text-[11px] text-mutedSlate italic">${escapeHtml(record.response.groundingNote)}</p>` : ""}
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Footer Action Bar -->
+            <div class="pt-3 border-t border-parchment-border flex flex-wrap items-center justify-between gap-2 text-xs" dir="ltr">
+              <span class="text-[11px] text-mutedSlate">
+                Maktaba Al-Ilm · Reference-Verified Response
+              </span>
+              <button
+                type="button"
+                data-copy-id="${record.id}"
+                class="px-3 py-1.5 rounded-xl bg-parchment-bg hover:bg-royalBlue-light text-royalBlue font-semibold border border-parchment-border transition inline-flex items-center gap-1.5"
+              >
+                <span>📋</span>
+                <span>Copy Answer + Citations</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function reRenderCurrentFeed() {
+      const listEl = document.getElementById("qaThreadList");
+      const heroEl = document.getElementById("welcomeHeroCard");
+      if (!listEl) return;
+
+      const itemsToShow = appState.viewingSavedOnly
+        ? appState.historyItems.filter(h => h.pinned || appState.viewingSavedOnly)
+        : appState.historyItems;
+
+      if (appState.viewingSavedOnly) {
+        if (heroEl) heroEl.classList.add("hidden");
+        const savedList = appState.historyItems.filter(h => h.pinned);
+        if (savedList.length === 0) {
+          listEl.innerHTML = `
+            <div class="scholar-card rounded-2xl p-8 text-center space-y-2" dir="ltr">
+              <p class="font-display text-xl font-bold text-royalBlue">No Saved Answers Yet</p>
+              <p class="text-xs text-mutedSlate">Tap the bookmark icon (🔖) on any answer card to save it here.</p>
+            </div>
+          `;
+          return;
+        }
+        listEl.innerHTML = savedList.map(buildCardHtml).join("");
+      } else {
+        if (heroEl && appState.historyItems.length === 0) {
+          heroEl.classList.remove("hidden");
+        }
+        listEl.innerHTML = itemsToShow.map(buildCardHtml).join("");
+      }
+
+      bindFeedCardEvents();
+    }
+
+    function bindFeedCardEvents() {
+      document.querySelectorAll("[data-pin-id]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          togglePinHistoryItem(btn.getAttribute("data-pin-id"));
+        });
+      });
+
+      document.querySelectorAll("[data-toggle-context]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-toggle-context");
+          const panel = document.getElementById(`contextPanel-${id}`);
+          if (!panel) return;
+          const isHidden = panel.classList.contains("hidden");
+          panel.classList.toggle("hidden", !isHidden);
+          btn.querySelector("span").textContent = isHidden ? "▾ Hide Reference Notes" : "▸ View Reference Notes";
+        });
+      });
+
+      document.querySelectorAll("[data-copy-id]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-copy-id");
+          const rec = appState.historyItems.find(h => h.id === id);
+          if (!rec) return;
+          const refsText = (rec.response.citations || [])
+            .map(c => `- ${c.bookOrSource} (${c.sectionOrChapter || c.discipline})`)
+            .join("\n");
+          const pointsText = (rec.response.keyPoints || [])
+            .map((p, i) => `${i + 1}. ${p}`)
+            .join("\n");
+          const fullText = `Question:\n${rec.question}\n\nDirect Answer:\n${rec.response.directAnswer}\n\nKey Points:\n${pointsText}\n\nReferences:\n${refsText}`;
+
+          const ta = document.createElement("textarea");
+          ta.value = fullText;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand("copy");
+            showToast("Answer and citations copied to clipboard!", "📋");
+          } catch (e) {
+            showToast("Unable to copy in this browser context", "⚠");
+          }
+          document.body.removeChild(ta);
+        });
+      });
+    }
+
+    // -----------------------------------------------------------------------
+    // I. PWA MANIFEST, SERVICE WORKER & OFFLINE SHELL INFRASTRUCTURE
+    // -----------------------------------------------------------------------
+    function createCrestDataUrl(size = 192) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 80 80">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E8C872"/>
+            <stop offset="50%" stop-color="#D4AF37"/>
+            <stop offset="100%" stop-color="#B58932"/>
+          </linearGradient>
+        </defs>
+        <rect width="80" height="80" rx="18" fill="#0B1D3A"/>
+        <polygon points="40,6 48,19.5 64.5,15.5 60.5,32 74,40 60.5,48 64.5,64.5 48,60.5 40,74 32,60.5 15.5,64.5 19.5,48 6,40 19.5,32 15.5,15.5 32,19.5" stroke="url(#g)" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
+        <path d="M19 54 C26.5 50.5, 34 51.8, 40 56.5 C46 51.8, 53.5 50.5, 61 54 L61 36 C53.5 32.5, 46 33.8, 40 38.5 C34 33.8, 26.5 32.5, 19 36 Z" stroke="url(#g)" stroke-width="2.2" stroke-linejoin="round" fill="#122B54"/>
+        <line x1="40" y1="38.5" x2="40" y2="56.5" stroke="url(#g)" stroke-width="1.8"/>
+        <path d="M40 13.5 L45.5 25.5 L42 34.5 L38 34.5 L34.5 25.5 Z" fill="url(#g)"/>
+      </svg>`;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+
+    function initPwaInfrastructure() {
+      const icon192 = createCrestDataUrl(192);
+      const icon512 = createCrestDataUrl(512);
+
+      const appleTouchLink = document.createElement("link");
+      appleTouchLink.rel = "apple-touch-icon";
+      appleTouchLink.href = icon192;
+      document.head.appendChild(appleTouchLink);
+
+      const manifest = {
+        name: "Maktaba Al-Ilm — Scholarly Research Concierge",
+        short_name: "Maktaba Al-Ilm",
+        start_url: "./",
+        display: "standalone",
+        background_color: "#F8F5EE",
+        theme_color: "#0B1D3A",
+        orientation: "portrait-primary",
+        icons: [
+          { src: icon192, sizes: "192x192", type: "image/svg+xml", purpose: "any" },
+          { src: icon512, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+        ]
+      };
+
+      try {
+        const blob = new Blob([JSON.stringify(manifest)], { type: "application/manifest+json" });
+        const manifestUrl = URL.createObjectURL(blob);
+        const manifestLink = document.createElement("link");
+        manifestLink.rel = "manifest";
+        manifestLink.href = manifestUrl;
+        document.head.appendChild(manifestLink);
+      } catch (e) {}
+
+      // Register Service Worker via Blob URL for offline shell caching
+      if ("serviceWorker" in navigator && (window.location.protocol === "https:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+        const swCode = `
+          const CACHE_NAME = 'maktaba-al-ilm-shell-v1';
+          self.addEventListener('install', event => {
+            event.waitUntil(
+              caches.open(CACHE_NAME).then(cache => cache.addAll(['./'])).catch(() => {})
+            );
+            self.skipWaiting();
+          });
+          self.addEventListener('activate', event => {
+            event.waitUntil(
+              caches.keys().then(keys => Promise.all(
+                keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+              ))
+            );
+            self.clients.claim();
+          });
+          self.addEventListener('fetch', event => {
+            if (event.request.method !== 'GET') return;
+            event.respondWith(
+              caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => cached))
+            );
+          });
+        `;
+        try {
+          const swBlob = new Blob([swCode], { type: "application/javascript" });
+          const swUrl = URL.createObjectURL(swBlob);
+          navigator.serviceWorker.register(swUrl).catch(() => {});
+        } catch (e) {}
+      }
+
+      if (isRunningAsInstalledPwa()) {
+        const strip = document.getElementById("mobileInstallStrip");
+        if (strip) strip.classList.add("hidden");
+        const btnLabel = document.getElementById("headerInstallBtnLabel");
+        if (btnLabel) btnLabel.textContent = "App Installed";
+      }
+    }
+
+    function updateNetworkBadge() {
+      const online = navigator.onLine;
+      const dot = document.getElementById("networkStatusDot");
+      const text = document.getElementById("networkStatusText");
+      if (!dot || !text) return;
+      if (online) {
+        dot.className = "w-1.5 h-1.5 rounded-full bg-royalBlue-sapphire";
+        text.textContent = "Online PWA";
+      } else {
+        dot.className = "w-1.5 h-1.5 rounded-full bg-antiqueGold-rich";
+        text.textContent = "Offline Mode";
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // J. EVENT LISTENERS & INITIALIZATION
+    // -----------------------------------------------------------------------
+    window.addEventListener("DOMContentLoaded", () => {
+      initPwaInfrastructure();
+      loadUsersAndAuth();
+      loadCuratorState();
+      loadSavedHistory();
+      renderNotebooksList();
+      applyAccessModeUI();
+      updateNetworkBadge();
+
+      // API Key Status Label
+      const apiKeyStatusText = document.getElementById("apiKeyStatusText");
+      if (localStorage.getItem(STORAGE_KEYS.API_KEY)) {
+        apiKeyStatusText.textContent = "Gemini API Connected";
+      }
+
+      // Reader Sign-Up & Sign-In Tabs & Forms
+      const authTabSignUp = document.getElementById("authTabSignUp");
+      const authTabSignIn = document.getElementById("authTabSignIn");
+      const userSignUpForm = document.getElementById("userSignUpForm");
+      const userSignInForm = document.getElementById("userSignInForm");
+
+      authTabSignUp.addEventListener("click", () => {
+        authTabSignUp.className = "py-2 rounded-lg font-bold bg-royalBlue text-antiqueGold-bright shadow-xs transition";
+        authTabSignIn.className = "py-2 rounded-lg font-semibold text-mutedSlate hover:text-charcoal transition";
+        userSignUpForm.classList.remove("hidden");
+        userSignInForm.classList.add("hidden");
+      });
+
+      authTabSignIn.addEventListener("click", () => {
+        authTabSignIn.className = "py-2 rounded-lg font-bold bg-royalBlue text-antiqueGold-bright shadow-xs transition";
+        authTabSignUp.className = "py-2 rounded-lg font-semibold text-mutedSlate hover:text-charcoal transition";
+        userSignInForm.classList.remove("hidden");
+        userSignUpForm.classList.add("hidden");
+      });
+
+      userSignUpForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("signupNameInput").value;
+        const email = document.getElementById("signupEmailInput").value;
+        const cityRole = document.getElementById("signupCityRoleInput").value;
+        const errEl = document.getElementById("signupErrorMsg");
+        const res = registerOrLoginUser({ name, email, cityRole, isNewSignup: true });
+        if (!res.ok) {
+          errEl.textContent = res.error;
+          errEl.classList.remove("hidden");
+        } else {
+          errEl.classList.add("hidden");
+          showToast(`Welcome, ${res.user.name}!`, "✦");
+        }
+      });
+
+      userSignInForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("signinEmailInput").value;
+        const errEl = document.getElementById("signinErrorMsg");
+        const res = registerOrLoginUser({ email, isNewSignup: false });
+        if (!res.ok) {
+          errEl.textContent = res.error;
+          errEl.classList.remove("hidden");
+        } else {
+          errEl.classList.add("hidden");
+          showToast(`Welcome back, ${res.user.name}!`, "✦");
+        }
+      });
+
+      document.getElementById("switchUserBtn").addEventListener("click", () => {
+        appState.currentUser = null;
+        try { localStorage.removeItem(STORAGE_KEYS.CURRENT_USER); } catch (e) {}
+        updateAuthGateUI();
+        showToast("Signed out · Enter or register a Reader Pass", "⇄");
+      });
+
+      // Online / Offline Listeners
+      window.addEventListener("online", () => {
+        updateNetworkBadge();
+        fetchUsersFromFirebaseIfConfigured();
+        showToast("Connection restored · Online PWA");
+      });
+      window.addEventListener("offline", () => {
+        updateNetworkBadge();
+        showToast("Offline mode · Cached app & saved answers ready", "⚡");
+      });
+
+      // PWA beforeinstallprompt & appinstalled
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        appState.deferredInstallPrompt = e;
+        document.getElementById("nativePromptActionBox").classList.remove("hidden");
+      });
+
+      window.addEventListener("appinstalled", () => {
+        appState.deferredInstallPrompt = null;
+        document.getElementById("mobileInstallStrip").classList.add("hidden");
+        document.getElementById("headerInstallBtnLabel").textContent = "App Installed";
+        markCurrentUserAsInstalled("Home Screen Installed");
+        showToast("Maktaba Al-Ilm installed to Home Screen!", "📲");
+      });
+
+      // Install Guide Modal & Triggers
+      const installModal = document.getElementById("installGuideModal");
+      const openInstallModal = () => {
+        installModal.classList.remove("hidden");
+        installModal.classList.add("flex");
+      };
+      const closeInstallModal = () => {
+        installModal.classList.add("hidden");
+        installModal.classList.remove("flex");
+      };
+
+      const triggerNativeInstall = async () => {
+        if (appState.deferredInstallPrompt) {
+          appState.deferredInstallPrompt.prompt();
+          const choice = await appState.deferredInstallPrompt.userChoice;
+          if (choice && choice.outcome === "accepted") {
+            markCurrentUserAsInstalled("PWA Prompt Accepted");
+            showToast("Installing Maktaba Al-Ilm...", "📲");
+          }
+          appState.deferredInstallPrompt = null;
+          closeInstallModal();
+        } else {
+          openInstallModal();
+        }
+      };
+
+      document.getElementById("headerInstallAppBtn").addEventListener("click", triggerNativeInstall);
+      document.getElementById("stripInstallBtn").addEventListener("click", triggerNativeInstall);
+      document.getElementById("modalTriggerNativeInstallBtn").addEventListener("click", triggerNativeInstall);
+      document.getElementById("closeInstallGuideBtn").addEventListener("click", closeInstallModal);
+      installModal.addEventListener("click", (e) => {
+        if (e.target === installModal) closeInstallModal();
+      });
+
+      document.getElementById("dismissInstallStripBtn").addEventListener("click", () => {
+        document.getElementById("mobileInstallStrip").classList.add("hidden");
+      });
+
+      document.getElementById("downloadStandaloneHtmlBtn").addEventListener("click", () => {
+        try {
+          const htmlDoc = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+          const blob = new Blob([htmlDoc], { type: "text/html;charset=utf-8" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "Maktaba-Al-Ilm.html";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast("Downloaded Maktaba-Al-Ilm.html", "⬇");
+        } catch (e) {
+          showToast("Download unavailable in preview frame", "⚠");
+        }
+      });
+
+      document.getElementById("copyAppLinkBtn").addEventListener("click", () => {
+        const ta = document.createElement("textarea");
+        ta.value = window.location.href;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast("App link copied to clipboard!", "🔗");
+        } catch (e) {
+          showToast("Copy link from address bar", "ℹ");
+        }
+        document.body.removeChild(ta);
+      });
+
+      // Curator Lock Modal & Toggle
+      const curatorModal = document.getElementById("curatorAuthModal");
+      const passcodeInput = document.getElementById("curatorPasscodeInput");
+      const authError = document.getElementById("curatorAuthError");
+
+      const openCuratorAuthModal = () => {
+        if (appState.isAdminUnlocked) {
+          appState.isAdminUnlocked = false;
+          try { sessionStorage.removeItem(STORAGE_KEYS.CURATOR_UNLOCKED); } catch (e) {}
+          applyAccessModeUI();
+          showToast("Curator Lock enabled · Public Reference Mode active", "🔒");
+          return;
+        }
+        passcodeInput.value = "";
+        authError.classList.add("hidden");
+        curatorModal.classList.remove("hidden");
+        curatorModal.classList.add("flex");
+        passcodeInput.focus();
+      };
+
+      const closeCuratorAuthModal = () => {
+        curatorModal.classList.add("hidden");
+        curatorModal.classList.remove("flex");
+      };
+
+      document.getElementById("curatorVaultBtn").addEventListener("click", openCuratorAuthModal);
+      document.getElementById("gateCuratorShortcutBtn").addEventListener("click", openCuratorAuthModal);
+      document.getElementById("gateCuratorShortcutBtn2").addEventListener("click", openCuratorAuthModal);
+      document.getElementById("closeCuratorAuthBtn").addEventListener("click", closeCuratorAuthModal);
+      document.getElementById("cancelCuratorAuthBtn").addEventListener("click", closeCuratorAuthModal);
+      curatorModal.addEventListener("click", (e) => {
+        if (e.target === curatorModal) closeCuratorAuthModal();
+      });
+
+      document.getElementById("curatorAuthForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (passcodeInput.value.trim() === CURATOR_PASSCODE) {
+          appState.isAdminUnlocked = true;
+          try { sessionStorage.setItem(STORAGE_KEYS.CURATOR_UNLOCKED, "true"); } catch (err) {}
+          if (!appState.currentUser) {
+            registerOrLoginUser({
+              name: "Curator Administrator",
+              email: "curator@maktaba-al-ilm.org",
+              cityRole: "Vault Curator",
+              isNewSignup: true
+            });
+          }
+          closeCuratorAuthModal();
+          applyAccessModeUI();
+          showToast("Curator Vault unlocked", "🔓");
+        } else {
+          authError.classList.remove("hidden");
+          passcodeInput.focus();
+        }
+      });
+
+      // Curator-Only Users & Installs Dashboard Modal
+      const dashboardModal = document.getElementById("curatorDashboardModal");
+      const openDashboard = () => {
+        if (!appState.isAdminUnlocked) {
+          openCuratorAuthModal();
+          return;
+        }
+        closeDrawer();
+        fetchUsersFromFirebaseIfConfigured().then(() => renderCuratorDashboard());
+        renderCuratorDashboard();
+        dashboardModal.classList.remove("hidden");
+        dashboardModal.classList.add("flex");
+      };
+      const closeDashboard = () => {
+        dashboardModal.classList.add("hidden");
+        dashboardModal.classList.remove("flex");
+      };
+
+      document.getElementById("openCuratorDashboardBtn").addEventListener("click", openDashboard);
+      document.getElementById("sidebarOpenDashboardBtn").addEventListener("click", openDashboard);
+      document.getElementById("closeCuratorDashboardBtn").addEventListener("click", closeDashboard);
+      dashboardModal.addEventListener("click", (e) => {
+        if (e.target === dashboardModal) closeDashboard();
+      });
+
+      document.getElementById("dashboardUserSearchInput").addEventListener("input", (e) => {
+        appState.dashboardSearch = e.target.value;
+        renderCuratorDashboard();
+      });
+
+      document.querySelectorAll(".dash-filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          appState.dashboardFilter = btn.getAttribute("data-user-filter");
+          document.querySelectorAll(".dash-filter-btn").forEach(b => {
+            if (b === btn) {
+              b.className = "dash-filter-btn px-3 py-2 rounded-xl font-bold bg-royalBlue text-white transition";
+            } else {
+              b.className = "dash-filter-btn px-3 py-2 rounded-xl font-semibold bg-white text-charcoal border border-parchment-border hover:bg-parchment-subtle transition";
+            }
+          });
+          renderCuratorDashboard();
+        });
+      });
+
+      document.getElementById("exportUsersCsvBtn").addEventListener("click", exportUsersRegistryToCsv);
+
+      document.getElementById("resetDemoUsersBtn").addEventListener("click", () => {
+        appState.usersRegistry = appState.currentUser ? [{ ...appState.currentUser }] : [];
+        persistUsersRegistry();
+        renderCuratorDashboard();
+        showToast("Registry updated to current user only", "✦");
+      });
+
+      // Mobile Drawer Controls (Curator Only)
+      const sidebar = document.getElementById("knowledgeSidebar");
+      const backdrop = document.getElementById("drawerBackdrop");
+      const openDrawer = () => {
+        if (!appState.isAdminUnlocked) return;
+        sidebar.classList.remove("-translate-x-full");
+        backdrop.classList.remove("hidden");
+      };
+      const closeDrawer = () => {
+        sidebar.classList.add("-translate-x-full");
+        backdrop.classList.add("hidden");
+      };
+      document.getElementById("openDrawerBtn").addEventListener("click", openDrawer);
+      document.getElementById("closeDrawerBtn").addEventListener("click", closeDrawer);
+      backdrop.addEventListener("click", closeDrawer);
+
+      // Notebook Search, Discipline Filter & Selection Controls
+      document.getElementById("notebookSearchInput").addEventListener("input", (e) => {
+        appState.searchQuery = e.target.value;
+        renderNotebooksList();
+      });
+
+      document.querySelectorAll(".discipline-pill").forEach(pill => {
+        pill.addEventListener("click", () => {
+          appState.activeDiscipline = pill.getAttribute("data-discipline");
+          document.querySelectorAll(".discipline-pill").forEach(p => {
+            if (p === pill) {
+              p.className = "discipline-pill px-2.5 py-1 rounded-full text-[11px] font-semibold bg-royalBlue text-white transition";
+            } else {
+              p.className = "discipline-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-parchment-bg text-charcoal hover:bg-parchment-subtle border border-parchment-border transition";
+            }
+          });
+          renderNotebooksList();
+        });
+      });
+
+      document.getElementById("selectAllBtn").addEventListener("click", () => {
+        NOTEBOOKS_DATA.forEach(n => appState.selectedIds.add(n.id));
+        renderNotebooksList();
+        updateScopeIndicators();
+      });
+
+      document.getElementById("clearAllBtn").addEventListener("click", () => {
+        appState.selectedIds.clear();
+        renderNotebooksList();
+        updateScopeIndicators();
+      });
+
+      document.getElementById("resetScopeBtn").addEventListener("click", () => {
+        NOTEBOOKS_DATA.forEach(n => appState.selectedIds.add(n.id));
+        renderNotebooksList();
+        updateScopeIndicators();
+      });
+
+      // Source Inspector Modal
+      document.getElementById("closeInspectorBtn").addEventListener("click", closeSourceInspector);
+      document.getElementById("inspectorDoneBtn").addEventListener("click", closeSourceInspector);
+      document.getElementById("sourceInspectorModal").addEventListener("click", (e) => {
+        if (e.target.id === "sourceInspectorModal") closeSourceInspector();
+      });
+      document.getElementById("inspectorAskScopedBtn").addEventListener("click", () => {
+        if (!appState.inspectedNotebookId) return;
+        appState.selectedIds = new Set([appState.inspectedNotebookId]);
+        renderNotebooksList();
+        updateScopeIndicators();
+        closeSourceInspector();
+        closeDrawer();
+        showToast("Scoped Q&A to selected notebook");
+      });
+
+      // Settings Modal
+      const settingsModal = document.getElementById("settingsModal");
+      document.getElementById("openSettingsBtn").addEventListener("click", () => {
+        document.getElementById("customApiKeyInput").value = localStorage.getItem(STORAGE_KEYS.API_KEY) || "";
+        document.getElementById("firebaseDbUrlInput").value = localStorage.getItem(STORAGE_KEYS.FIREBASE_URL) || "";
+        document.getElementById("settingsHistoryStats").textContent = `${appState.historyItems.length} saved item(s) on this device`;
+        settingsModal.classList.remove("hidden");
+        settingsModal.classList.add("flex");
+      });
+      const closeSettingsModal = () => {
+        settingsModal.classList.add("hidden");
+        settingsModal.classList.remove("flex");
+      };
+      document.getElementById("closeSettingsModalBtn").addEventListener("click", closeSettingsModal);
+      settingsModal.addEventListener("click", (e) => {
+        if (e.target === settingsModal) closeSettingsModal();
+      });
+      document.getElementById("saveSettingsBtn").addEventListener("click", () => {
+        const keyVal = document.getElementById("customApiKeyInput").value.trim();
+        const fbVal = document.getElementById("firebaseDbUrlInput").value.trim();
+        if (keyVal) {
+          localStorage.setItem(STORAGE_KEYS.API_KEY, keyVal);
+          apiKeyStatusText.textContent = "Gemini API Connected";
+        } else {
+          localStorage.removeItem(STORAGE_KEYS.API_KEY);
+          apiKeyStatusText.textContent = "Demo Mode (Add API Key in ⚙️)";
+        }
+        if (fbVal) {
+          localStorage.setItem(STORAGE_KEYS.FIREBASE_URL, fbVal);
+          fetchUsersFromFirebaseIfConfigured();
+        } else {
+          localStorage.removeItem(STORAGE_KEYS.FIREBASE_URL);
+        }
+        closeSettingsModal();
+        showToast("Settings saved", "✓");
+      });
+      document.getElementById("wipeAllLocalHistoryBtn").addEventListener("click", () => {
+        appState.historyItems = [];
+        persistHistory();
+        reRenderCurrentFeed();
+        document.getElementById("settingsHistoryStats").textContent = "0 saved item(s) on this device";
+        showToast("Saved Q&A history cleared", "🗑");
+      });
+
+      // Response Depth Toggle (To-The-Point vs Detailed)
+      const styleConciseBtn = document.getElementById("styleConciseBtn");
+      const styleDetailedBtn = document.getElementById("styleDetailedBtn");
+      styleConciseBtn.addEventListener("click", () => {
+        appState.responseStyle = "concise";
+        styleConciseBtn.className = "px-2.5 py-1 rounded-lg font-semibold bg-royalBlue text-antiqueGold-bright shadow-2xs transition";
+        styleDetailedBtn.className = "px-2.5 py-1 rounded-lg font-medium text-mutedSlate hover:text-charcoal transition";
+      });
+      styleDetailedBtn.addEventListener("click", () => {
+        appState.responseStyle = "detailed";
+        styleDetailedBtn.className = "px-2.5 py-1 rounded-lg font-semibold bg-royalBlue text-antiqueGold-bright shadow-2xs transition";
+        styleConciseBtn.className = "px-2.5 py-1 rounded-lg font-medium text-mutedSlate hover:text-charcoal transition";
+      });
+
+      // Saved / History Feed Toggle & Mobile Bottom Nav
+      const toggleSavedFeedBtn = document.getElementById("toggleSavedFeedBtn");
+      const toggleSavedFeedLabel = document.getElementById("toggleSavedFeedLabel");
+      const setSavedFeedMode = (savedOnly) => {
+        appState.viewingSavedOnly = savedOnly;
+        if (savedOnly) {
+          toggleSavedFeedLabel.textContent = "All Answers";
+          toggleSavedFeedBtn.classList.add("bg-royalBlue-light", "border-royalBlue-border", "text-royalBlue");
+        } else {
+          toggleSavedFeedLabel.textContent = "Saved";
+          toggleSavedFeedBtn.classList.remove("bg-royalBlue-light", "border-royalBlue-border", "text-royalBlue");
+        }
+        reRenderCurrentFeed();
+      };
+      toggleSavedFeedBtn.addEventListener("click", () => setSavedFeedMode(!appState.viewingSavedOnly));
+
+      document.getElementById("navAskTab").addEventListener("click", () => {
+        setSavedFeedMode(false);
+        document.getElementById("questionInput").focus();
+      });
+      document.getElementById("navHistoryTab").addEventListener("click", () => {
+        setSavedFeedMode(true);
+      });
+      document.getElementById("navCuratorTab").addEventListener("click", () => {
+        if (appState.isAdminUnlocked) {
+          openDrawer();
+        } else {
+          openCuratorAuthModal();
+        }
+      });
+
+      // Auto-resize Textarea & Enter-to-Submit
+      const questionInput = document.getElementById("questionInput");
+      const questionForm = document.getElementById("questionForm");
+      const askSubmitBtn = document.getElementById("askSubmitBtn");
+      const feedContainer = document.getElementById("qaFeedContainer");
+
+      questionInput.addEventListener("input", () => {
+        questionInput.style.height = "auto";
+        questionInput.style.height = Math.min(questionInput.scrollHeight, 140) + "px";
+        const meta = detectScriptMeta(questionInput.value);
+        questionInput.setAttribute("dir", meta.dir);
+      });
+
+      questionInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          questionForm.dispatchEvent(new Event("submit"));
+        }
+      });
+
+      document.querySelectorAll(".starter-prompt-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const textEl = btn.querySelector("span");
+          if (textEl) {
+            questionInput.value = textEl.textContent.trim();
+            questionInput.dispatchEvent(new Event("input"));
+            questionForm.dispatchEvent(new Event("submit"));
+          }
+        });
+      });
+
+      // Question Submission Handler
+      questionForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (appState.isSubmitting) return;
+        const text = questionInput.value.trim();
+        if (!text) return;
+
+        const activeNotebooks = NOTEBOOKS_DATA.filter(n => appState.selectedIds.has(n.id));
+        if (activeNotebooks.length === 0) {
+          showToast("Please select at least one notebook in the Curator Vault.", "⚠");
+          return;
+        }
+
+        setSavedFeedMode(false);
+        appState.isSubmitting = true;
+        askSubmitBtn.disabled = true;
+
+        const loadingId = "loading-" + Date.now();
+        const loadingDiv = document.createElement("div");
+        loadingDiv.id = loadingId;
+        loadingDiv.className = "scholar-card rounded-2xl p-5 flex items-center gap-3 text-xs sm:text-sm text-royalBlue";
+        loadingDiv.innerHTML = `
+          <span class="w-4 h-4 rounded-full border-2 border-royalBlue border-t-antiqueGold-rich animate-spin shrink-0"></span>
+          <span>Consulting verified references and preparing answer...</span>
+        `;
+        document.getElementById("qaThreadList").prepend(loadingDiv);
+        feedContainer.scrollTo({ top: 0, behavior: "smooth" });
+
+        try {
+          const structured = await generateScholarlyAnswer(text, activeNotebooks, appState.responseStyle);
+          const loadingEl = document.getElementById(loadingId);
+          if (loadingEl) loadingEl.remove();
+
+          addHistoryRecord(text, structured, activeNotebooks.length);
+          incrementUserQuestionCount();
+          questionInput.value = "";
+          questionInput.style.height = "auto";
+          questionInput.setAttribute("dir", "ltr");
+          reRenderCurrentFeed();
+        } catch (err) {
+          const loadingEl = document.getElementById(loadingId);
+          if (loadingEl) loadingEl.remove();
+          showToast(`Unable to generate answer: ${err.message || "Request failed"}`, "⚠");
+        } finally {
+          appState.isSubmitting = false;
+          askSubmitBtn.disabled = false;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

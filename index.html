@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0B1D3A" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Maktaba Al-Ilm" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Maktaba Al-Ilm" />
+  <meta name="description" content="Maktaba Al-Ilm — Scholarly Research Concierge with verified classical references, Reader Sign-Up, installable mobile app, and private Curator vault." />
+  <title>Maktaba Al-Ilm — Scholarly Research Concierge</title>
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (window.tailwind) tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+            urdu: ['"Noto Nastaliq Urdu"', 'serif'],
+            arabic: ['"Amiri"', 'serif']
+          },
+          colors: {
+            parchment: { bg: '#F8F5EE', surface: '#FCFBF8', subtle: '#F1ECE1', border: '#E2D9C8' },
+            royalBlue: { DEFAULT: '#0B1D3A', hover: '#071429', mid: '#122B54', sapphire: '#1A3A6E', light: '#EBF0F8', border: '#C6D4EB' },
+            antiqueGold: { DEFAULT: '#C59B44', rich: '#D4AF37', bright: '#E8C872', dark: '#8C671E', light: '#FBF5E6', border: '#E4CE96' },
+            charcoal: '#1A202C',
+            mutedSlate: '#5A6577'
+          },
+          boxShadow: {
+            'luxury': '0 10px 30px -10px rgba(11, 29, 58, 0.08), 0 1px 3px rgba(197, 155, 68, 0.14)',
+            'luxury-lg': '0 20px 45px -12px rgba(11, 29, 58, 0.14), 0 4px 12px rgba(197, 155, 68, 0.18)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .library-canvas {
+      background-color: #F8F5EE;
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(197,155,68,0.09) 0%, transparent 42%),
+        radial-gradient(circle at 88% 14%, rgba(26,58,110,0.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 95%, rgba(11,29,58,0.04) 0%, transparent 50%);
+    }
+    .scholar-card {
+      background-color: #FCFBF8;
+      border: 1px solid #E2D9C8;
+      box-shadow: 0 8px 24px -8px rgba(11,29,58,0.07), 0 1px 2px rgba(197,155,68,0.12);
+    }
+    .gold-hairline { height: 2px; background: linear-gradient(90deg, rgba(197,155,68,0.12) 0%, #D4AF37 50%, rgba(197,155,68,0.12) 100%); }
+    .script-urdu { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.25; letter-spacing: 0; }
+    .script-arabic { font-family: 'Amiri', serif; line-height: 1.95; }
+    .script-latin { font-family: 'Inter', system-ui, -apple-system, sans-serif; line-height: 1.65; }
+    .safe-top { padding-top: env(safe-area-inset-top); }
+    .safe-bottom { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+    .safe-x { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #F1ECE1; }
+    ::-webkit-scrollbar-thumb { background: #C9BDA6; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #1A3A6E; }
+    .ai-prose h4 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 1.35rem; color: #0B1D3A; margin: 1.1rem 0 .35rem; }
+    .ai-prose p { margin: .5rem 0; }
+    .ai-prose ul, .ai-prose ol { margin: .4rem 0 .6rem; padding-inline-start: 1.3rem; }
+    .ai-prose ul { list-style: disc; } .ai-prose ol { list-style: decimal; }
+    .ai-prose li { margin: .25rem 0; }
+    .ai-prose strong { color: #0B1D3A; }
+    .ai-prose .ar-quote { font-family: 'Amiri', serif; font-size: 1.5rem; line-height: 2; color: #0B1D3A; direction: rtl; text-align: right; background: #FBF5E6; border-inline-start: 3px solid #D4AF37; border-radius: .75rem; padding: .5rem .9rem; margin: .7rem 0; }
+    .ai-prose.rtl { direction: rtl; text-align: right; }
+    .ai-prose.rtl .ar-quote { border-inline-start: 0; border-inline-end: 3px solid #D4AF37; }
+    .chip-row { overflow-x: auto; scrollbar-width: none; }
+    .chip-row::-webkit-scrollbar { display: none; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+
+<body class="library-canvas text-charcoal font-sans antialiased min-h-screen flex flex-col overflow-x-hidden safe-x selection:bg-royalBlue selection:text-antiqueGold-bright">
+
+  <svg width="0" height="0" class="absolute pointer-events-none" aria-hidden="true">
+    <defs>
+      <linearGradient id="maktabaGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E8C872" />
+        <stop offset="50%" stop-color="#D4AF37" />
+        <stop offset="100%" stop-color="#B58932" />
+      </linearGradient>
+    </defs>
+    <symbol id="crest" viewBox="0 0 80 80">
+      <polygon points="40,4 48.2,18.8 65.5,14.5 61.2,31.8 76,40 61.2,48.2 65.5,65.5 48.2,61.2 40,76 31.8,61.2 14.5,65.5 18.8,48.2 4,40 18.8,31.8 14.5,14.5 31.8,18.8" stroke="url(#maktabaGoldGrad)" stroke-width="1.8" fill="rgba(212,175,55,0.09)"/>
+      <circle cx="40" cy="40" r="25" fill="none" stroke="url(#maktabaGoldGrad)" stroke-width="1" stroke-dasharray="2.5 2.5" opacity="0.8"/>
+      <path d="M18 54.5 C26 50.8, 34 52, 40 57 C46 52, 54 50.8, 62 54.5 L62 35.5 C54 31.8, 46 33, 40 38 C34 33, 26 31.8, 18 35.5 Z" stroke="url(#maktabaGoldGrad)" stroke-width="2.2" stroke-linejoin="round" fill="rgba(11,29,58,0.92)"/>
+      <line x1="40" y1="38" x2="40" y2="57" stroke="url(#maktabaGoldGrad)" stroke-width="1.8"/>
+      <path d="M40 12.5 L46 25.5 L42 35 L38 35 L34 25.5 Z" fill="url(#maktabaGoldGrad)"/>
+      <line x1="40" y1="12.5" x2="40" y2="26.5" stroke="#0B1D3A" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed top-4 right-4 left-4 sm:left-auto z-[80] transition-all duration-300 -translate-y-24 opacity-0 pointer-events-none sm:max-w-sm" role="status" aria-live="polite">
+    <div class="bg-royalBlue text-white px-4 py-3 rounded-xl shadow-luxury-lg border border-antiqueGold/70 flex items-center gap-2.5 text-sm font-medium">
+      <span class="text-antiqueGold-bright font-bold shrink-0">✦</span>
+      <span id="toastMsg">Done</span>
+    </div>
+  </div>
+
+  <!-- ============ 1. READER SIGN-UP / SIGN-IN GATE ============ -->
+  <div id="authGate" dir="ltr" class="fixed inset-0 z-50 overflow-y-auto bg-[#F8F5EE]/95 backdrop-blur-md flex items-start sm:items-center justify-center p-4 sm:p-6 safe-top">
+    <div class="max-w-lg w-full scholar-card rounded-3xl overflow-hidden my-6 border border-antiqueGold/65 shadow-luxury-lg">
+      <div class="gold-hairline"></div>
+      <div class="px-6 py-6 bg-gradient-to-br from-royalBlue-sapphire via-royalBlue-mid to-royalBlue text-white text-center">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-royalBlue border-2 border-antiqueGold/85 shadow-lg flex items-center justify-center p-2">
+          <svg class="w-full h-full" aria-hidden="true"><use href="#crest"/></svg>
+        </div>
+        <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-antiqueGold-bright bg-white/10 border border-antiqueGold/45 px-3 py-0.5 rounded-full mb-2">✦ Scholarly Reader Admission</span>
+        <h2 class="font-display text-3xl font-bold tracking-tight">Maktaba Al-Ilm</h2>
+        <p class="text-xs text-blue-100/90 mt-1 max-w-sm mx-auto leading-relaxed">Scholarly Research Concierge — sign up or sign in to access reference-backed answers across English, اردو &amp; العربية.</p>
+      </div>
+
+      <div class="px-6 pt-5">
+        <div class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-parchment-bg border border-parchment-border text-xs">
+          <button type="button" id="tabSignUp" class="py-2 rounded-lg font-bold bg-royalBlue text-antiqueGold-bright transition">New Reader Sign-Up</button>
+          <button type="button" id="tabSignIn" class="py-2 rounded-lg font-semibold text-mutedSlate hover:text-charcoal transition">Returning Reader</button>
+        </div>
+      </div>
+
+      <form id="signUpForm" class="p-6 space-y-3.5 text-xs" novalidate>
+        <div>
+          <label for="suName" class="block font-bold mb-1">Full Name <span class="text-red-600">*</span></label>
+          <input id="suName" type="text" autocomplete="name" placeholder="e.g., Muhammad Usman Al-Azhari" class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-base sm:text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire" />
+        </div>
+        <div>
+          <label for="suEmail" class="block font-bold mb-1">Email Address <span class="text-red-600">*</span></label>
+          <input id="suEmail" type="email" autocomplete="email" placeholder="e.g., reader@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-base sm:text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire" />
+        </div>
+        <div>
+          <label for="suRole" class="block font-bold mb-1">City / Scholarly Role <span class="text-mutedSlate font-normal">(Optional)</span></label>
+          <input id="suRole" type="text" placeholder="e.g., Islamabad · Student of Hadith" class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-base sm:text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire" />
+        </div>
+        <p id="suError" class="hidden text-red-700 font-semibold"></p>
+        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-royalBlue to-royalBlue-sapphire hover:from-royalBlue-hover hover:to-royalBlue text-antiqueGold-bright border border-antiqueGold/65 font-bold text-sm shadow-md transition">Enter Maktaba Al-Ilm Desk →</button>
+        <div class="pt-2 border-t border-parchment-border flex items-center justify-between text-[11px] text-mutedSlate">
+          <span>English · اردو · العربية</span>
+          <button type="button" data-open-curator class="font-semibold text-royalBlue-sapphire hover:underline">🔒 Curator Lock</button>
+        </div>
+      </form>
+
+      <form id="signInForm" class="hidden p-6 space-y-4 text-xs" novalidate>
+        <p class="text-mutedSlate leading-relaxed">Enter your registered email address to resume your research session on this device.</p>
+        <div>
+          <label for="siEmail" class="block font-bold mb-1">Registered Email Address <span class="text-red-600">*</span></label>
+          <input id="siEmail" type="email" autocomplete="email" placeholder="e.g., reader@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-parchment-bg border border-parchment-border text-base sm:text-sm focus:outline-none focus:bg-white focus:border-royalBlue-sapphire" />
+        </div>
+        <p id="siError" class="hidden text-red-700 font-semibold"></p>
+        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-royalBlue to-royalBlue-sapphire text-antiqueGold-bright border border-antiqueGold/65 font-bold text-sm shadow-md transition">Sign In &amp; Resume Research →</button>
+        <div class="pt-2 border-t border-parchment-border flex items-center justify-between text-[11px] text-mutedSlate">
+          <span>New visitor? Switch to Sign-Up above.</span>
+          <button type="button" data-open-curator class="font-semibold text-royalBlue-sapphire hover:underline">🔒 Curator Lock</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ 2. MOBILE INSTALL STRIP ============ -->
+  <div id="installStrip" dir="ltr" class="md:hidden bg-gradient-to-r from-royalBlue via-royalBlue-mid to-royalBlue-sapphire text-white px-3 py-2 flex items-center justify-between gap-2 border-b border-antiqueGold/50 safe-top">
+    <div class="flex items-center gap-2 min-w-0">
+      <span class="w-6 h-6 rounded-lg bg-royalBlue border border-antiqueGold/75 flex items-center justify-center text-antiqueGold-bright text-xs shrink-0">✦</span>
+      <p class="text-[11px] leading-tight truncate"><span class="font-semibold text-antiqueGold-bright">Maktaba Al-Ilm App</span> · Add to Home Screen</p>
+    </div>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button type="button" data-install class="px-3 py-1 rounded-full bg-antiqueGold-rich text-royalBlue font-bold text-[11px] hover:bg-antiqueGold-bright transition">Install</button>
+      <button type="button" id="dismissStrip" aria-label="Dismiss install banner" class="p-1.5 text-blue-100/80 hover:text-white text-xs">✕</button>
+    </div>
+  </div>
+
+  <!-- ============ 3. HEADER ============ -->
+  <header dir="ltr" class="sticky top-0 z-30 bg-parchment-surface/95 backdrop-blur-md border-b border-parchment-border">
+    <div class="gold-hairline"></div>
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <button id="openDrawerBtn" type="button" aria-label="Open curator notebooks" class="hidden items-center justify-center w-10 h-10 rounded-xl bg-parchment-bg hover:bg-parchment-subtle text-royalBlue border border-parchment-border shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-royalBlue border border-antiqueGold/80 flex items-center justify-center shrink-0 p-1.5">
+          <svg class="w-full h-full" aria-hidden="true"><use href="#crest"/></svg>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h1 class="font-display text-xl sm:text-2xl font-bold text-royalBlue tracking-tight truncate">Maktaba Al-Ilm</h1>
+            <span id="netPill" class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-royalBlue-light text-royalBlue-sapphire border border-royalBlue-border">
+              <span id="netDot" class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span><span id="netText">Online</span>
+            </span>
+          </div>
+          <p class="text-[11px] text-mutedSlate truncate">Scholarly Research Concierge · Verified References</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div id="userPill" class="hidden lg:flex items-center gap-1.5 h-9 px-3 rounded-full bg-parchment-bg border border-parchment-border text-[11px] max-w-[190px]">
+          <span class="w-2 h-2 rounded-full bg-antiqueGold-rich shrink-0"></span>
+          <span id="userName" class="font-semibold truncate">Reader</span>
+        </div>
+        <button id="dashBtn" type="button" title="Users & Installs" class="hidden h-9 px-3 rounded-full bg-antiqueGold-light hover:bg-antiqueGold text-antiqueGold-dark hover:text-white border border-antiqueGold text-[11px] font-bold items-center gap-1.5 transition">
+          <span>📊</span><span class="hidden sm:inline">Users &amp; Installs</span>
+          <span id="dashCount" class="px-1.5 rounded-full bg-royalBlue text-antiqueGold-bright text-[10px]">0</span>
+        </button>
+        <button type="button" data-install id="headerInstallBtn" class="h-9 px-3 rounded-full bg-gradient-to-r from-royalBlue to-royalBlue-sapphire text-antiqueGold-bright border border-antiqueGold/75 text-xs font-semibold flex items-center gap-1.5 transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span id="installLabel">Get App</span>
+        </button>
+        <button id="vaultBtn" type="button" title="Curator Lock" class="h-9 px-2.5 sm:px-3 rounded-full bg-parchment-bg hover:bg-parchment-subtle border border-parchment-border text-xs font-semibold flex items-center gap-1">
+          <span id="vaultIcon">🔒</span><span id="vaultLabel" class="hidden sm:inline">Curator</span>
+        </button>
+        <button id="menuBtn" type="button" aria-label="Account menu" class="h-9 w-9 rounded-full bg-parchment-bg hover:bg-parchment-subtle border border-parchment-border text-sm font-bold text-royalBlue">
+          <span id="userInitial">R</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Account menu -->
+  <div id="accountMenu" class="hidden fixed right-3 sm:right-6 top-20 z-40 w-64 scholar-card rounded-2xl p-4 text-sm">
+    <p class="font-bold" id="menuName">Reader</p>
+    <p class="text-xs text-mutedSlate truncate" id="menuEmail"></p>
+    <p class="text-xs text-mutedSlate mt-0.5" id="menuRole"></p>
+    <div class="border-t border-parchment-border mt-3 pt-3 space-y-1">
+      <button type="button" data-install class="w-full text-left px-2 py-1.5 rounded-lg hover:bg-parchment-subtle">⬇︎ Install app</button>
+      <button type="button" id="signOutBtn" class="w-full text-left px-2 py-1.5 rounded-lg hover:bg-parchment-subtle text-red-700">⇄ Switch reader / Sign out</button>
+    </div>
+  </div>
+
+  <!-- ============ 4. MAIN ============ -->
+  <main class="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-6 sm:py-8 pb-28">
+
+    <!-- Hero search -->
+    <section class="scholar-card rounded-3xl overflow-hidden">
+      <div class="gold-hairline"></div>
+      <div class="p-5 sm:p-7">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-antiqueGold-dark">✦ <span id="greeting">As-salamu alaykum</span></p>
+        <h2 class="font-display text-2xl sm:text-4xl font-bold text-royalBlue mt-1 leading-tight">What would you like to research today?</h2>
+        <p class="text-sm text-mutedSlate mt-1">Search in English, اردو or العربية — every answer comes with its classical reference.</p>
+
+        <form id="searchForm" class="mt-4 flex gap-2">
+          <input id="searchInput" type="search" enterkeyhint="search" placeholder="e.g., intention, knowledge, علم, نیت" class="flex-1 min-w-0 px-4 py-3 rounded-2xl bg-parchment-bg border border-parchment-border text-base focus:outline-none focus:bg-white focus:border-royalBlue-sapphire" />
+          <button type="submit" class="px-4 sm:px-6 py-3 rounded-2xl bg-royalBlue text-antiqueGold-bright font-bold text-sm border border-antiqueGold/60 shrink-0">Search</button>
+        </form>
+
+        <div id="topicChips" class="chip-row flex gap-2 mt-4 -mx-1 px-1 pb-1"></div>
+
+        <div class="flex flex-wrap items-center gap-2 mt-4 text-[11px]">
+          <span class="text-mutedSlate font-semibold mr-1">Show:</span>
+          <label class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-parchment-bg border border-parchment-border cursor-pointer"><input type="checkbox" data-script="ar" checked class="accent-[#1A3A6E]"> العربية</label>
+          <label class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-parchment-bg border border-parchment-border cursor-pointer"><input type="checkbox" data-script="ur" checked class="accent-[#1A3A6E]"> اردو</label>
+          <label class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-parchment-bg border border-parchment-border cursor-pointer"><input type="checkbox" data-script="en" checked class="accent-[#1A3A6E]"> English</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scholar's answer (AI) -->
+    <section id="aiPanel" hidden class="mt-6 scholar-card rounded-3xl overflow-hidden border border-antiqueGold/60">
+      <div class="px-5 py-3 bg-gradient-to-r from-royalBlue to-royalBlue-sapphire text-white flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-antiqueGold-bright">✦ Scholar’s Answer · جواب</p>
+          <p id="aiQuestion" class="text-sm font-semibold truncate"></p>
+        </div>
+        <span id="aiStatus" class="shrink-0 text-[11px] px-2.5 py-1 rounded-full bg-white/10 border border-antiqueGold/40 text-antiqueGold-bright">Researching…</span>
+      </div>
+      <div id="aiBody" class="px-5 py-5 text-charcoal"></div>
+      <div class="px-5 py-3 bg-parchment-subtle/70 border-t border-parchment-border flex flex-wrap items-center justify-between gap-2">
+        <p class="text-[11px] text-mutedSlate max-w-md">AI-prepared summary from classical sources. Verify references before quoting; for personal rulings consult a qualified scholar.</p>
+        <div class="flex gap-2">
+          <button type="button" id="aiStop" class="hidden px-3 py-1.5 rounded-full border border-parchment-border bg-parchment-surface text-[11px] font-semibold">Stop</button>
+          <button type="button" id="aiCopy" class="px-3 py-1.5 rounded-full border border-parchment-border bg-parchment-surface text-[11px] font-semibold">Copy answer</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- View tabs -->
+    <div class="flex items-center justify-between mt-6 mb-3 gap-2">
+      <div class="inline-flex p-1 rounded-xl bg-parchment-subtle border border-parchment-border text-xs">
+        <button type="button" data-view="library" class="view-tab px-3.5 py-1.5 rounded-lg font-bold bg-royalBlue text-antiqueGold-bright">Library</button>
+        <button type="button" data-view="saved" class="view-tab px-3.5 py-1.5 rounded-lg font-semibold text-mutedSlate">My Notebook <span id="savedCount" class="ml-0.5">0</span></button>
+      </div>
+      <p id="resultMeta" class="text-[11px] text-mutedSlate text-right"></p>
+    </div>
+
+    <div id="results" class="grid gap-4 md:grid-cols-2"></div>
+    <div id="emptyState" class="hidden scholar-card rounded-2xl p-6 text-center">
+      <p class="font-display text-xl font-bold text-royalBlue">No saved library card for this yet</p>
+      <p class="text-sm text-mutedSlate mt-1 max-w-md mx-auto">Your question has been added to the Curator's research queue so a reviewed card can be added to the library.</p>
+    </div>
+
+    <p class="text-[11px] text-mutedSlate text-center mt-8 max-w-xl mx-auto leading-relaxed">References are provided for study. For rulings (fatwa) on your personal situation, consult a qualified scholar.</p>
+  </main>
+
+  <!-- ============ 5. CURATOR DRAWER ============ -->
+  <div id="drawerBackdrop" class="hidden fixed inset-0 z-40 bg-royalBlue/40 backdrop-blur-sm"></div>
+  <aside id="drawer" class="fixed top-0 left-0 bottom-0 z-50 w-[88vw] max-w-sm bg-parchment-surface border-r border-parchment-border shadow-luxury-lg -translate-x-full transition-transform duration-300 flex flex-col safe-top" aria-label="Curator notebooks">
+    <div class="p-4 bg-gradient-to-br from-royalBlue-sapphire to-royalBlue text-white flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-antiqueGold-bright">Curator Vault</p>
+        <p class="font-display text-xl font-bold">Knowledge Notebooks</p>
+      </div>
+      <button type="button" id="closeDrawer" aria-label="Close" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20">✕</button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-4 space-y-5 text-sm">
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate mb-2">Notebooks</p>
+        <div id="notebookList" class="space-y-1"></div>
+      </div>
+
+      <form id="addRefForm" class="scholar-card rounded-2xl p-4 space-y-2.5 text-xs" novalidate>
+        <p class="font-bold text-royalBlue text-sm">＋ Add a verified reference</p>
+        <select id="arNotebook" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border text-sm"></select>
+        <input id="arTitle" placeholder="Title (English) *" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border text-sm" />
+        <textarea id="arArabic" dir="rtl" rows="2" placeholder="النص العربي" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border script-arabic text-lg"></textarea>
+        <textarea id="arUrdu" dir="rtl" rows="2" placeholder="اردو ترجمہ" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border script-urdu text-base"></textarea>
+        <textarea id="arEnglish" rows="2" placeholder="English translation *" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border text-sm"></textarea>
+        <input id="arSource" placeholder="Source, e.g. Sahih Muslim 2699 *" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border text-sm" />
+        <input id="arGrade" placeholder="Grading / note (optional)" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border text-sm" />
+        <input id="arTags" placeholder="Keywords, comma separated" class="w-full px-3 py-2 rounded-lg bg-parchment-bg border border-parchment-border text-sm" />
+        <p id="arError" class="hidden text-red-700 font-semibold"></p>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-royalBlue text-antiqueGold-bright font-bold">Save to library</button>
+      </form>
+
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate mb-2">Research queue (unanswered searches)</p>
+        <div id="queueList" class="space-y-1.5 text-xs"></div>
+      </div>
+    </div>
+    <div class="p-4 border-t border-parchment-border safe-bottom">
+      <button type="button" id="lockVaultBtn" class="w-full py-2.5 rounded-xl border border-parchment-border bg-parchment-bg font-semibold text-sm">🔒 Lock Curator Vault</button>
+    </div>
+  </aside>
+
+  <!-- ============ 6. MODALS ============ -->
+  <div id="modalBackdrop" class="hidden fixed inset-0 z-[60] bg-royalBlue/50 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6">
+    <!-- Curator lock -->
+    <div id="curatorModal" class="hidden w-full sm:max-w-md bg-parchment-surface rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-luxury-lg safe-bottom">
+      <div class="gold-hairline"></div>
+      <div class="p-6">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-antiqueGold-dark">🔒 Curator Lock</p>
+        <h3 class="font-display text-2xl font-bold text-royalBlue" id="curatorTitle">Unlock Curator Vault</h3>
+        <p class="text-xs text-mutedSlate mt-1" id="curatorHint">Enter your curator passcode.</p>
+        <form id="curatorForm" class="mt-4 space-y-3" novalidate>
+          <input id="curatorPass" type="password" autocomplete="current-password" placeholder="Passcode" class="w-full px-3.5 py-3 rounded-xl bg-parchment-bg border border-parchment-border text-base focus:outline-none focus:border-royalBlue-sapphire" />
+          <input id="curatorPass2" type="password" autocomplete="new-password" placeholder="Confirm passcode" class="hidden w-full px-3.5 py-3 rounded-xl bg-parchment-bg border border-parchment-border text-base focus:outline-none focus:border-royalBlue-sapphire" />
+          <p id="curatorError" class="hidden text-xs text-red-700 font-semibold"></p>
+          <div class="flex gap-2">
+            <button type="button" data-close-modal class="flex-1 py-3 rounded-xl border border-parchment-border font-semibold text-sm">Cancel</button>
+            <button type="submit" class="flex-1 py-3 rounded-xl bg-royalBlue text-antiqueGold-bright font-bold text-sm" id="curatorSubmit">Unlock</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Install -->
+    <div id="installModal" class="hidden w-full sm:max-w-md bg-parchment-surface rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-luxury-lg safe-bottom">
+      <div class="gold-hairline"></div>
+      <div class="p-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-royalBlue border border-antiqueGold/80 p-1.5 shrink-0"><svg class="w-full h-full"><use href="#crest"/></svg></div>
+          <div>
+            <h3 class="font-display text-2xl font-bold text-royalBlue leading-tight">Install Maktaba Al-Ilm</h3>
+            <p class="text-xs text-mutedSlate">Opens full-screen from your home screen, works offline.</p>
+          </div>
+        </div>
+        <div id="installSteps" class="mt-4 text-sm space-y-3"></div>
+        <button type="button" data-close-modal class="mt-5 w-full py-3 rounded-xl bg-royalBlue text-antiqueGold-bright font-bold text-sm">Got it</button>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashModal" class="hidden w-full sm:max-w-2xl max-h-[88vh] bg-parchment-surface rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-luxury-lg flex flex-col safe-bottom">
+      <div class="gold-hairline"></div>
+      <div class="p-5 sm:p-6 flex items-center justify-between border-b border-parchment-border">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-antiqueGold-dark">📊 Curator Analytics</p>
+          <h3 class="font-display text-2xl font-bold text-royalBlue">Users &amp; Installs</h3>
+        </div>
+        <button type="button" data-close-modal aria-label="Close" class="w-9 h-9 rounded-full bg-parchment-subtle">✕</button>
+      </div>
+      <div class="p-5 sm:p-6 overflow-y-auto">
+        <div id="statTiles" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+        <p class="text-[11px] font-bold uppercase tracking-wider text-mutedSlate mt-6 mb-2">Registered readers</p>
+        <div class="overflow-x-auto rounded-xl border border-parchment-border">
+          <table class="w-full text-xs">
+            <thead class="bg-parchment-subtle text-left"><tr><th class="p-2.5">Name</th><th class="p-2.5">Email</th><th class="p-2.5">City / Role</th><th class="p-2.5">Joined</th><th class="p-2.5">Visits</th></tr></thead>
+            <tbody id="readerRows"></tbody>
+          </table>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button type="button" id="copyCsvBtn" class="px-4 py-2 rounded-xl border border-parchment-border bg-parchment-bg text-xs font-semibold">Copy as CSV</button>
+        </div>
+        <p class="text-[11px] text-mutedSlate mt-3 leading-relaxed">Data is stored in this browser only. To see readers from every phone in one place, connect a backend (e.g., Supabase or Firebase).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile bottom bar -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-30 bg-parchment-surface/95 backdrop-blur-md border-t border-parchment-border safe-bottom">
+    <div class="grid grid-cols-3 text-[11px] font-semibold text-mutedSlate pt-2">
+      <button type="button" data-view="library" class="flex flex-col items-center gap-0.5"><span class="text-lg">📚</span>Library</button>
+      <button type="button" data-view="saved" class="flex flex-col items-center gap-0.5"><span class="text-lg">🔖</span>Notebook</button>
+      <button type="button" data-install class="flex flex-col items-center gap-0.5"><span class="text-lg">⬇︎</span>Install</button>
+    </div>
+  </nav>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ---------------- Reference library (seed) ---------------- */
+  const NOTEBOOKS = [
+    { id: 'fatiha', name: 'Surah al-Fātiḥah', icon: '🌟' },
+    { id: 'quran', name: 'Qur’an — Knowledge & Reflection', icon: '📖' },
+    { id: 'hadith-ilm', name: 'Hadith — Seeking Knowledge', icon: '🕯️' },
+    { id: 'hadith-character', name: 'Hadith — Character & Sincerity', icon: '🌿' },
+    { id: 'hope', name: 'Ease, Hope & Patience', icon: '🌙' },
+    { id: 'legacy', name: 'Deeds & Legacy', icon: '🏛️' },
+    { id: 'curator', name: 'Curator Additions', icon: '✒️' }
+  ];
+
+  const FATIHA_TAGS = 'fatiha fatihah faatiha al-fatiha surah sura opening ummul quran umm al-kitab sab mathani tafseer tafsir سورہ سورة سورت فاتحہ فاتحة الفاتحة تفسیر تفسير ام الکتاب أم الكتاب';
+  const SEED = [
+    { id: 'f1', nb: 'fatiha', title: 'Surah al-Fātiḥah — full text (1:1–7)',
+      ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾',
+      ur: 'اللہ کے نام سے جو نہایت مہربان، بے حد رحم فرمانے والا ہے۔ سب تعریف اللہ کے لیے ہے جو تمام جہانوں کا رب ہے۔ نہایت مہربان، بے حد رحم فرمانے والا۔ روزِ جزا کا مالک۔ ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد مانگتے ہیں۔ ہمیں سیدھے راستے کی ہدایت دے۔ ان لوگوں کا راستہ جن پر تو نے انعام فرمایا، نہ ان کا جن پر غضب ہوا اور نہ گمراہوں کا۔',
+      en: 'In the name of Allah, the Most Compassionate, the Most Merciful. All praise is for Allah, Lord of all the worlds; the Most Compassionate, the Most Merciful; Master of the Day of Judgment. You alone we worship, and You alone we ask for help. Guide us to the straight path — the path of those You have blessed, not of those who earned Your anger, nor of those who went astray.',
+      src: 'Qur’an, al-Fātiḥah 1:1–7', grade: 'Qur’an',
+      tags: FATIHA_TAGS + ' text full bismillah hamd' },
+    { id: 'f2', nb: 'fatiha', title: 'No prayer without al-Fātiḥah',
+      ar: 'لَا صَلَاةَ لِمَنْ لَمْ يَقْرَأْ بِفَاتِحَةِ الْكِتَابِ',
+      ur: 'اس شخص کی نماز نہیں جس نے سورۂ فاتحہ نہ پڑھی۔',
+      en: 'There is no prayer for the one who does not recite the Opening of the Book (al-Fātiḥah).',
+      src: 'Sahih al-Bukhari 756; Sahih Muslim 394', grade: 'Sahih — agreed upon',
+      tags: FATIHA_TAGS + ' salah salat prayer namaz نماز صلاة' },
+    { id: 'f3', nb: 'fatiha', title: 'The prayer divided between Allah and His servant',
+      ar: 'قَالَ اللَّهُ تَعَالَى: قَسَمْتُ الصَّلَاةَ بَيْنِي وَبَيْنَ عَبْدِي نِصْفَيْنِ، وَلِعَبْدِي مَا سَأَلَ',
+      ur: 'اللہ تعالیٰ نے فرمایا: میں نے نماز (یعنی سورۂ فاتحہ) کو اپنے اور اپنے بندے کے درمیان آدھا آدھا تقسیم کر دیا ہے، اور میرے بندے کے لیے وہ ہے جو اس نے مانگا۔',
+      en: 'Allah the Exalted said: “I have divided the prayer (al-Fātiḥah) between Myself and My servant into two halves, and My servant shall have what he asks for.”',
+      src: 'Sahih Muslim 395', grade: 'Sahih — Hadith Qudsi',
+      tags: FATIHA_TAGS + ' hadith qudsi prayer salah dialogue نماز حدیث قدسی' },
+    { id: 'f4', nb: 'fatiha', title: 'You alone we worship, You alone we ask for help',
+      ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
+      ur: 'ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد مانگتے ہیں۔',
+      en: 'You alone we worship, and You alone we ask for help.',
+      src: 'Qur’an, al-Fātiḥah 1:5', grade: 'Qur’an',
+      tags: FATIHA_TAGS + ' tawheed tawhid worship ibadah help istianah توحید عبادت مدد' },
+    { id: 's1', nb: 'hadith-character', title: 'Actions are judged by intentions',
+      ar: 'إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ',
+      ur: 'اعمال کا دارومدار نیتوں پر ہے۔',
+      en: 'Actions are only by intentions.',
+      src: 'Sahih al-Bukhari 1; Sahih Muslim 1907', grade: 'Sahih — agreed upon (muttafaq ʿalayh)',
+      tags: 'intention niyyah niyah sincerity deeds actions نیت نیت نیّت اعمال النية الأعمال' },
+    { id: 's2', nb: 'hadith-ilm', title: 'Seeking knowledge is an obligation',
+      ar: 'طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ',
+      ur: 'علم حاصل کرنا ہر مسلمان پر فرض ہے۔',
+      en: 'Seeking knowledge is an obligation upon every Muslim.',
+      src: 'Sunan Ibn Majah 224', grade: 'Graded sahih by al-Albani',
+      tags: 'knowledge ilm learning study obligation فرض علم تعلیم العلم طلب' },
+    { id: 's3', nb: 'hadith-ilm', title: 'The path of knowledge leads to Paradise',
+      ar: 'مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ',
+      ur: 'جو شخص علم کی تلاش میں کسی راستے پر چلتا ہے، اللہ اس کے لیے جنت کا راستہ آسان فرما دیتا ہے۔',
+      en: 'Whoever travels a path seeking knowledge, Allah makes easy for him a path to Paradise.',
+      src: 'Sahih Muslim 2699', grade: 'Sahih',
+      tags: 'knowledge ilm path paradise jannah student travel علم جنت راستہ طالب العلم الجنة طريق' },
+    { id: 's4', nb: 'hadith-ilm', title: 'The best of you learn and teach the Qur’an',
+      ar: 'خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ',
+      ur: 'تم میں سب سے بہتر وہ ہے جو قرآن سیکھے اور سکھائے۔',
+      en: 'The best of you are those who learn the Qur’an and teach it.',
+      src: 'Sahih al-Bukhari 5027', grade: 'Sahih',
+      tags: 'quran teaching learning teacher best tajweed قرآن تعلیم استاد بہتر القرآن تعلم' },
+    { id: 's5', nb: 'hadith-character', title: 'The religion is sincere counsel',
+      ar: 'الدِّينُ النَّصِيحَةُ',
+      ur: 'دین خیر خواہی کا نام ہے۔',
+      en: 'The religion is sincere counsel (naṣīḥah).',
+      src: 'Sahih Muslim 55', grade: 'Sahih',
+      tags: 'naseeha nasiha advice sincerity counsel religion deen دین نصیحت خیرخواہی الدين النصيحة' },
+    { id: 's6', nb: 'legacy', title: 'Three deeds that continue after death',
+      ar: 'إِذَا مَاتَ الْإِنْسَانُ انْقَطَعَ عَنْهُ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ: إِلَّا مِنْ صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ',
+      ur: 'جب انسان فوت ہو جاتا ہے تو اس کا عمل منقطع ہو جاتا ہے سوائے تین چیزوں کے: صدقۂ جاریہ، وہ علم جس سے فائدہ اٹھایا جائے، یا نیک اولاد جو اس کے لیے دعا کرے۔',
+      en: 'When a person dies, his deeds come to an end except for three: ongoing charity, beneficial knowledge, or a righteous child who prays for him.',
+      src: 'Sahih Muslim 1631', grade: 'Sahih',
+      tags: 'death legacy sadaqah jariyah charity knowledge child dua صدقہ جاریہ موت اولاد دعا صدقة جارية' },
+    { id: 's7', nb: 'quran', title: 'My Lord, increase me in knowledge',
+      ar: 'وَقُل رَّبِّ زِدْنِي عِلْمًا',
+      ur: 'اور کہو: اے میرے رب! میرے علم میں اضافہ فرما۔',
+      en: 'And say, “My Lord, increase me in knowledge.”',
+      src: 'Qur’an, Ṭā Hā 20:114', grade: 'Qur’an',
+      tags: 'dua knowledge ilm increase prayer taha علم دعا رب زدنی' },
+    { id: 's8', nb: 'quran', title: 'Read in the name of your Lord',
+      ar: 'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ',
+      ur: 'پڑھو اپنے رب کے نام سے جس نے پیدا کیا۔',
+      en: 'Read in the name of your Lord who created.',
+      src: 'Qur’an, al-ʿAlaq 96:1', grade: 'Qur’an',
+      tags: 'read iqra reading first revelation knowledge اقرأ پڑھو وحی' },
+    { id: 's9', nb: 'quran', title: 'Are those who know equal to those who do not?',
+      ar: 'قُلْ هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ',
+      ur: 'کہو: کیا جاننے والے اور نہ جاننے والے برابر ہو سکتے ہیں؟',
+      en: 'Say, “Are those who know equal to those who do not know?”',
+      src: 'Qur’an, az-Zumar 39:9', grade: 'Qur’an',
+      tags: 'knowledge scholars ulama know equal علم علماء جاننے والے' },
+    { id: 's10', nb: 'hope', title: 'With hardship comes ease',
+      ar: 'فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا',
+      ur: 'پس یقیناً مشکل کے ساتھ آسانی ہے۔ بے شک مشکل کے ساتھ آسانی ہے۔',
+      en: 'So surely with hardship comes ease. Surely with hardship comes ease.',
+      src: 'Qur’an, ash-Sharḥ 94:5–6', grade: 'Qur’an',
+      tags: 'hardship ease hope difficulty patience sabr مشکل آسانی صبر امید العسر اليسر' },
+    { id: 's11', nb: 'hope', title: 'No soul is burdened beyond its capacity',
+      ar: 'لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا',
+      ur: 'اللہ کسی جان پر اس کی طاقت سے زیادہ بوجھ نہیں ڈالتا۔',
+      en: 'Allah does not burden a soul beyond its capacity.',
+      src: 'Qur’an, al-Baqarah 2:286', grade: 'Qur’an',
+      tags: 'burden capacity hope ease test trial بوجھ طاقت آزمائش وسع' }
+  ];
+
+  const TOPICS = ['سورہ فاتحہ کی تفسیر', 'Tafsir of Ayat al-Kursi', 'Virtues of seeking knowledge', 'علم کی فضیلت', 'Intention', 'Hardship & patience', 'نیت', 'صبر'];
+
+  /* ---------------- Storage ---------------- */
+  const KEY = 'maktaba.alilm.v1';
+  const blank = () => ({ readers: [], session: null, saved: {}, custom: [], queue: [], installs: 0, searches: 0, passHash: null, stripDismissed: false, scripts: { ar: true, ur: true, en: true } });
+  let db = blank();
+  try { const raw = localStorage.getItem(KEY); if (raw) db = Object.assign(blank(), JSON.parse(raw)); } catch (e) {}
+  const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} };
+
+  let curatorUnlocked = false;
+  try { curatorUnlocked = sessionStorage.getItem(KEY + '.cur') === '1'; } catch (e) {}
+
+  /* ---------------- Helpers ---------------- */
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const norm = (s) => String(s || '').toLowerCase().normalize('NFKD').replace(/[ً-ْٰ̀-ͯ’'ʿ]/g, '');
+  const emailOk = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+
+  let toastTimer;
+  function toast(msg) {
+    $('#toastMsg').textContent = msg;
+    const t = $('#toast');
+    t.classList.remove('-translate-y-24', 'opacity-0');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.add('-translate-y-24', 'opacity-0'), 2600);
+  }
+
+  async function hash(str) {
+    try {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('maktaba::' + str));
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) {
+      let h = 0; for (const c of 'maktaba::' + str) h = (h * 31 + c.charCodeAt(0)) | 0; return 'x' + h;
+    }
+  }
+
+  const currentUser = () => db.readers.find((r) => r.email === db.session) || null;
+  const allRefs = () => SEED.concat(db.custom);
+
+  /* ---------------- Auth gate ---------------- */
+  function setAuthTab(which) {
+    const up = which === 'up';
+    $('#signUpForm').classList.toggle('hidden', !up);
+    $('#signInForm').classList.toggle('hidden', up);
+    $('#tabSignUp').className = 'py-2 rounded-lg transition ' + (up ? 'font-bold bg-royalBlue text-antiqueGold-bright' : 'font-semibold text-mutedSlate');
+    $('#tabSignIn').className = 'py-2 rounded-lg transition ' + (!up ? 'font-bold bg-royalBlue text-antiqueGold-bright' : 'font-semibold text-mutedSlate');
+  }
+  $('#tabSignUp').onclick = () => setAuthTab('up');
+  $('#tabSignIn').onclick = () => setAuthTab('in');
+
+  function showErr(el, msg) { el.textContent = msg; el.classList.toggle('hidden', !msg); }
+
+  $('#signUpForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = $('#suName').value.trim(), email = $('#suEmail').value.trim().toLowerCase(), role = $('#suRole').value.trim();
+    if (name.length < 2) return showErr($('#suError'), 'Please enter your full name.');
+    if (!emailOk(email)) return showErr($('#suError'), 'Please enter a valid email address.');
+    if (db.readers.some((r) => r.email === email)) { setAuthTab('in'); $('#siEmail').value = email; return showErr($('#siError'), 'This email is already registered — sign in below.'); }
+    showErr($('#suError'), '');
+    db.readers.push({ name, email, role, joined: new Date().toISOString(), visits: 1 });
+    db.session = email; persist();
+    enterApp(`Welcome, ${name.split(' ')[0]} ✦`);
+  });
+
+  $('#signInForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = $('#siEmail').value.trim().toLowerCase();
+    const r = db.readers.find((x) => x.email === email);
+    if (!r) return showErr($('#siError'), 'No reader found with this email on this device. Please sign up.');
+    showErr($('#siError'), '');
+    r.visits = (r.visits || 0) + 1; db.session = email; persist();
+    enterApp(`Welcome back, ${r.name.split(' ')[0]} ✦`);
+  });
+
+  function enterApp(msg) {
+    $('#authGate').classList.add('hidden');
+    document.body.style.overflow = '';
+    renderUser(); render();
+    if (msg) toast(msg);
+  }
+
+  function renderUser() {
+    const u = currentUser();
+    if (!u) return;
+    const first = u.name.split(' ')[0];
+    $('#userName').textContent = u.name;
+    $('#userInitial').textContent = first.charAt(0).toUpperCase();
+    $('#menuName').textContent = u.name; $('#menuEmail').textContent = u.email; $('#menuRole').textContent = u.role || '';
+    $('#greeting').textContent = `As-salamu alaykum, ${first}`;
+  }
+
+  $('#menuBtn').onclick = (e) => { e.stopPropagation(); $('#accountMenu').classList.toggle('hidden'); };
+  document.addEventListener('click', (e) => { if (!$('#accountMenu').contains(e.target)) $('#accountMenu').classList.add('hidden'); });
+  $('#signOutBtn').onclick = () => {
+    db.session = null; persist();
+    $('#accountMenu').classList.add('hidden');
+    $('#authGate').classList.remove('hidden');
+    setAuthTab('in');
+    toast('Signed out');
+  };
+
+  /* ---------------- Library rendering ---------------- */
+  let view = 'library', query = '', activeNb = null;
+
+  function scriptsOn() { return db.scripts; }
+  $$('[data-script]').forEach((cb) => {
+    cb.checked = db.scripts[cb.dataset.script] !== false;
+    cb.onchange = () => { db.scripts[cb.dataset.script] = cb.checked; persist(); render(); };
+  });
+
+  function card(r) {
+    const s = scriptsOn();
+    const saved = !!(db.saved[db.session] || []).includes(r.id);
+    const nb = NOTEBOOKS.find((n) => n.id === r.nb);
+    return `
+    <article class="scholar-card rounded-2xl overflow-hidden flex flex-col">
+      <div class="px-4 pt-4 flex items-start justify-between gap-2">
+        <div class="min-w-0">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-antiqueGold-dark">${esc(nb ? nb.icon + ' ' + nb.name : 'Reference')}</p>
+          <h3 class="font-display text-xl font-bold text-royalBlue leading-snug">${esc(r.title)}</h3>
+        </div>
+        <button type="button" data-save="${esc(r.id)}" aria-label="${saved ? 'Remove from notebook' : 'Save to notebook'}" class="shrink-0 w-9 h-9 rounded-full border ${saved ? 'bg-royalBlue text-antiqueGold-bright border-royalBlue' : 'bg-parchment-bg border-parchment-border text-mutedSlate'}">${saved ? '★' : '☆'}</button>
+      </div>
+      <div class="px-4 py-3 space-y-2 flex-1">
+        ${s.ar !== false && r.ar ? `<p dir="rtl" lang="ar" class="script-arabic text-2xl text-royalBlue">${esc(r.ar)}</p>` : ''}
+        ${s.ur !== false && r.ur ? `<p dir="rtl" lang="ur" class="script-urdu text-lg text-charcoal">${esc(r.ur)}</p>` : ''}
+        ${s.en !== false && r.en ? `<p class="script-latin text-sm text-charcoal">${esc(r.en)}</p>` : ''}
+      </div>
+      <div class="px-4 py-3 bg-parchment-subtle/70 border-t border-parchment-border flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <p class="text-xs font-bold text-royalBlue-sapphire truncate">📜 ${esc(r.src)}</p>
+          ${r.grade ? `<p class="text-[11px] text-mutedSlate truncate">${esc(r.grade)}</p>` : ''}
+        </div>
+        <button type="button" data-copy="${esc(r.id)}" class="shrink-0 px-3 py-1.5 rounded-full bg-parchment-surface border border-parchment-border text-[11px] font-semibold">Copy</button>
+      </div>
+    </article>`;
+  }
+
+  // Common words that should never count as a match on their own
+  const STOP = new Set(('a an the of in on for to and or is are was what who how why when where which about please tell me explain give show me i my you your with from by at it this that do does can ' +
+    'کی کا کے کو میں سے پر اور ہے ہیں تھا تھی کیا کیوں کیسے کون کس یہ وہ بھی ہی نے جو مجھے بتائیں بتاو بتاؤ کریں کرو ایک اس ان ' +
+    'في من على إلى عن ما ماذا هل هو هي هذا هذه الذي التي و أو').split(/\s+/).map(norm));
+  const tokens = (q) => norm(q).split(/[\s,.;:!?؟،۔]+/).filter((w) => w.length >= 2 && !STOP.has(w));
+
+  function score(r, q) {
+    if (!q) return 1;
+    const t = tokens(q);
+    if (!t.length) return 0;
+    const hay = norm([r.title, r.ar, r.ur, r.en, r.src, r.tags].join(' '));
+    return t.reduce((s, w) => s + (hay.includes(w) ? 1 : 0), 0);
+  }
+  const matches = (r, q) => score(r, q) > 0;
+
+  function render() {
+    let list = allRefs();
+    if (view === 'saved') { const ids = db.saved[db.session] || []; list = list.filter((r) => ids.includes(r.id)); }
+    if (activeNb) list = list.filter((r) => r.nb === activeNb);
+    if (query) {
+      const scored = list.map((r) => [r, score(r, query)]).filter(([, s]) => s > 0);
+      const top = Math.max(0, ...scored.map(([, s]) => s));
+      // keep the strongest matches; drop cards that only share one weak word with a multi-word query
+      list = scored.filter(([, s]) => s >= Math.max(1, top - 1)).sort((a, b) => b[1] - a[1]).map(([r]) => r);
+    }
+
+    $('#results').innerHTML = list.map(card).join('');
+    const empty = list.length === 0;
+    $('#emptyState').classList.toggle('hidden', !(empty && view === 'library' && query));
+    if (empty && view === 'saved') $('#results').innerHTML = `<div class="md:col-span-2 scholar-card rounded-2xl p-6 text-center text-sm text-mutedSlate">Tap ☆ on any reference to save it to your notebook.</div>`;
+
+    const nbName = activeNb ? NOTEBOOKS.find((n) => n.id === activeNb)?.name : '';
+    $('#resultMeta').textContent = `${list.length} reference${list.length === 1 ? '' : 's'}${query ? ` for “${query}”` : ''}${nbName ? ' · ' + nbName : ''}`;
+    $('#savedCount').textContent = (db.saved[db.session] || []).length;
+
+    $$('.view-tab').forEach((b) => {
+      const on = b.dataset.view === view;
+      b.className = 'view-tab px-3.5 py-1.5 rounded-lg ' + (on ? 'font-bold bg-royalBlue text-antiqueGold-bright' : 'font-semibold text-mutedSlate');
+    });
+    $$('nav [data-view]').forEach((b) => b.classList.toggle('text-royalBlue', b.dataset.view === view));
+  }
+
+  $('#results').addEventListener('click', async (e) => {
+    const s = e.target.closest('[data-save]'), c = e.target.closest('[data-copy]');
+    if (s) {
+      const id = s.dataset.save, arr = db.saved[db.session] = db.saved[db.session] || [];
+      const i = arr.indexOf(id);
+      if (i >= 0) { arr.splice(i, 1); toast('Removed from notebook'); } else { arr.push(id); toast('Saved to your notebook'); }
+      persist(); render();
+    }
+    if (c) {
+      const r = allRefs().find((x) => x.id === c.dataset.copy);
+      const text = [r.ar, r.ur, r.en, '— ' + r.src + (r.grade ? ' (' + r.grade + ')' : '')].filter(Boolean).join('\n\n');
+      try { await navigator.clipboard.writeText(text); toast('Reference copied'); }
+      catch (err) { toast('Copy not allowed here — long-press the text instead'); }
+    }
+  });
+
+  // Topic chips
+  $('#topicChips').innerHTML = TOPICS.map((t) => `<button type="button" data-topic="${esc(t)}" class="shrink-0 px-3.5 py-1.5 rounded-full bg-antiqueGold-light border border-antiqueGold-border text-antiqueGold-dark text-xs font-semibold hover:bg-antiqueGold hover:text-white transition">${esc(t)}</button>`).join('');
+  $('#topicChips').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-topic]'); if (!b) return;
+    const t = b.dataset.topic === 'Qur’an' ? 'quran' : b.dataset.topic;
+    $('#searchInput').value = t; runSearch(t);
+  });
+
+  function runSearch(q) {
+    query = q.trim(); view = 'library'; activeNb = null;
+    if (query) {
+      db.searches++;
+      const found = allRefs().some((r) => matches(r, query));
+      if (!found && !db.queue.some((x) => x.q.toLowerCase() === query.toLowerCase())) {
+        db.queue.unshift({ q: query, by: currentUser()?.name || 'Reader', at: new Date().toISOString() });
+        db.queue = db.queue.slice(0, 50);
+      }
+      persist();
+    }
+    render();
+    if (query) askScholar(query);
+    (query ? $('#aiPanel') : $('#results')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---------------- Scholar's Answer (Claude) ---------------- */
+  let sampleFn = null, aiCtrl = null, aiText = '';
+  try {
+    if (window.claude && typeof window.claude.use === 'function') {
+      window.claude.use('sample').then((s) => { sampleFn = s; }).catch(() => { sampleFn = null; });
+    }
+  } catch (e) {}
+
+  function detectLang(q) {
+    if (/[ٹڈڑںےہھگچپژکی]/.test(q)) return 'ur';
+    if (/[؀-ۿ]/.test(q)) return 'ar';
+    return 'en';
+  }
+
+  function mdToHtml(md) {
+    const lines = esc(md).split('\n');
+    let html = '', list = null;
+    const inline = (s) => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*])\*(?!\s)(.+?)\*/g, '$1<em>$2</em>');
+    const close = () => { if (list) { html += `</${list}>`; list = null; } };
+    for (const raw of lines) {
+      const l = raw.trim();
+      if (!l) { close(); continue; }
+      let m;
+      if ((m = l.match(/^#{1,4}\s+(.*)/))) { close(); html += `<h4>${inline(m[1])}</h4>`; }
+      else if ((m = l.match(/^&gt;\s?(.*)/))) { close(); html += `<div class="ar-quote" lang="ar">${inline(m[1])}</div>`; }
+      else if ((m = l.match(/^[-*•]\s+(.*)/))) { if (list !== 'ul') { close(); html += '<ul>'; list = 'ul'; } html += `<li>${inline(m[1])}</li>`; }
+      else if ((m = l.match(/^(\d+|[٠-٩۰-۹]+)[.)]\s+(.*)/))) { if (list !== 'ol') { close(); html += '<ol>'; list = 'ol'; } html += `<li>${inline(m[2])}</li>`; }
+      else { close(); html += `<p>${inline(l)}</p>`; }
+    }
+    close();
+    return html;
+  }
+
+  function scholarPrompt(q, lang) {
+    const langName = { ur: 'Urdu (اردو, in clear standard Urdu script)', ar: 'Arabic (العربية الفصحى)', en: 'English' }[lang];
+    const libTitles = allRefs().map((r) => `- ${r.title} — ${r.src}`).join('\n');
+    return `You are the research concierge of "Maktaba Al-Ilm", a scholarly Islamic reference library run by a curator trained in Tafseer and Tajweed. Answer the reader's question thoroughly and accurately from mainstream classical Sunni scholarship.
+
+Rules:
+- Write the whole answer in ${langName}, because that is the language the reader used.
+- Back every point with a reference: Qur'an as (Surah name chapter:verse); hadith with collection and number (e.g. Sahih al-Bukhari 756); tafsir points attributed to named classical works (e.g. Tafsir al-Tabari, Tafsir Ibn Kathir, Tafsir al-Qurtubi) or well-known Urdu tafasir (e.g. Ma'arif al-Qur'an, Tafheem al-Qur'an, Tadabbur-e-Qur'an) only where you are confident the point is found there.
+- Never invent a hadith, a hadith number, a grading or a quotation. If you are not sure of an exact number, cite the collection without a number and say so. Mention grading for hadith outside Bukhari and Muslim when known.
+- Put every Arabic Qur'an or hadith text on its own line starting with "> " (with full tashkeel), followed on the next line by its translation.
+- For tafsir of a surah: give an introduction (Makki/Madani, names, number of verses, virtues with references), then explain the verses one by one or in groups, then key lessons.
+- Where scholars differ, briefly state the main views and who held them. Do not issue personal fatwas; for personal rulings advise consulting a qualified scholar.
+- Format with short "## " headings, short paragraphs, and "- " bullet lists. No tables. Aim for a complete but readable answer (roughly 350–700 words).
+
+Verified cards already in the library (cite them if relevant):
+${libTitles}
+
+Reader's question:
+${q}`;
+  }
+
+  async function askScholar(q) {
+    const lang = detectLang(q);
+    const panel = $('#aiPanel'), body = $('#aiBody'), status = $('#aiStatus');
+    panel.hidden = false;
+    $('#aiQuestion').textContent = q;
+    body.className = 'px-5 py-5 text-charcoal ai-prose ' + (lang === 'ur' ? 'rtl script-urdu text-[17px]' : lang === 'ar' ? 'rtl script-arabic text-xl' : 'script-latin text-[15px]');
+    body.dir = lang === 'en' ? 'ltr' : 'rtl';
+
+    if (!sampleFn) {
+      status.textContent = 'Library only';
+      body.className = 'px-5 py-5 text-sm text-mutedSlate script-latin';
+      body.dir = 'ltr';
+      body.innerHTML = `<p>Full written answers are available when Maktaba Al-Ilm is opened inside Claude. Showing matching library references below.</p>`;
+      return;
+    }
+
+    if (aiCtrl) aiCtrl.abort();
+    aiCtrl = new AbortController();
+    const ctrl = aiCtrl;
+    aiText = '';
+    status.textContent = 'Researching…';
+    body.innerHTML = '<p class="text-mutedSlate animate-pulse">' + (lang === 'ur' ? 'حوالہ جات تلاش کیے جا رہے ہیں…' : lang === 'ar' ? 'جارٍ البحث في المصادر…' : 'Consulting the sources…') + '</p>';
+    $('#aiStop').classList.remove('hidden');
+
+    try {
+      const res = await sampleFn(scholarPrompt(q, lang), {
+        signal: ctrl.signal,
+        modelTier: 'complex',
+        cache: true,
+        onText: ({ text }) => {
+          if (ctrl !== aiCtrl || !text || text === 'Thinking...') return;
+          aiText = text; body.innerHTML = mdToHtml(text); status.textContent = 'Writing…';
+        }
+      });
+      if (ctrl !== aiCtrl) return;
+      aiText = res.text || aiText;
+      body.innerHTML = mdToHtml(aiText);
+      status.textContent = res.truncated ? 'Shortened' : 'Complete ✦';
+    } catch (err) {
+      if (ctrl !== aiCtrl) return;
+      if (err && err.name === 'AbortError') { status.textContent = 'Stopped'; }
+      else if (err && err.code === 'not_granted') {
+        status.textContent = 'Permission needed';
+        body.dir = 'ltr'; body.className = 'px-5 py-5 text-sm text-mutedSlate script-latin';
+        body.innerHTML = '<p>Allow Maktaba Al-Ilm to ask Claude when prompted, then search again. Library references are shown below.</p>';
+      } else if (err && err.code === 'rate_limited') {
+        status.textContent = 'Busy';
+        body.dir = 'ltr'; body.className = 'px-5 py-5 text-sm text-mutedSlate script-latin';
+        body.innerHTML = '<p>Too many questions at once — please wait a minute and try again.</p>';
+      } else {
+        status.textContent = 'Error';
+        if (err && err.text) { body.innerHTML = mdToHtml(err.text); }
+        else { body.dir = 'ltr'; body.className = 'px-5 py-5 text-sm text-mutedSlate script-latin'; body.innerHTML = '<p>The answer could not be prepared right now. Please try again.</p>'; }
+      }
+    } finally {
+      if (ctrl === aiCtrl) $('#aiStop').classList.add('hidden');
+    }
+  }
+
+  $('#aiStop').onclick = () => { if (aiCtrl) aiCtrl.abort(); };
+  $('#aiCopy').onclick = async () => {
+    const text = aiText || $('#aiBody').innerText;
+    try { await navigator.clipboard.writeText($('#aiQuestion').textContent + '\n\n' + text); toast('Answer copied'); }
+    catch (e) { toast('Copy not allowed here — long-press the text instead'); }
+  };
+  $('#searchForm').addEventListener('submit', (e) => { e.preventDefault(); runSearch($('#searchInput').value); });
+  $('#searchInput').addEventListener('input', (e) => {
+    if (!e.target.value) { query = ''; if (aiCtrl) aiCtrl.abort(); $('#aiPanel').hidden = true; render(); }
+  });
+
+  $$('[data-view]').forEach((b) => b.addEventListener('click', () => { view = b.dataset.view; activeNb = null; render(); }));
+
+  /* ---------------- Modals ---------------- */
+  function openModal(id) {
+    $('#modalBackdrop').classList.remove('hidden');
+    ['curatorModal', 'installModal', 'dashModal'].forEach((m) => $('#' + m).classList.toggle('hidden', m !== id));
+  }
+  function closeModal() { $('#modalBackdrop').classList.add('hidden'); }
+  $$('[data-close-modal]').forEach((b) => (b.onclick = closeModal));
+  $('#modalBackdrop').addEventListener('click', (e) => { if (e.target.id === 'modalBackdrop') closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeDrawer(); } });
+
+  /* ---------------- Curator vault ---------------- */
+  function openCurator() {
+    if (curatorUnlocked) { openDrawer(); return; }
+    const setup = !db.passHash;
+    $('#curatorTitle').textContent = setup ? 'Create Curator Passcode' : 'Unlock Curator Vault';
+    $('#curatorHint').textContent = setup ? 'First time on this device — choose a passcode (min. 6 characters).' : 'Enter your curator passcode.';
+    $('#curatorPass2').classList.toggle('hidden', !setup);
+    $('#curatorSubmit').textContent = setup ? 'Create & Unlock' : 'Unlock';
+    $('#curatorPass').value = ''; $('#curatorPass2').value = '';
+    showErr($('#curatorError'), '');
+    openModal('curatorModal');
+    setTimeout(() => $('#curatorPass').focus(), 50);
+  }
+  $$('[data-open-curator]').forEach((b) => (b.onclick = openCurator));
+  $('#vaultBtn').onclick = openCurator;
+
+  $('#curatorForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const p = $('#curatorPass').value;
+    if (!db.passHash) {
+      if (p.length < 6) return showErr($('#curatorError'), 'Use at least 6 characters.');
+      if (p !== $('#curatorPass2').value) return showErr($('#curatorError'), 'Passcodes do not match.');
+      db.passHash = await hash(p); persist();
+    } else if ((await hash(p)) !== db.passHash) {
+      return showErr($('#curatorError'), 'Incorrect passcode.');
+    }
+    curatorUnlocked = true;
+    try { sessionStorage.setItem(KEY + '.cur', '1'); } catch (err) {}
+    closeModal(); applyCuratorUI(); toast('Curator vault unlocked');
+    if (!$('#authGate').classList.contains('hidden')) { /* curator can still browse without reader account */ $('#authGate').classList.add('hidden'); }
+    openDrawer();
+  });
+
+  function applyCuratorUI() {
+    $('#openDrawerBtn').classList.toggle('hidden', !curatorUnlocked);
+    $('#openDrawerBtn').classList.toggle('flex', curatorUnlocked);
+    $('#dashBtn').classList.toggle('hidden', !curatorUnlocked);
+    $('#dashBtn').classList.toggle('flex', curatorUnlocked);
+    $('#vaultIcon').textContent = curatorUnlocked ? '🔓' : '🔒';
+    $('#vaultLabel').textContent = curatorUnlocked ? 'Vault' : 'Curator';
+    $('#dashCount').textContent = db.readers.length;
+  }
+
+  $('#lockVaultBtn').onclick = () => {
+    curatorUnlocked = false;
+    try { sessionStorage.removeItem(KEY + '.cur'); } catch (e) {}
+    closeDrawer(); applyCuratorUI(); toast('Curator vault locked');
+    if (!currentUser()) $('#authGate').classList.remove('hidden');
+  };
+
+  function openDrawer() {
+    renderDrawer();
+    $('#drawer').classList.remove('-translate-x-full');
+    $('#drawerBackdrop').classList.remove('hidden');
+  }
+  function closeDrawer() {
+    $('#drawer').classList.add('-translate-x-full');
+    $('#drawerBackdrop').classList.add('hidden');
+  }
+  $('#openDrawerBtn').onclick = openDrawer;
+  $('#closeDrawer').onclick = closeDrawer;
+  $('#drawerBackdrop').onclick = closeDrawer;
+
+  function renderDrawer() {
+    const counts = {}; allRefs().forEach((r) => (counts[r.nb] = (counts[r.nb] || 0) + 1));
+    $('#notebookList').innerHTML = NOTEBOOKS.map((n) => `
+      <button type="button" data-nb="${n.id}" class="w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-parchment-subtle ${activeNb === n.id ? 'bg-royalBlue-light' : ''}">
+        <span class="truncate">${n.icon} ${esc(n.name)}</span><span class="text-xs text-mutedSlate">${counts[n.id] || 0}</span>
+      </button>`).join('');
+    $('#arNotebook').innerHTML = NOTEBOOKS.map((n) => `<option value="${n.id}" ${n.id === 'curator' ? 'selected' : ''}>${n.icon} ${esc(n.name)}</option>`).join('');
+    $('#queueList').innerHTML = db.queue.length
+      ? db.queue.map((x, i) => `<div class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-parchment-bg border border-parchment-border">
+          <div class="min-w-0"><p class="font-semibold truncate">“${esc(x.q)}”</p><p class="text-mutedSlate">${esc(x.by)} · ${new Date(x.at).toLocaleDateString()}</p></div>
+          <button type="button" data-dq="${i}" class="shrink-0 text-mutedSlate hover:text-red-700" aria-label="Dismiss">✕</button></div>`).join('')
+      : '<p class="text-mutedSlate">No pending questions.</p>';
+  }
+  $('#notebookList').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-nb]'); if (!b) return;
+    activeNb = activeNb === b.dataset.nb ? null : b.dataset.nb; view = 'library'; query = ''; $('#searchInput').value = '';
+    render(); renderDrawer(); closeDrawer();
+  });
+  $('#queueList').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-dq]'); if (!b) return;
+    db.queue.splice(+b.dataset.dq, 1); persist(); renderDrawer();
+  });
+
+  $('#addRefForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = (id) => $('#' + id).value.trim();
+    if (!v('arTitle') || !v('arEnglish') || !v('arSource')) return showErr($('#arError'), 'Title, English text and source are required.');
+    showErr($('#arError'), '');
+    db.custom.push({ id: 'c' + Date.now(), nb: v('arNotebook'), title: v('arTitle'), ar: v('arArabic'), ur: v('arUrdu'), en: v('arEnglish'), src: v('arSource'), grade: v('arGrade'), tags: v('arTags').replace(/,/g, ' ') });
+    persist();
+    ['arTitle', 'arArabic', 'arUrdu', 'arEnglish', 'arSource', 'arGrade', 'arTags'].forEach((id) => ($('#' + id).value = ''));
+    renderDrawer(); render(); toast('Reference added to library');
+  });
+
+  /* ---------------- Dashboard ---------------- */
+  $('#dashBtn').onclick = () => {
+    const tiles = [
+      ['Readers', db.readers.length], ['Installs', db.installs], ['Searches', db.searches], ['Pending Qs', db.queue.length]
+    ];
+    $('#statTiles').innerHTML = tiles.map(([k, v]) => `<div class="rounded-2xl bg-parchment-bg border border-parchment-border p-3"><p class="text-[11px] text-mutedSlate font-semibold">${k}</p><p class="font-display text-3xl font-bold text-royalBlue">${v}</p></div>`).join('');
+    $('#readerRows').innerHTML = db.readers.length
+      ? db.readers.slice().reverse().map((r) => `<tr class="border-t border-parchment-border"><td class="p-2.5 font-semibold whitespace-nowrap">${esc(r.name)}</td><td class="p-2.5">${esc(r.email)}</td><td class="p-2.5">${esc(r.role || '—')}</td><td class="p-2.5 whitespace-nowrap">${new Date(r.joined).toLocaleDateString()}</td><td class="p-2.5">${r.visits || 1}</td></tr>`).join('')
+      : '<tr><td colspan="5" class="p-4 text-center text-mutedSlate">No readers yet.</td></tr>';
+    openModal('dashModal');
+  };
+  $('#copyCsvBtn').onclick = async () => {
+    const csv = ['Name,Email,City/Role,Joined,Visits'].concat(db.readers.map((r) => [r.name, r.email, r.role || '', r.joined, r.visits || 1].map((x) => '"' + String(x).replace(/"/g, '""') + '"').join(','))).join('\n');
+    try { await navigator.clipboard.writeText(csv); toast('Reader list copied as CSV'); } catch (e) { toast('Copy not allowed in this view'); }
+  };
+
+  /* ---------------- PWA install ---------------- */
+  let deferredPrompt = null;
+  const ua = navigator.userAgent || '';
+  const isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /android/i.test(ua);
+  // Only count as installed when actually launched from the home-screen icon
+  let launchedFromIcon = false;
+  try {
+    if (new URLSearchParams(location.search).get('source') === 'pwa') sessionStorage.setItem(KEY + '.pwa', '1');
+    launchedFromIcon = sessionStorage.getItem(KEY + '.pwa') === '1';
+  } catch (e) {}
+  const inFrame = (() => { try { return window.top !== window.self; } catch (e) { return true; } })();
+  const isStandalone = () => !inFrame && (launchedFromIcon || window.navigator.standalone === true);
+  let swOk = false;
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(() => { swOk = true; }).catch(() => { swOk = false; });
+    });
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault(); deferredPrompt = e;
+    $('#installLabel').textContent = 'Install';
+  });
+  window.addEventListener('appinstalled', () => {
+    db.installs++; persist(); deferredPrompt = null;
+    applyInstalledUI(); toast('Maktaba Al-Ilm installed ✦');
+  });
+
+  function applyInstalledUI() {
+    if (inFrame) {
+      // Inside the Claude preview the page cannot be installed as its own app — hide install prompts
+      $('#installStrip').classList.add('hidden');
+      $('#headerInstallBtn').classList.add('hidden');
+      $$('nav [data-install], #accountMenu [data-install]').forEach((b) => b.classList.add('hidden'));
+      $('nav .grid').classList.replace('grid-cols-3', 'grid-cols-2');
+      return;
+    }
+    if (isStandalone()) {
+      $('#installStrip').classList.add('hidden');
+      $('#headerInstallBtn').classList.add('hidden');
+      $$('nav [data-install]').forEach((b) => { b.innerHTML = '<span class="text-lg">✅</span>Installed'; b.disabled = true; });
+    }
+  }
+
+  function step(n, html) {
+    return `<div class="flex gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-royalBlue text-antiqueGold-bright text-xs font-bold flex items-center justify-center">${n}</span><p class="pt-1">${html}</p></div>`;
+  }
+
+  async function handleInstall() {
+    $('#accountMenu').classList.add('hidden');
+    if (isStandalone()) return toast('Already installed — you’re in the app ✦');
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if (outcome === 'accepted') toast('Installing…'); else toast('Install cancelled');
+      return;
+    }
+    let html;
+    if (isIOS) {
+      html = step(1, 'Open this page in <b>Safari</b>.') +
+             step(2, 'Tap the <b>Share</b> button <span class="inline-block px-1.5 rounded bg-parchment-subtle">⬆︎</span> at the bottom of the screen.') +
+             step(3, 'Scroll and choose <b>Add to Home Screen</b>, then tap <b>Add</b>.');
+    } else if (isAndroid) {
+      html = step(1, 'Open this page in <b>Chrome</b>.') +
+             step(2, 'Tap the <b>⋮</b> menu at the top right.') +
+             step(3, 'Choose <b>Install app</b> or <b>Add to Home screen</b>.');
+    } else {
+      html = step(1, 'In <b>Chrome</b> or <b>Edge</b>, click the install icon <span class="inline-block px-1.5 rounded bg-parchment-subtle">⊕</span> at the right end of the address bar.') +
+             step(2, 'Or open the browser menu and choose <b>Install Maktaba Al-Ilm</b>.');
+    }
+    if (window.top !== window.self) {
+      html += `<p class="text-xs text-mutedSlate bg-antiqueGold-light border border-antiqueGold-border rounded-xl p-3">You’re viewing a preview inside another page. Open the app at its own web address to install it.</p>`;
+    }
+    $('#installSteps').innerHTML = html;
+    openModal('installModal');
+  }
+  $$('[data-install]').forEach((b) => b.addEventListener('click', handleInstall));
+
+  $('#dismissStrip').onclick = () => { $('#installStrip').classList.add('hidden'); db.stripDismissed = true; persist(); };
+
+  /* ---------------- Network status ---------------- */
+  function netUI() {
+    const on = navigator.onLine;
+    $('#netText').textContent = on ? 'Online' : 'Offline';
+    $('#netDot').className = 'w-1.5 h-1.5 rounded-full ' + (on ? 'bg-emerald-600' : 'bg-amber-500');
+  }
+  window.addEventListener('online', () => { netUI(); toast('Back online'); });
+  window.addEventListener('offline', () => { netUI(); toast('Offline — your library still works'); });
+
+  /* ---------------- Boot ---------------- */
+  netUI();
+  if (db.stripDismissed) $('#installStrip').classList.add('hidden');
+  applyInstalledUI();
+  applyCuratorUI();
+  if (currentUser()) { $('#authGate').classList.add('hidden'); renderUser(); }
+  else if (curatorUnlocked) { $('#authGate').classList.add('hidden'); }
+  else { document.body.style.overflow = 'hidden'; }
+  render();
+})();
+</script>
+</body>
+</html>
